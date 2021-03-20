@@ -13,10 +13,14 @@ Safety Floater ia a smart floater with the purpose to detect the illegal transit
 
 In future, the system could be used to monitor the state of the sea and to improve the prevention of the illegal traffic of boats by installing a camera in order to get a photo of who break the rules.
 
+## Documents
 
 - [Concept](https://github.com/IlKaiser/IoT_Group-Project/projects)
 - [Technology](https://github.com/IlKaiser/IoT_Group-Project/projects)
 - [Evaluation](https://github.com/IlKaiser/IoT_Group-Project/projects)
+
+## Videos
+
 - [Presentation of the product](https://www.youtube.com)
 - [Technical Approach](https://www.youtube.com)
 - [Performance Evaluation Plan](https://www.youtube.com)
