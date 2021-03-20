@@ -8,8 +8,8 @@ The team is composed by:
 - Ivan Giacomoni [Linkedin Profile](https://www.linkedin.com/in/ivan-giacomoni-53100420a/)
 
 ## Main Idea
-Smart floater for boats illegal transit detection near by swimmers.
-In this way general life quality of tourists can be improved and accidents avoided.
+
+The main idea is to develop a smart floater for boats illegal transit detection near by swimmers, in order to detect if the safe distance is not guaranteed. We would like to use ultra sounds for boats detection and notify the violation to the authorities. In this way we could also achieve an improvement to water pollution in an indirect way. In this way general life quality of tourists can be improved and accidents avoided.
 
 
 - [Concept](https://github.com/IlKaiser/IoT_Group-Project/projects)
