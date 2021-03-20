@@ -1,4 +1,4 @@
-# IoT Group-Project Blue Growth
+# FloatShield || Safety Floater
 
 ## Team Members
 
@@ -9,7 +9,9 @@ The team is composed by:
 
 ## Main Idea
 
-The main idea is to develop a smart floater for boats illegal transit detection near by swimmers, in order to detect if the safe distance is not guaranteed. We would like to use ultra sounds for boats detection and notify the violation to the authorities. In this way we could also achieve an improvement to water pollution in an indirect way. In this way general life quality of tourists can be improved and accidents avoided.
+Safety Floater ia a smart floater with the purpose to detect the illegal transit of the boats near by swimmers, in order to preserve the safe distance. This system allows to the authorities to monitor coasts and tourists' welfare. At the same time, Safety Floater allows to achieve another goal in an indirect way: improve the water pollution near the coast.
+
+In future, the system could be used to monitor the state of the sea and to improve the prevention of the illegal traffic of boats by installing a camera in order to get a photo of who break the rules.
 
 
 - [Concept](https://github.com/IlKaiser/IoT_Group-Project/projects)
