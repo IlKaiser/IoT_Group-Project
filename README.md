@@ -1,6 +1,6 @@
 # IoT Group-Project Blue Growth
 
-##Team Members
+## Team Members
 
 The team is composed by:
 - Daniele Bufalieri [Linkedin Profile](https://www.linkedin.com/in/daniele-bufalieri-4b245a121/)
