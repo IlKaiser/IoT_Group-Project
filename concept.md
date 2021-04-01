@@ -28,3 +28,9 @@ Below we propose one persona that represent this category.
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/ThirdUserPersonaMatteo.png)
 
 As we can see from the above persona, Matteo cares a lot about the safety of people, and with Safety Floater he is confident to do his job as best as he can.
+
+## Use case
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/storyboard.png)
+
+Above we can see a typical use case: Bob wants to enjoy a holiday with his family, so they go to the airport in order to take a plain for Sardinia. When they arrive there, they are ready to enjoy some days at a beautiful beach. One day, however, whil 
