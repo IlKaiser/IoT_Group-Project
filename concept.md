@@ -22,4 +22,9 @@ As we can see from the above persona, Vittoria cares a lot about the environment
 
 ## Coast guard
 
+This is the second type of user the application is directed to. The main purposes are to make boats respect the rules in proximity of the beach, and also to allow an immediate action of authorities.
+Below we propose one persona that represent this category.
 
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/ThirdUserPersonaMatteo.png)
+
+As we can see from the above persona, Matteo cares a lot about the safety of people, and with Safety Floater he is confident to do his job as best as he can.
