@@ -40,4 +40,7 @@ It is used for movement detection and orientation.
 
 ## Communication
 - **Smart Floater-to-Sea Station Communication** is via Radio in our original design, in practice we will use Bluetooth with this antenna. Prediodically are sent packets with the status of the sensor. 
-- **Sea Station-to-Cloud Communication**  via simple wi-fi network 
+- **Sea Station-to-Cloud Communication**  via simple wi-fi network
+
+## The final picture
+
