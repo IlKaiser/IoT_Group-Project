@@ -16,8 +16,8 @@ In future, the system could be used to monitor the state of the sea and to impro
 ## Documents
 
 - [Concept](https://github.com/IlKaiser/IoT_Group-Project/blob/main/concept.md)
-- [Technology](https://github.com/IlKaiser/IoT_Group-Project/projects)
-- [Evaluation](https://github.com/IlKaiser/IoT_Group-Project/projects)
+- [Technology](https://github.com/IlKaiser/IoT_Group-Project/blob/main/technology.md)
+- [Evaluation](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation.md)
 
 ## Videos
 
