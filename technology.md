@@ -44,3 +44,4 @@ It is used for movement detection and orientation.
 
 ## The final picture
 
+![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png)
