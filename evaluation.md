@@ -7,4 +7,4 @@ Given that Safety Floater will communicate with the Sea Station via LoraWAN, the
 During the development phase we will use Iot-lab to have an estimation of the power consumption of the embedded device (Nucleo f401-re), because even ìf on Iot-lab are not available our specific sensors we can obtain a rough result. During the final testing we will use a voltage measure sensor in order to monitor the real consumption.
 
 ## End-user point of view
-From an end-user point of view the response time is conditioned by LoraWAN, by the bandwith of the channel linking the Sea Station to the cloud, and by the type of protocol used (e.g.: HTTP-REST / MQTT).   
+From an end-user point of view the response time is conditioned by LoraWAN, by the bandwith of the channel linking the Sea Station to the cloud, and by the type of protocol used (e.g.: HTTP-REST / MQTT). From a quantitative point of view, we will use timestamps at the generation of the packet and one at the receiving of the packet.  
