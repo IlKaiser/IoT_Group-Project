@@ -1,4 +1,4 @@
-# FloatShield || Safety Floater
+# Safety Floater
 
 ## Team Members
 
