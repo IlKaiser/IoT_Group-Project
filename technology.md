@@ -34,7 +34,7 @@ We chose our sensors based on RIOT OS API compatibilty.
 
 It is used for movement detection and orientation.
 ### Ultrasonic Proximity Sensor
-![Img](https://images-na.ssl-images-amazon.com/images/I/71YRg95095L._SL1500_.jpg)
+![Img](https://images-na.ssl-images-amazon.com/images/I/71Ht9ic07xL._AC_SL1500_.jpg)
 ### Voltage Sensor ?
 ### GPS ?
 ### Solar Panel
