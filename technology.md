@@ -40,6 +40,9 @@ It is used for movement detection and orientation.
 ### Solar Panel
 ![Img](https://images-na.ssl-images-amazon.com/images/I/51t9Z3nh4uL._SL1001_.jpg)
 
+## Actuators
+For actuators, we choose a DC-motor and a buzzer.
+
 ## Communication
 - **Smart Floater-to-Sea Station Communication** is via Radio in our original design, in practice we will use Bluetooth with this antenna. Prediodically are sent packets with the status of the sensor. 
 - **Sea Station-to-Cloud Communication**  via simple wi-fi network
