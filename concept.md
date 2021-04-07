@@ -14,7 +14,7 @@ Below we propose two personas that represent this category.
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/FirstuserpersonaBob.png)
 
 As we can see from the above persona, Bob cares a lot about his family security, and with Safety Floater he feels more secure when his children go swim to the sea.
-Also, he can enjoy his vacation, because he can relax and trust the local authorities efficiency.
+Also, he would like to enjoy his vacation, he wants to relax and he trusts the local authorities efficiency.
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/SeconduserpersonaVittoria.png)
 
