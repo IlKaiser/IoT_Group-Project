@@ -45,7 +45,7 @@ For actuators, we choose a DC-motor and a buzzer.
 
 ![BUZZER](https://images-na.ssl-images-amazon.com/images/I/51-E3qYe8DL._AC_SL1100_.jpg)
 
-![DC](https://images-na.ssl-images-amazon.com/images/I/61PCyTtxtML._AC_SL1500_.jpg)
+![DC](https://images-na.ssl-images-amazon.com/images/I/41ztg1Wb9kL._AC_.jpg)
 
 ## Communication
 - **Smart Floater-to-Sea Station Communication** is via Radio in our original design, in practice we will use Bluetooth with this antenna. Prediodically are sent packets with the status of the sensor. 
