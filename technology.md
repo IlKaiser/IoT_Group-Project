@@ -43,6 +43,8 @@ It is used for movement detection and orientation.
 ## Actuators
 For actuators, we choose a DC-motor and a buzzer.
 
+![BUZZER](https://images-na.ssl-images-amazon.com/images/I/51-E3qYe8DL._AC_SL1100_.jpg)
+
 ## Communication
 - **Smart Floater-to-Sea Station Communication** is via Radio in our original design, in practice we will use Bluetooth with this antenna. Prediodically are sent packets with the status of the sensor. 
 - **Sea Station-to-Cloud Communication**  via simple wi-fi network
