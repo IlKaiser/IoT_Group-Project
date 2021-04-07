@@ -3,7 +3,7 @@
 ## Introduction
 
 Safety Floater is a project born to satisfy Blue Growth requirements for coastal tourism, in particular the monitoring and security of territory.
-The goal is to detect the illegal transit of boats near by swimmers, in order to preserve the safe distance. This system allows to the authorities to monitor coasts and tourists' welfare. At the same time, Safety Floater allows to achieve another goal in an indirect way: improve the water pollution near the coast.
+The goal is to detect the illegal transit of boats near by swimmers, in order to preserve the safe distance. This system allows the authorities to monitor coasts and tourists' welfare. At the same time, Safety Floater allows to achieve another goal in an indirect way: improve the water pollution near the coast.
 So the system has two principal type of users: tourists and coast guards.
 
 ## Tourists
