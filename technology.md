@@ -7,7 +7,7 @@
 
 ### Smart Floater
 It is the main component of our project: its main purpose is to detect illegal transit of boats over the safety line. When a violation is detected, the sensors data are sent to the **Sea Station (Ground server)**.
-Are used for the detections **proximity sensors**, a **dc motor** grants that the floater has the sensor correctly oriented, **gps sensor** detects the current position of the floater, **solar panels** permit a longer battery life.
+Are used for the detections **ultrasonic proximity sensors**, a **dc motor** grants that the floater has the sensor correctly oriented, **gps sensor** detects the current position of the floater, **solar panels** permit a longer battery life and **buzzer** for audio notification of swimmers.
 A **radio module** would be used in real life scenario to transmit data (its model in practice is a common bluetooth module).
 The sensors are controlled by a Nucleo Board (nucelo-f401re) with [RIOT OS](https://www.riot-os.org/).
 
