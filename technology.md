@@ -65,4 +65,4 @@ WORK IN PROGRESS
 
 ## The final picture
 
-![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png | width=100)
+![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png )
