@@ -21,7 +21,7 @@ It is the highest level component of our project. It is composed by the remote s
 We chose our sensors based on RIOT OS API compatibilty.
 
 ### MakerHawk MPU-9250 9DOF Module 9 Axis Gyroscope Accelerometer Magnetic Field Sensor
-![Img](https://images-na.ssl-images-amazon.com/images/I/61qPZjhQq2L._AC_SL1200_.jpg)
+<img src="https://images-na.ssl-images-amazon.com/images/I/61qPZjhQq2L._AC_SL1200_.jpg"  width=400/>
 - 9-axis: 3-axis gyroscope + 3-axis accelerometer + 3-axis magnetic field sensor
 - Power supply: 3-5v (low dropout internal regulator)
 - Communication: standard IIC / SPI communication protocol
@@ -34,20 +34,30 @@ We chose our sensors based on RIOT OS API compatibilty.
 
 It is used for movement detection and orientation.
 ### Ultrasonic Proximity Sensor
-![Img](https://images-na.ssl-images-amazon.com/images/I/71Ht9ic07xL._AC_SL1500_.jpg )
+<img src="https://images-na.ssl-images-amazon.com/images/I/71Ht9ic07xL._AC_SL1500_.jpg"  width=400/>
+
 ### Voltage Sensor 
-![Volt](https://images-na.ssl-images-amazon.com/images/I/51HVZdowtJL._AC_SL1001_.jpg)
+
+<img src="https://images-na.ssl-images-amazon.com/images/I/51HVZdowtJL._AC_SL1001_.jpg"  width=400/>
+
 ### GPS  
 WORK IN PROGRESS
 ### Solar Panel
-![Img](https://images-na.ssl-images-amazon.com/images/I/51t9Z3nh4uL._SL1001_.jpg)
+
+<img src="https://images-na.ssl-images-amazon.com/images/I/51t9Z3nh4uL._SL1001_.jpg"  width=400/>
 
 ## Actuators
-For actuators, we choose a DC-motor and a buzzer.
 
-![BUZZER](https://images-na.ssl-images-amazon.com/images/I/51-E3qYe8DL._AC_SL1100_.jpg)
+### Buzzer
 
-![DC](https://images-na.ssl-images-amazon.com/images/I/41ztg1Wb9kL._AC_.jpg)
+<img src="https://images-na.ssl-images-amazon.com/images/I/51-E3qYe8DL._AC_SL1100_.jpg"  width=400/>
+
+
+
+### DC Motor
+
+<img src="https://images-na.ssl-images-amazon.com/images/I/41ztg1Wb9kL._AC_.jpg"  width=400/>
+
 
 ## Communication
 - **Smart Floater-to-Sea Station Communication** is via Radio in our original design, in practice we will use Bluetooth with this antenna. Prediodically are sent packets with the status of the sensor. 
@@ -55,4 +65,4 @@ For actuators, we choose a DC-motor and a buzzer.
 
 ## The final picture
 
-![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png)
+![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png | width=100)
