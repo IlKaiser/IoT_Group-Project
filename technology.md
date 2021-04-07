@@ -33,7 +33,7 @@ We chose our sensors based on RIOT OS API compatibilty.
 - Module size: 15mm * 25mm
 
 It is used for movement detection and orientation.
-### Ultrasonic Proximity Sensor
+### Ultrasonic Proximity Sensor HC-SR04
 <img src="https://images-na.ssl-images-amazon.com/images/I/71Ht9ic07xL._AC_SL1500_.jpg"  width=400/>
 
 ### Voltage Sensor 
@@ -42,6 +42,7 @@ It is used for movement detection and orientation.
 
 ### GPS  
 WORK IN PROGRESS
+
 ### Solar Panel
 
 <img src="https://images-na.ssl-images-amazon.com/images/I/51t9Z3nh4uL._SL1001_.jpg"  width=400/>
