@@ -22,6 +22,7 @@ We chose our sensors based on RIOT OS API compatibilty.
 
 ### MakerHawk MPU-9250 9DOF Module 9 Axis Gyroscope Accelerometer Magnetic Field Sensor
 <img src="https://images-na.ssl-images-amazon.com/images/I/61qPZjhQq2L._AC_SL1200_.jpg"  width=400/>
+
 - 9-axis: 3-axis gyroscope + 3-axis accelerometer + 3-axis magnetic field sensor
 - Power supply: 3-5v (low dropout internal regulator)
 - Communication: standard IIC / SPI communication protocol
@@ -35,6 +36,16 @@ We chose our sensors based on RIOT OS API compatibilty.
 It is used for movement detection and orientation.
 ### Ultrasonic Proximity Sensor HC-SR04
 <img src="https://images-na.ssl-images-amazon.com/images/I/71Ht9ic07xL._AC_SL1500_.jpg"  width=400/>
+
+- Working Voltage: DC 5V
+- Working Current: 15mA
+- Working Frequency: 40Hz
+- Max Range: 4m
+- Min Range: 2cm
+- Measuring Angle: 15 degree
+- Trigger Input Signal: 10µS TTL pulse
+- Echo Output Signal Input TTL lever signal and the range in proportion
+- Dimension 45 * 20 * 15mm
 
 ### Voltage Sensor 
 
