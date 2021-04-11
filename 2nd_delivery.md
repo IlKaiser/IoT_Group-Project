@@ -18,21 +18,24 @@ Now for each of the previous points we explain our decisions:
 ### Concept
 No changes has been done.
 
-### Architecture and technology
+#### Architecture and technology
 For the first delivery, our architecture was totally based on STM-32 devices. Now, since we wanted to use specific sensors (GPS, camera, other sensors) and we wanted to minimize the latency of the report notification, we changed slightly the architecture and the technology. Below we show a picture:
 
 <img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/SCHEMA.png"  width=1500/>
 
 Now we present the specific components.
 
-### Arduino-UNO
+#### Arduino-UNO
 Attached to the Floaters, it communicates with STM-32 with I2C protocol. It samples the GPS, the accelerometer and the proximity sensor. After sampling and some data-processing, it sends data to the STM-32 board.
 
-### STM-32
+#### STM-32
 Attached to the Floaters, it communicates with Arduino-UNO with I2C protocol. It manages actuators, which are the DC motor, the Servo motor and buzzers. It also uses Lora-WAN protocol to communicate with the Sea Station, in order to send data received by Arduino-UNO.
 
-### Sea Station (with Raspberry pi 4)
+#### Sea Station (with Raspberry pi 4)
 We decided to use a Raspberry pi for the Sea Station, because it is a portable device that offers great performances similar to a PC with low power consumption. It uses Lora-WAN protocol to communicate with the STM-32 board in order to receive reports and to take pictures, with the goal of verifying wheter there was a true violation or not, by using a Neural Network.
 
-### Cloud service
+#### Cloud service
 There are no changes for this part.
+
+### Evaluation
+No changes has been done.
