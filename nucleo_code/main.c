@@ -23,11 +23,15 @@
 
 #define ALARM_BUFFER_SIZE 1
 #define ALARM_CMD 1
+#define ALARM_THRESHOLD 2
 
 //time interval for each thread
 #define DELAY_INFO 30
 #define DELAY_ALARM 1
 #define DELAY_CONTROL 15
+
+
+
 
 //constant for servomotor
 #define SERVO_MIN 550
@@ -130,17 +134,26 @@ static void* threadAlarm(void* arg)
 		return NULL;
 	}
 	
-
+	int cont=0;
 	char buffer[ALARM_BUFFER_SIZE]={0};
 	while(1)
 	{
 		I2CCommunication(ALARM_CMD,buffer,ALARM_BUFFER_SIZE,"ALARM");
 		printf("[ALARM]MEX: %s \n",buffer);
 		
-		if(buffer[0]=='1')
+		if(atoi(buffer)==1)
+			cont++;
+		else
+			cont=0;
+			
+			
+		
+		if(cont==ALARM_THRESHOLD)
 			controlBuzzer(buzzer,1);
-		if(buffer[0]=='0')
+		
+		if(cont==0)
 			controlBuzzer(buzzer,0);
+		
 		
 		xtimer_sleep(DELAY_ALARM);
 	
