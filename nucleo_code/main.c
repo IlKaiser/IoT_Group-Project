@@ -21,7 +21,7 @@
 #define CONTROL_BUFFER_SIZE 10
 #define CONTROL_CMD 2
 
-#define ALARM_BUFFER_SIZE 1
+#define ALARM_BUFFER_SIZE 2
 #define ALARM_CMD 1
 #define ALARM_THRESHOLD 2
 
@@ -135,23 +135,31 @@ static void* threadAlarm(void* arg)
 	}
 	
 	int cont=0;
+	int cont2=0;
+	
 	char buffer[ALARM_BUFFER_SIZE]={0};
 	while(1)
 	{
 		I2CCommunication(ALARM_CMD,buffer,ALARM_BUFFER_SIZE,"ALARM");
 		printf("[ALARM]MEX: %s \n",buffer);
+		char first_alarm=buffer[0];
+		char second_alarm=buffer[1];
 		
-		if(atoi(buffer)==1)
+		if(first_alarm=='1')
 			cont++;
 		else
 			cont=0;
-			
+		
+		if(second_alarm=='1')
+			cont2++;
+		else
+			cont2=0;
 			
 		
-		if(cont==ALARM_THRESHOLD)
+		if(cont==ALARM_THRESHOLD||cont2==ALARM_THRESHOLD)
 			controlBuzzer(buzzer,1);
 		
-		if(cont==0)
+		if(cont==0&&cont2==0)
 			controlBuzzer(buzzer,0);
 		
 		
