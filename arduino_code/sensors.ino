@@ -4,11 +4,15 @@
 String mode = "auto";  // auto || test
 
 byte x = 0;
-long durata, cm;
+long durata, cm, durata_2, cm_2;
 
-// HC SR04 ultrasound sensor pins definition
+// [1] HC SR04 ultrasound sensor pins definition
 #define trigPin                       6
 #define echoPin                       7
+
+// [2] HC SR04 ultrasound sensor pins definition
+#define trigPin_2                     9
+#define echoPin_2                     8
 
 #define MAX_DISTANCE_FROM_FLOATER     100                     // It should be about 170-180 cm
 #define BOAT_TIME                     4000                    // ms
@@ -21,9 +25,13 @@ void setup() {
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
 
-  // HC SR04 ultrasound sensor pins initialization
+  // [1] HC SR04 ultrasound sensor pins initialization
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+
+  // [2] HC SR04 ultrasound sensor pins initialization
+  pinMode(trigPin_2, OUTPUT);
+  pinMode(echoPin_2, INPUT);
 }
 
 void loop() {
@@ -104,7 +112,11 @@ void requestEvent() {
         Serial.println(cm);
         Serial.println();
 
-        if(cm <= MAX_DISTANCE_FROM_FLOATER){
+        Serial.print("Cm_2 = ");
+        Serial.println(cm_2);
+        Serial.println();
+
+        if(cm <= MAX_DISTANCE_FROM_FLOATER || cm_2 <= MAX_DISTANCE_FROM_FLOATER){
           Serial.println("Possible detection!");
           Wire.write("1");  
         }
@@ -112,7 +124,8 @@ void requestEvent() {
         else{
           Serial.println("No boats detected!");
           Wire.write("0");    
-        }       
+        }
+        
         
       } 
       
@@ -139,6 +152,8 @@ void requestEvent() {
 }
 
 void measureDistanceBy_HCSR04(){
+   
+   // [1]
    digitalWrite(trigPin, LOW);
    delayMicroseconds(2);
    digitalWrite(trigPin, HIGH);
@@ -146,5 +161,13 @@ void measureDistanceBy_HCSR04(){
    digitalWrite(trigPin, LOW);
    durata = pulseIn(echoPin, HIGH);
    cm = durata / 58;    // for inches the formula is duration / 148;
-}
 
+   // [2]
+   digitalWrite(trigPin_2, LOW);
+   delayMicroseconds(2);
+   digitalWrite(trigPin_2, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(trigPin_2, LOW);
+   durata_2 = pulseIn(echoPin_2, HIGH);
+   cm_2 = durata_2 / 58;    // for inches the formula is duration / 148;
+}
