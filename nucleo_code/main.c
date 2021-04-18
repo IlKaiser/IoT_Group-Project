@@ -31,9 +31,7 @@
 //time interval for each thread
 #define DELAY_INFO 30
 #define DELAY_ALARM 1
-#define DELAY_CONTROL 15
-
-
+#define DELAY_CONTROL 1000000
 
 
 //constant for servomotor
@@ -41,6 +39,10 @@
 #define SERVO_MAX 2500
 #define DEGREE_MAX 360
 #define DEGREE_TO_US(x) ((x*(SERVO_MAX-SERVO_MIN)/DEGREE_MAX)+SERVO_MIN)
+
+//constant for correcting the floater orientation with the compass
+#define FROM_RIGHT_TO_LEFT_CORRECTION_THRESHOLD 1
+#define FROM_LEFT_TO_RIGHT_CORRECTION_THRESHOLD -1
 
 
 static char stackThreadControl[THREAD_STACKSIZE_DEFAULT];
@@ -79,28 +81,36 @@ void controlBuzzer(gpio_t buzzer,int status)
 }
 
 
-void getControlData(mpu9x50_t dev,char* correctionData,int len)
+void getControlData(mpu9x50_t dev,char* correctionData,int len, short* x_axis)
 {
 		//Data structure to save info
 		mpu9x50_results_t measurement;
     
+	    mutex_lock(&mutex);
 	
 		/* Get accel data in milli g */
-        mpu9x50_read_accel(&dev, &measurement);
-        printf("[MPU9250] Accel data [milli g] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
-                measurement.x_axis, measurement.y_axis, measurement.z_axis);
+        //mpu9x50_read_accel(&dev, &measurement);
+        //printf("[MPU9250] Accel data [milli g] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
+        //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
         /* Get gyro data in dps */
-        mpu9x50_read_gyro(&dev, &measurement);
-        printf("[MPU9250] Gyro data [dps] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
-                measurement.x_axis, measurement.y_axis, measurement.z_axis);
+        //mpu9x50_read_gyro(&dev, &measurement);
+        //printf("[MPU9250] Gyro data [dps] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
+        //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
         /* Get compass data in mikro Tesla */
         mpu9x50_read_compass(&dev, &measurement);
-        printf("[MPU9250] Compass data [micro T] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
-                measurement.x_axis, measurement.y_axis, measurement.z_axis);
+        //printf("[MPU9250] Compass data [micro T] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
+        //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
+        
+        *x_axis = measurement.x_axis;
+        
+        
         printf("\n+-------------------------------------+\n");
 		
 		printf("%i \n",len);
 		printf("%s \n",correctionData);
+		printf("\n");
+		
+		mutex_unlock(&mutex);
 		
 	
 }
@@ -159,15 +169,54 @@ static void* threadControl(void* arg)
         
     printf("[MPU9250] Initialization successful\n\n");
 
-	int degree=0;
+	int degree=0, i=0;
+	short x_start = 0;
+	
+	//get control data correction degree will be saved into buffer with sintax -360/360 as char*
 	while(1)
 	{
+		
+		//sample values for magnetic field detected by the compass
+        short x_axis;
+		
 		//get control data correction degree will be saved into buffer with sintax -360/360 as char*
-		getControlData(dev,buffer,CONTROL_BUFFER_SIZE);
+	    getControlData(dev,buffer,CONTROL_BUFFER_SIZE, &x_axis);	
+		
+		if(i==1){
+		    x_start = x_axis;	
+		}
+		
+		printf("x_start=%hd\n",x_start);
+		
+		printf("[MPU9250] Compass data [micro T] - X: %hd\n", x_axis);
+		
+		short int x_diff = x_start - x_axis;
+		
+		if(x_diff > FROM_RIGHT_TO_LEFT_CORRECTION_THRESHOLD){
+		    printf("Rotate the floater to the left!\n");
+		    
+		    // controlServoOrientation(&servo,degree);
+		    
+		    // TO DO
+		}
+		
+		else if(x_diff < FROM_LEFT_TO_RIGHT_CORRECTION_THRESHOLD){
+		    printf("Rotate the floater to the right!\n");	
+		    
+		    // controlServoOrientation(&servo,degree);
+		    
+		    // TO DO
+		}
+		
 		degree=atoi(buffer);
 		controlServoOrientation(&servo,degree);
-		printf("[CONTROL] Correction angle: %i \n",degree);
-		xtimer_sleep(DELAY_CONTROL);
+		printf("[CONTROL] Correction angle: %d \n",degree);
+		
+		if(i == 0 || i == 1){
+		    i++;
+		}
+		
+		xtimer_usleep(DELAY_CONTROL);
 	}
 	
 	return NULL;
@@ -250,6 +299,7 @@ static void* threadInfo(void* arg)
 
 int main(void)
 {
+	
 	//initialize the i2c interface
 	i2c_init(I2C_INTERFACE);
 	
