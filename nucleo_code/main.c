@@ -190,7 +190,7 @@ static void* threadControl(void* arg)
 		
 		printf("[MPU9250] Compass data [micro T] - X: %hd\n", x_axis);
 		
-		short int x_diff = x_start - x_axis;
+		short x_diff = x_start - x_axis;
 		
 		if(x_diff > FROM_RIGHT_TO_LEFT_CORRECTION_THRESHOLD){
 		    printf("Rotate the floater to the left!\n");
