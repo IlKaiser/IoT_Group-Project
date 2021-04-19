@@ -80,6 +80,15 @@ void controlBuzzer(gpio_t buzzer,int status)
 		gpio_set(buzzer);
 }
 
+void controlDCMotor(gpio_t dc_motor,int status)
+{
+	if(status==0)
+		gpio_clear(dc_motor);
+	else if(status==1)
+		gpio_set(dc_motor);
+	
+}
+
 
 void getControlData(mpu9x50_t dev,char* correctionData,int len, short* x_axis)
 {
@@ -135,6 +144,13 @@ static void* threadControl(void* arg)
 			printf("[CONTROL] FAILED TO CONNECT TO SERVO!\n");
 			return NULL;
 		}
+	
+	//Definition of dcmotor and its initialittation D2
+	gpio_t dc_motor=GPIO_PIN(PORT_A,10);
+	
+	if(gpio_init(dc_motor,GPIO_OUT)<0)
+		printf("[CONTROL] FAILED TO CONNECT TO DC MOTOR! \n");
+    
 		
 	// definition of MPU-device
 	mpu9x50_t dev;
@@ -146,30 +162,30 @@ static void* threadControl(void* arg)
     // Check errors
     if (result == -1) {
         puts("[MPU9250] The given i2c is not enabled");
-        return NULL;
+       // return NULL;
     }
     else if (result == -2) {
         puts("[MPU9250] The compass did not answer correctly on the given address");
-        return NULL;
+        //return NULL;
     }
     
     // Definition of sample rates
     mpu9x50_set_sample_rate(&dev, 200);
     if (dev.conf.sample_rate != 200) {
         puts("[MPU9250] The sample rate was not set correctly");
-        return NULL;
+        //return NULL;
     }
     
     mpu9x50_set_compass_sample_rate(&dev, 100);
     
     if (dev.conf.compass_sample_rate != 100) {
         puts("[MPU9250] The compass sample rate was not set correctly");
-        return NULL;
+        //return NULL;
     }
         
     printf("[MPU9250] Initialization successful\n\n");
 
-	int degree=0, i=0;
+	int  i=0;
 	short x_start = 0;
 	
 	//get control data correction degree will be saved into buffer with sintax -360/360 as char*
@@ -194,23 +210,17 @@ static void* threadControl(void* arg)
 		
 		if(x_diff > FROM_RIGHT_TO_LEFT_CORRECTION_THRESHOLD){
 		    printf("Rotate the floater to the left!\n");
-		    
+		    controlDCMotor(dc_motor,0);
 		    // controlServoOrientation(&servo,degree);
 		    
-		    // TO DO
 		}
 		
 		else if(x_diff < FROM_LEFT_TO_RIGHT_CORRECTION_THRESHOLD){
 		    printf("Rotate the floater to the right!\n");	
-		    
+		    controlDCMotor(dc_motor,1);
 		    // controlServoOrientation(&servo,degree);
 		    
-		    // TO DO
 		}
-		
-		degree=atoi(buffer);
-		controlServoOrientation(&servo,degree);
-		printf("[CONTROL] Correction angle: %d \n",degree);
 		
 		if(i == 0 || i == 1){
 		    i++;
