@@ -20,10 +20,11 @@
 
 //define command's number and buffer size
 #define INFO_BUFFER_SIZE 30
-#define INFO_CMD 3
+#define INFO_CMD 4
 
 #define CONTROL_BUFFER_SIZE 10
-#define CONTROL_CMD 2
+#define CONTROL_CMD_RIGHT 2
+#define CONTROL_CMD_LEFT 3
 
 #define ALARM_BUFFER_SIZE 1
 #define ALARM_CMD 1
@@ -44,14 +45,13 @@
 #define DELAY_ALARM_HIGH 20
 #define DELAY_CONTROL_HIGH 6000000
 
-//constant for servomotor
-#define SERVO_MIN 550
-#define SERVO_MAX 2500
-#define DEGREE_MAX 360
-#define DEGREE_TO_US(x) ((x*(SERVO_MAX-SERVO_MIN)/DEGREE_MAX)+SERVO_MIN)
-
-//constant for correcting the floater orientation with the compass
+//constants for correcting the proximity orientation with the compass
 #define CORRECTION_THRESHOLD 1
+#define HIGH_CORRECTION_THRESHOLD 10
+
+//constants for correcting the proximity orientation with the gyroscope
+#define FROM_RIGHT_TO_LEFT_THRESHOLD -0.002
+#define FROM_LEFT_TO_RIGHT_THRESHOLD 0.002
 
 //acceleration constants for power management ( m/s^2 )
 #define LOW_PM_THRESHOLD 9.5
@@ -88,26 +88,12 @@ void I2CCommunication(int cmd,void*buffer,int len,char* service)
 		
 }
 
-void controlServoOrientation(servo_t* servo,int degree){
-	servo_set(servo,DEGREE_TO_US(degree));
-}
-
-
 void controlBuzzer(gpio_t buzzer,int status)
 {
 	if(status==0)
 		gpio_clear(buzzer);
 	else if(status==1)
 		gpio_set(buzzer);
-}
-
-void controlDCMotor(gpio_t dc_motor,int status)
-{
-	if(status==0)
-		gpio_clear(dc_motor);
-	else if(status==1)
-		gpio_set(dc_motor);
-	
 }
 
 char* fromFloatToString(float f, unsigned precision){
@@ -129,7 +115,7 @@ float calculateDegreeFromDps(short dps, float fixedNumber){
     return degree;
 }
 
-void getControlData(mpu9x50_t dev,char* correctionData,int len, short* z_gyro, short* x_compass, short* z_accel)
+void getControlData(mpu9x50_t dev, short* z_gyro, short* x_compass, short* z_accel)
 {
 		//Data structure to save info
 		mpu9x50_results_t measurement;
@@ -152,14 +138,7 @@ void getControlData(mpu9x50_t dev,char* correctionData,int len, short* z_gyro, s
         //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
         
         *x_compass = measurement.x_axis;
-        
-        
-        printf("\n+-------------------------------------+\n");
-		
-		printf("%i \n",len);
-		printf("%s \n",correctionData);
-		printf("\n");
-		
+
 		mutex_unlock(&mutex);
 		
 	
@@ -191,21 +170,21 @@ void powerManagement(float z_accel){
 	}
 }
 
-void floaterCorrection(short x_start_compass, short previous_x_compass, short x_compass, short z_gyro){
-    
-    if(previous_x_compass > 0 || previous_x_compass <= 0){
-	    printf(" ");	
-	} 
+void proximitySensorCorrection(char* buffer, short x_start_compass, short previous_x_compass, short x_compass, short z_gyro){
     
     float degree = calculateDegreeFromDps(z_gyro, FIXED_NUMBER);
-	
-	char* degree_s = fromFloatToString(degree, 7);
-	
-	printf("correction degree = %s\n",degree_s);
 	
 	short x_diff_compass = x_start_compass - x_compass;	
 	int x_diff_compass_abs = abs((int)x_diff_compass);
 	
+	// Non-return point
+	if(x_diff_compass_abs > HIGH_CORRECTION_THRESHOLD){
+	    //printf("Non-return point!\n");
+	    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+	    return;
+	}
+	
+	// If the proximity sensor is too far from the starting point
 	if(x_diff_compass_abs > CORRECTION_THRESHOLD){
 		
 		/* Evaluate if the floater is moving away or approaching the x_start_compass
@@ -214,25 +193,26 @@ void floaterCorrection(short x_start_compass, short previous_x_compass, short x_
 	    short previous_x_diff_compass = x_start_compass - previous_x_compass;	
 	    int previous_x_diff_compass_abs = abs((int)previous_x_diff_compass);
 	    
-	    // If the floater is moving to the left
-	    if(degree > 0){
+	    // If the proximity sensor is moving to the left
+	    if(degree > FROM_LEFT_TO_RIGHT_THRESHOLD){
 			
 			// If it is approaching
 			if(x_diff_compass_abs < previous_x_diff_compass_abs){
+				
+				//printf("Continue moving the proximity sensor to the left!\n");
 			    
-			    printf("Continue moving the floater to the left!\n");
-		        // controlDCMotor(dc_motor, 1);
-		        // controlServoOrientation(&servo,degree);
+			    // Send to Arduino the indication to continue move it to the left
+			    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
 		           	
 			}
 			
 			// If it is moving away
 			else if(x_diff_compass_abs > previous_x_diff_compass_abs){
+				//printf("Rotate the proximity sensor to the right!\n");
 			    
-			    printf("Rotate the floater to the right!\n");
-		        // controlDCMotor(dc_motor, 1);
-		        // controlServoOrientation(&servo,degree);
-		           	
+			    // Send to Arduino the indication to rotate it to the right
+			    I2CCommunication(CONTROL_CMD_RIGHT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+			          	
 			}
 			
 			// If it is remained in the same position as before
@@ -243,25 +223,26 @@ void floaterCorrection(short x_start_compass, short previous_x_compass, short x_
 			}*/
 		}
 		
-		// If the floater is moving to the right
-		else if(degree < 0){
+		// If the proximity sensor is moving to the right
+		else if(degree < FROM_RIGHT_TO_LEFT_THRESHOLD){
 			
 			// If it is approaching
 			if(x_diff_compass_abs < previous_x_diff_compass_abs){
+			    //printf("Continue moving the proximity sensor to the right!\n");
 			    
-			    printf("Continue moving the floater to the right!\n");
-		        // controlDCMotor(dc_motor, 1);
-		        // controlServoOrientation(&servo,degree);
-		           	
+			    // Send to Arduino the indication to continue move it to the right
+			    I2CCommunication(CONTROL_CMD_RIGHT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+			       	
 			}
 			
 			// If it is moving away
 			else if(x_diff_compass_abs > previous_x_diff_compass_abs){
+				
+				//printf("Rotate the proximity sensor to the left!\n");
 			    
-			    printf("Rotate the floater to the left!\n");
-		        // controlDCMotor(dc_motor, 1);
-		        // controlServoOrientation(&servo,degree);
-		           	
+			    // Send to Arduino the indication to rotate it to the left
+			    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+			       	
 			}
 			
 			// If it is remained in the same position as before
@@ -275,16 +256,13 @@ void floaterCorrection(short x_start_compass, short previous_x_compass, short x_
 		
 		// If no movement is detected
 		else if(degree == 0){
-		    printf("No corretion degree detected.. rotate the floater just a bit!\n");
-		    // controlDCMotor(dc_motor, 1);
-		    // controlServoOrientation(&servo,degree);	
+		    //printf("No movement detected!\n");
 		}
 	}
 	
+	// The proximity sensor is correctly orientated
 	else{
-	    printf("Correct orientation for the floater!\n");
-	    // controlDCMotor(dc_motor, 0);
-		// controlServoOrientation(&servo,degree);
+	    //printf("The proximity sensor is correctly orientated\n"); 
 	}
 		
 }
@@ -299,22 +277,6 @@ static void* threadControl(void* arg)
 		printf(" ");
 	
 	char buffer[CONTROL_BUFFER_SIZE]={0};
-	
-	//definition of servo and its initialitation D3
-	servo_t servo;
-	
-	if(servo_init(&servo,PWM_DEV(0),1,SERVO_MIN,SERVO_MAX)<0)
-		{
-			printf("[CONTROL] FAILED TO CONNECT TO SERVO!\n");
-			return NULL;
-		}
-	
-	//Definition of dcmotor and its initialittation D2
-	gpio_t dc_motor=GPIO_PIN(PORT_A,10);
-	
-	if(gpio_init(dc_motor,GPIO_OUT)<0)
-		printf("[CONTROL] FAILED TO CONNECT TO DC MOTOR! \n");
-    
 		
 	// definition of MPU-device
 	mpu9x50_t dev;
@@ -346,8 +308,6 @@ static void* threadControl(void* arg)
         puts("[MPU9250] The compass sample rate was not set correctly");
         //return NULL;
     }
-        
-    printf("[MPU9250] Initialization successful\n\n");
 
 	int i=0;
 	short x_start_compass = 0, previous_x_compass = 0;
@@ -364,7 +324,7 @@ static void* threadControl(void* arg)
 		}
 		
 		//get control data correction degree will be saved into buffer with sintax -360/360 as char*
-	    getControlData(dev,buffer,CONTROL_BUFFER_SIZE, &z_gyro, &x_compass, &z_accel);	
+	    getControlData(dev, &z_gyro, &x_compass, &z_accel);	
 		
 		//trick to correctly take the initial reference for the floater
 		if(i==1){
@@ -372,32 +332,18 @@ static void* threadControl(void* arg)
 		    previous_x_compass = x_compass;
 		}
 		
-		printf("[MPU9250] x_start_compass=%hd\n",x_start_compass);
+		// Proximity sensor correction
+		proximitySensorCorrection(buffer, x_start_compass, previous_x_compass, x_compass, z_gyro);
 		
-		printf("[MPU9250] Compass data [micro T] - X PREVIOUS: %hd\n", previous_x_compass);
-		printf("[MPU9250] Compass data [micro T] - X: %hd\n", x_compass);
-		
-		printf("[MPU9250] Gyroscope data [dps] - Z: %hd\n", z_gyro);
-		
-		// Floater correction
-		floaterCorrection(x_start_compass, previous_x_compass, x_compass, z_gyro);
-		
-		// Power management with acceleration data
-		printf("[MPU9250] Accel data [milli g] - Z: %hd\n", z_accel);
-		
+		/* Power management
 		float z_accell = ( (float) z_accel ) * GRAVITY_ACCELERATION / 1000;
-		
-		// Converting to string for printing purposes
-		char* z_accel_s = fromFloatToString(z_accell, 2);
-		printf("[MPU9250] Accel data [m/s^2] - Z: %s\n", z_accel_s);
-		
-		// Power management
-		//powerManagement(z_accell);
+		powerManagement(z_accell);*/
 		
 		//trick to correctly take the initial reference for the floater
 		if(i == 0 || i == 1){
 		    i++;
 		}
+		
 		
 		xtimer_usleep(delay_control);
 	}
