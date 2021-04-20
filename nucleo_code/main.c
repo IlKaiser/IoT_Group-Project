@@ -51,8 +51,7 @@
 #define DEGREE_TO_US(x) ((x*(SERVO_MAX-SERVO_MIN)/DEGREE_MAX)+SERVO_MIN)
 
 //constant for correcting the floater orientation with the compass
-#define FROM_RIGHT_TO_LEFT_CORRECTION_THRESHOLD 1
-#define FROM_LEFT_TO_RIGHT_CORRECTION_THRESHOLD -1
+#define CORRECTION_THRESHOLD 1
 
 //acceleration constants for power management ( m/s^2 )
 #define LOW_PM_THRESHOLD 9.5
@@ -60,6 +59,9 @@
 
 //gravity acceleration constant
 #define GRAVITY_ACCELERATION 9.8066
+
+//fixed number for float conversion
+#define FIXED_NUMBER 4.3
 
 static char stackThreadControl[THREAD_STACKSIZE_DEFAULT];
 static char stackThreadAlarm[THREAD_STACKSIZE_DEFAULT];
@@ -108,17 +110,26 @@ void controlDCMotor(gpio_t dc_motor,int status)
 	
 }
 
-char* fromFloatToString(float f){
+char* fromFloatToString(float f, unsigned precision){
     
     char* buf = (char*)malloc(10*sizeof(char));
-    unsigned precision = 2;
 	size_t n = fmt_float(buf, f, precision);
 	buf[n] = '\0';
     
     return buf;
 }
 
-void getControlData(mpu9x50_t dev,char* correctionData,int len, short* x_compass, short* z_accel)
+float calculateDegreeFromDps(short dps, float fixedNumber){
+    float degree = (float)dps;
+    
+    degree = degree * fixedNumber;
+    degree = degree / 3600;
+    degree = degree / fixedNumber; 
+    
+    return degree;
+}
+
+void getControlData(mpu9x50_t dev,char* correctionData,int len, short* z_gyro, short* x_compass, short* z_accel)
 {
 		//Data structure to save info
 		mpu9x50_results_t measurement;
@@ -131,7 +142,8 @@ void getControlData(mpu9x50_t dev,char* correctionData,int len, short* x_compass
         //printf("[MPU9250] Accel data [milli g] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
         //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
         /* Get gyro data in dps */
-        //mpu9x50_read_gyro(&dev, &measurement);
+        mpu9x50_read_gyro(&dev, &measurement);
+        *z_gyro = measurement.z_axis;
         //printf("[MPU9250] Gyro data [dps] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
         //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
         /* Get compass data in mikro Tesla */
@@ -177,6 +189,104 @@ void powerManagement(float z_accel){
 		delay_control = DELAY_CONTROL_HIGH;
 		delay_info = DELAY_INFO_HIGH;	
 	}
+}
+
+void floaterCorrection(short x_start_compass, short previous_x_compass, short x_compass, short z_gyro){
+    
+    if(previous_x_compass > 0 || previous_x_compass <= 0){
+	    printf(" ");	
+	} 
+    
+    float degree = calculateDegreeFromDps(z_gyro, FIXED_NUMBER);
+	
+	char* degree_s = fromFloatToString(degree, 7);
+	
+	printf("correction degree = %s\n",degree_s);
+	
+	short x_diff_compass = x_start_compass - x_compass;	
+	int x_diff_compass_abs = abs((int)x_diff_compass);
+	
+	if(x_diff_compass_abs > CORRECTION_THRESHOLD){
+		
+		/* Evaluate if the floater is moving away or approaching the x_start_compass
+		   by exploiting the previous measured value */
+	    
+	    short previous_x_diff_compass = x_start_compass - previous_x_compass;	
+	    int previous_x_diff_compass_abs = abs((int)previous_x_diff_compass);
+	    
+	    // If the floater is moving to the left
+	    if(degree > 0){
+			
+			// If it is approaching
+			if(x_diff_compass_abs < previous_x_diff_compass_abs){
+			    
+			    printf("Continue moving the floater to the left!\n");
+		        // controlDCMotor(dc_motor, 1);
+		        // controlServoOrientation(&servo,degree);
+		           	
+			}
+			
+			// If it is moving away
+			else if(x_diff_compass_abs > previous_x_diff_compass_abs){
+			    
+			    printf("Rotate the floater to the right!\n");
+		        // controlDCMotor(dc_motor, 1);
+		        // controlServoOrientation(&servo,degree);
+		           	
+			}
+			
+			// If it is remained in the same position as before
+			/*else if(x_diff_compass_abs == previous_x_diff_compass_abs){
+			    
+			    printf("The floater is not moving!\n");
+		           	
+			}*/
+		}
+		
+		// If the floater is moving to the right
+		else if(degree < 0){
+			
+			// If it is approaching
+			if(x_diff_compass_abs < previous_x_diff_compass_abs){
+			    
+			    printf("Continue moving the floater to the right!\n");
+		        // controlDCMotor(dc_motor, 1);
+		        // controlServoOrientation(&servo,degree);
+		           	
+			}
+			
+			// If it is moving away
+			else if(x_diff_compass_abs > previous_x_diff_compass_abs){
+			    
+			    printf("Rotate the floater to the left!\n");
+		        // controlDCMotor(dc_motor, 1);
+		        // controlServoOrientation(&servo,degree);
+		           	
+			}
+			
+			// If it is remained in the same position as before
+			/*else if(x_diff_compass_abs == previous_x_diff_compass_abs){
+			    
+			    printf("The floater is not moving!\n");
+		           	
+			}*/
+			
+		}
+		
+		f no movement is detected
+		else if(degree == 0){
+		    printf("No corretion degree detected.. rotate the floater just a bit!\n");
+		    // controlDCMotor(dc_motor, 1);
+		    // controlServoOrientation(&servo,degree);	
+		}
+	}
+	
+	else{
+	    printf("Correct orientation for the floater!\n");
+	    // controlDCMotor(dc_motor, 0);
+		// controlServoOrientation(&servo,degree);
+	}
+		
 }
 
 static void* threadControl(void* arg)
@@ -240,41 +350,37 @@ static void* threadControl(void* arg)
     printf("[MPU9250] Initialization successful\n\n");
 
 	int i=0;
-	short x_start_compass = 0;
+	short x_start_compass = 0, previous_x_compass = 0;
+	
+	//sample values for magnetic field detected by the compass and accelerometer
+    short z_gyro, x_compass, z_accel;
 	
 	//get control data correction degree will be saved into buffer with sintax -360/360 as char*
 	while(1)
 	{
-		
-		//sample values for magnetic field detected by the compass and accelerometer
-        short x_compass, z_accel;
+		// Take the previous measure for the compass in order to improve the floater correction
+		if (i > 1){
+		    previous_x_compass = x_compass;	
+		}
 		
 		//get control data correction degree will be saved into buffer with sintax -360/360 as char*
-	    getControlData(dev,buffer,CONTROL_BUFFER_SIZE, &x_compass, &z_accel);	
+	    getControlData(dev,buffer,CONTROL_BUFFER_SIZE, &z_gyro, &x_compass, &z_accel);	
 		
+		//trick to correctly take the initial reference for the floater
 		if(i==1){
-		    x_start_compass = x_compass;	
+		    x_start_compass = x_compass;
+		    previous_x_compass = x_compass;
 		}
 		
-		printf("x_start_compass=%hd\n",x_start_compass);
+		printf("[MPU9250] x_start_compass=%hd\n",x_start_compass);
 		
+		printf("[MPU9250] Compass data [micro T] - X PREVIOUS: %hd\n", previous_x_compass);
 		printf("[MPU9250] Compass data [micro T] - X: %hd\n", x_compass);
 		
-		short x_diff_compass = x_start_compass - x_compass;
+		printf("[MPU9250] Gyroscope data [dps] - Z: %hd\n", z_gyro);
 		
-		if(x_diff_compass > FROM_RIGHT_TO_LEFT_CORRECTION_THRESHOLD){
-		    printf("Rotate the floater to the left!\n");
-		    controlDCMotor(dc_motor,0);
-		    // controlServoOrientation(&servo,degree);
-		    
-		}
-		
-		else if(x_diff_compass < FROM_LEFT_TO_RIGHT_CORRECTION_THRESHOLD){
-		    printf("Rotate the floater to the right!\n");	
-		    controlDCMotor(dc_motor,1);
-		    // controlServoOrientation(&servo,degree);
-		    
-		}
+		// Floater correction
+		floaterCorrection(x_start_compass, previous_x_compass, x_compass, z_gyro);
 		
 		// Power management with acceleration data
 		printf("[MPU9250] Accel data [milli g] - Z: %hd\n", z_accel);
@@ -282,11 +388,13 @@ static void* threadControl(void* arg)
 		float z_accell = ( (float) z_accel ) * GRAVITY_ACCELERATION / 1000;
 		
 		// Converting to string for printing purposes
-		char* z_accel_s = fromFloatToString(z_accell);
+		char* z_accel_s = fromFloatToString(z_accell, 2);
 		printf("[MPU9250] Accel data [m/s^2] - Z: %s\n", z_accel_s);
 		
-		powerManagement(z_accell);
+		// Power management
+		//powerManagement(z_accell);
 		
+		//trick to correctly take the initial reference for the floater
 		if(i == 0 || i == 1){
 		    i++;
 		}
