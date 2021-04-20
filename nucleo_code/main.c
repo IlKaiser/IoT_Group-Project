@@ -273,7 +273,7 @@ void floaterCorrection(short x_start_compass, short previous_x_compass, short x_
 			
 		}
 		
-		f no movement is detected
+		// If no movement is detected
 		else if(degree == 0){
 		    printf("No corretion degree detected.. rotate the floater just a bit!\n");
 		    // controlDCMotor(dc_motor, 1);
