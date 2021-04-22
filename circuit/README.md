@@ -13,7 +13,7 @@ First, we need to put the **5v supply** and the **ground** on the breadboard.
 In order to establish the **I2C** communication between the Nucleo board and the Arduino Uno board, we need to:
 - connect one **GND pin** of the Arduino Uno board with one **GND pin** of the Nucleo board
 - the **A5 pin** of the Arduino Uno board with the **SCL/D15 pin** of the Nucleo board
-- the **A4 pin** of the Arduino Uno board with the **SCDS/D14 pin** of the Nucleo board
+- the **A4 pin** of the Arduino Uno board with the **SDA/D14 pin** of the Nucleo board
 
 However, since the SCL and SDA pins are also needed for the MPU-9250 sensor, we need to put them on the breadboard.
 
