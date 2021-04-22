@@ -73,6 +73,8 @@ mutex_t mutex;
 //define delay variables for each thread
 int delay_info = DELAY_INFO_BASE, delay_control = DELAY_CONTROL_BASE, delay_alarm = DELAY_ALARM_BASE;
 
+//define boolean flag for the first compass measurement
+int first_read_compass_done = 0;
 
 void I2CCommunication(int cmd,void*buffer,int len,char* service)
 {
@@ -133,14 +135,24 @@ void getControlData(mpu9x50_t dev, short* z_gyro, short* x_compass, short* z_acc
         //printf("[MPU9250] Gyro data [dps] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
         //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
         /* Get compass data in mikro Tesla */
-        mpu9x50_read_compass(&dev, &measurement);
-        //printf("[MPU9250] Compass data [micro T] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
-        //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
         
-        *x_compass = measurement.x_axis;
+        while(!first_read_compass_done){
+			
+		    mpu9x50_read_compass(&dev, &measurement);
+		    *x_compass = measurement.x_axis;
+		    
+		    if(*x_compass != 0){
+				first_read_compass_done = 1;
+			    break;	
+			}	
+		}
+		
+		if(first_read_compass_done){
+		    mpu9x50_read_compass(&dev, &measurement);
+		    *x_compass = measurement.x_axis;	
+		}
 
 		mutex_unlock(&mutex);
-		
 	
 }
 
@@ -309,41 +321,31 @@ static void* threadControl(void* arg)
         //return NULL;
     }
 
-	int i=0;
+	//int i=0;
 	short x_start_compass = 0, previous_x_compass = 0;
 	
 	//sample values for magnetic field detected by the compass and accelerometer
     short z_gyro, x_compass, z_accel;
 	
+	getControlData(dev, &z_gyro, &x_start_compass, &z_accel);
+	
+	previous_x_compass = x_start_compass;
+	
 	//get control data correction degree will be saved into buffer with sintax -360/360 as char*
 	while(1)
 	{
-		// Take the previous measure for the compass in order to improve the floater correction
-		if (i > 1){
-		    previous_x_compass = x_compass;	
-		}
+		
+		previous_x_compass = x_compass;
 		
 		//get control data correction degree will be saved into buffer with sintax -360/360 as char*
-	    getControlData(dev, &z_gyro, &x_compass, &z_accel);	
-		
-		//trick to correctly take the initial reference for the floater
-		if(i==1){
-		    x_start_compass = x_compass;
-		    previous_x_compass = x_compass;
-		}
-		
+	    getControlData(dev, &z_gyro, &x_compass, &z_accel);
+				
 		// Proximity sensor correction
 		proximitySensorCorrection(buffer, x_start_compass, previous_x_compass, x_compass, z_gyro);
 		
 		/* Power management
 		float z_accell = ( (float) z_accel ) * GRAVITY_ACCELERATION / 1000;
 		powerManagement(z_accell);*/
-		
-		//trick to correctly take the initial reference for the floater
-		if(i == 0 || i == 1){
-		    i++;
-		}
-		
 		
 		xtimer_usleep(delay_control);
 	}
@@ -417,8 +419,9 @@ static void* threadInfo(void* arg)
 	{	
 	
 		I2CCommunication(INFO_CMD,buffer,INFO_BUFFER_SIZE,"INFO");
+		
 		printf("[INFO]MEX: %s \n",buffer);
-	
+			
 		xtimer_sleep(delay_info);
 	
 	}
