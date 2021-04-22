@@ -8,6 +8,8 @@ For the project we will use ***[TO DO]***:
 - a BN-880 gps module
 - 1 100 Ohm resistor
 
+First, we need to put the **5v supply** and the **ground** on the breadboard.
+
 In order to establish the **I2C** communication between the Nucleo board and the Arduino Uno board, we need to:
 - connect one **GND pin** of the Arduino Uno board with one **GND pin** of the Nucleo board
 - the **A5 pin** of the Arduino Uno board with the **SCL/D15 pin** of the Nucleo board
