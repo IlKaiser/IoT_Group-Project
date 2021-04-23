@@ -7,6 +7,9 @@ For the project we will use ***[TO DO]***:
 - an MPU-9250 9 Axis Gyroscope Accelerometer Magnetic Field sensor
 - a BN-880 gps module
 - 1 100 Ohm resistor
+- 1 Stepper Unipolar motor
+- 1 ULN2008
+- 1 E32868T20D
 
 First, we need to put the **5v supply** and the **ground** on the breadboard.
 
@@ -22,6 +25,7 @@ Now we explain the wiring of sensors and actuators ***[TO DO]***:
 - For the **HC-SR04** sensor we need to connect the **GND pin** to **ground** on the breadboard, the **VCC pin** to **5V** on the breadboard, the **trig pin** to the **D12 pin** of the Arduino Uno board and the **echo pin** to the **D13 pin** of the Arduino Uno board
 - For the **MPU-9250** sensor we need to connect the **GND pin** to **ground** on the breadboard, the **VCC pin** to **3.3V**, the **SCL pin** to the **SCL/D15 pin** of the Nucleo board on the breadboard and the **SDA pin** to the **SDA/D14 pin** of the Nucleo board on the breadboard
 - For the **BN-880** module we need to to connect the **GND pin** to **ground** on the breadboard, the **VCC pin** to **5V** on the breadboard and the **TX pin** to the **D7 pin** of the Arduino Uno board
+- For the **E32868T20D** LoraWan module we need to connect the **GND pin** to **GND** on Arduino, the **VCC pin** to **3.3V**, the **AUX pin** to the **D6 pin** of the Arduino board,the **M1 pin** to the **D5 pin** of the Arduino board,the **M0 pin** to the **D4 pin** of the Arduino board,the **RX pin** to the **D3 pin** of the Arduino board,the **TX pin** to the **D2 pin** of the Arduino board 
 
 Below we can see the **wiring of components** ***[TO DO]***:
 
