@@ -31,4 +31,7 @@ Below we can see the **wiring of components** ***[TO DO]***:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/circuit.png)
 
-**NOTE!** As you can see from the wiring, we need to point out a few things: the MPU sensor is not an MPU-9250 in the picture, but is an MPU-6050 sensor, that works with the same logic; for the resistor, in the picture we have a 220 Ohm resistor but, as mentioned before, it should be a 100 Ohm resistor.
+**NOTE!** As you can see from the wiring, we need to point out a few things: 
+- the MPU sensor is not an MPU-9250 in the picture, but is an MPU-6050 sensor, that works with the same logic
+- in the picture we have a 220 Ohm resistor but, as mentioned before, it should be a 100 Ohm resistor
+- the E32868T20D LoraWan module is obviously not the real one 
