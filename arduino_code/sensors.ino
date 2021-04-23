@@ -1,5 +1,7 @@
 #include <Wire.h>
 #include <Stepper.h>
+#include <TinyGPS++.h>
+#include <SoftwareSerial.h>
 
 // Global variables
 String mode = "auto";  // auto || test
@@ -7,9 +9,19 @@ String mode = "auto";  // auto || test
 byte x = 0;
 long durata, cm;
 
+static const int RXPin = 7, TXPin = 3; //Connect only pin 4 to GPS TX
+static const uint32_t GPSBaud = 9600; //Modified to be used with BN-880 or uBlox NEO-7M / M8N
+String infoGps;
+// The TinyGPS++ object
+TinyGPSPlus gps;
+
+// The serial connection to the GPS device
+SoftwareSerial ss(RXPin, TXPin);
+
 // HC SR04 ultrasound sensor pins definition
 #define trigPin                       12
 #define echoPin                       13
+#define SMART_DELAY_GPS               50
 
 // change this to the number of steps on your motor
 #define STEPS                         48
@@ -26,6 +38,7 @@ void setup() {
   // Setting the address 
   Wire.begin(0x04);
   Serial.begin(9600);
+  ss.begin(GPSBaud);
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
 
@@ -34,7 +47,11 @@ void setup() {
   pinMode(echoPin, INPUT);
 }
 
-void loop() {}
+void loop() {
+  infoGps = getGpsInfo();
+  
+  smartDelay(SMART_DELAY_GPS);  
+}
 
 void receiveEvent(int data){
   x = Wire.read();
@@ -109,6 +126,17 @@ void requestEvent() {
 
         Wire.write("321"); 
       }
+
+      // Gps
+      else if (x == 4){
+        if(infoGps == "/"){
+          Wire.write("/");  
+        }
+    
+        else{
+          Wire.write(infoGps.c_str());  
+        }
+      }
        
   }
 
@@ -130,4 +158,47 @@ void measureDistanceBy_HCSR04(){
    durata = pulseIn(echoPin, HIGH);
    cm = durata / 58;    // for inches the formula is duration / 148;
    
+}
+
+// This custom version of delay() ensures that the gps object
+// is being "fed".
+static void smartDelay(unsigned long ms)
+{
+  unsigned long start = millis();
+  do 
+  {
+    while (ss.available())
+      gps.encode(ss.read());
+  } while (millis() - start < ms);
+}
+
+String fromFloatToString(float val, int precision){
+  String buf;
+  buf += String(val, precision);
+
+  return buf;
+}
+
+String getGpsInfo(){
+  if(gps.location.isValid() && gps.speed.isValid()){
+
+    float lat = gps.location.lat(), lon = gps.location.lng(), speed_kmh = gps.speed.kmph();
+   
+    String lat_s = fromFloatToString(lat, 4);
+    String lon_s = fromFloatToString(lon, 4);
+    float speed_ms = speed_kmh / 3.6;
+
+    String info = "";
+    info += String(lat_s);
+    info += ";";
+    info += String(lon_s);
+    info += ";";
+    info += String(speed_ms);
+    
+    return info;
+  }
+
+  else{
+      return "/";
+  }
 }
