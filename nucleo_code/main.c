@@ -19,7 +19,7 @@
 #define ARDUINO_ADDRESS (0X04)
 
 //define command's number and buffer size
-#define INFO_BUFFER_SIZE 30
+#define INFO_BUFFER_SIZE 20
 #define INFO_CMD 4
 
 #define CONTROL_BUFFER_SIZE 10
@@ -31,9 +31,9 @@
 #define ALARM_THRESHOLD 2
 
 //base time interval for each thread
-#define DELAY_INFO_BASE 30
+#define DELAY_INFO_BASE 1
 #define DELAY_ALARM_BASE 1
-#define DELAY_CONTROL_BASE 1000000
+#define DELAY_CONTROL_BASE 100
 
 //medium time interval for each thread
 #define DELAY_INFO_MEDIUM 50
@@ -334,7 +334,6 @@ static void* threadControl(void* arg)
 	//get control data correction degree will be saved into buffer with sintax -360/360 as char*
 	while(1)
 	{
-		
 		previous_x_compass = x_compass;
 		
 		//get control data correction degree will be saved into buffer with sintax -360/360 as char*
@@ -379,7 +378,7 @@ static void* threadAlarm(void* arg)
 	while(1)
 	{
 		I2CCommunication(ALARM_CMD,buffer,ALARM_BUFFER_SIZE,"ALARM");
-		printf("[ALARM]MEX: %s \n",buffer);
+		//printf("[ALARM]MEX: %s \n",buffer);
 		
 		if(atoi(buffer)==1)
 			cont++;
@@ -420,7 +419,13 @@ static void* threadInfo(void* arg)
 	
 		I2CCommunication(INFO_CMD,buffer,INFO_BUFFER_SIZE,"INFO");
 		
-		printf("[INFO]MEX: %s \n",buffer);
+		if(strcmp(buffer, "/") == 0){
+			printf("[INFO] No info received!\n");
+		}
+		
+		else{
+		    printf("[INFO] %s\n",buffer);
+		}
 			
 		xtimer_sleep(delay_info);
 	
