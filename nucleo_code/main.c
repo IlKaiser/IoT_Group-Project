@@ -107,6 +107,13 @@ char* fromFloatToString(float f, unsigned precision){
     return buf;
 }
 
+char* getSubstr(char* str, int start_pos, int len){
+    char* substr = (char*)malloc(len * sizeof(char));
+	memcpy(substr, &str[start_pos], len-1);
+	substr[len-1] = '\0';
+	return substr;
+}
+
 float calculateDegreeFromDps(short dps, float fixedNumber){
     float degree = (float)dps;
     
@@ -419,7 +426,9 @@ static void* threadInfo(void* arg)
 	
 		I2CCommunication(INFO_CMD,buffer,INFO_BUFFER_SIZE,"INFO");
 		
-		if(strcmp(buffer, "/") == 0){
+		char* first = getSubstr(buffer, 0, 2);
+		
+		if(strcmp(first, "/") == 0){
 			printf("[INFO] No info received!\n");
 		}
 		
