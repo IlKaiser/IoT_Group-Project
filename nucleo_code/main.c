@@ -31,7 +31,7 @@
 #define ALARM_THRESHOLD 2
 
 //base time interval for each thread
-#define DELAY_INFO_BASE 1
+#define DELAY_INFO_BASE 30
 #define DELAY_ALARM_BASE 1
 #define DELAY_CONTROL_BASE 100
 
@@ -189,98 +189,61 @@ void powerManagement(float z_accel){
 	}
 }
 
-void proximitySensorCorrection(char* buffer, short x_start_compass, short previous_x_compass, short x_compass, short z_gyro){
-    
+void proximitySensorCorrection(char* buffer, short x_start_compass, short x_compass, short z_gyro, int* last_state){
     float degree = calculateDegreeFromDps(z_gyro, FIXED_NUMBER);
-	
+    
 	short x_diff_compass = x_start_compass - x_compass;	
 	int x_diff_compass_abs = abs((int)x_diff_compass);
 	
-	// Non-return point
-	if(x_diff_compass_abs > HIGH_CORRECTION_THRESHOLD){
-	    //printf("Non-return point!\n");
-	    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
-	    return;
-	}
-	
-	// If the proximity sensor is too far from the starting point
+	// If the proximity sensor is NOT correctly orientated
 	if(x_diff_compass_abs > CORRECTION_THRESHOLD){
 		
-		/* Evaluate if the floater is moving away or approaching the x_start_compass
-		   by exploiting the previous measured value */
-	    
-	    short previous_x_diff_compass = x_start_compass - previous_x_compass;	
-	    int previous_x_diff_compass_abs = abs((int)previous_x_diff_compass);
-	    
-	    // If the proximity sensor is moving to the left
-	    if(degree > FROM_LEFT_TO_RIGHT_THRESHOLD){
-			
-			// If it is approaching
-			if(x_diff_compass_abs < previous_x_diff_compass_abs){
-				
-				//printf("Continue moving the proximity sensor to the left!\n");
+		// If it was correctly orientated before this point
+		if(*last_state == 0){
+		    
+		    // If it is moving to the left 
+		    if(degree > 0){
 			    
-			    // Send to Arduino the indication to continue move it to the left
-			    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
-		           	
-			}
-			
-			// If it is moving away
-			else if(x_diff_compass_abs > previous_x_diff_compass_abs){
-				//printf("Rotate the proximity sensor to the right!\n");
-			    
-			    // Send to Arduino the indication to rotate it to the right
+			    // Setting the last state to 1, which means that the "next" last state will be that
+			    // the proximity sensor was moved to the right
+			    *last_state = 1;
+			    // Send to Arduino the indication to move it to the right
 			    I2CCommunication(CONTROL_CMD_RIGHT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
-			          	
+			        	
 			}
 			
-			// If it is remained in the same position as before
-			/*else if(x_diff_compass_abs == previous_x_diff_compass_abs){
+			// If it is moving to the right
+			else if(degree < 0){
 			    
-			    printf("The floater is not moving!\n");
-		           	
-			}*/
+			    // Setting the last state to 2, which means that the "next" last state will be that
+			    // the proximity sensor was moved to the left
+			    *last_state = 2;
+			    // Send to Arduino the indication to move it to the left
+			    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+			        	
+			} 
+		    	
 		}
 		
-		// If the proximity sensor is moving to the right
-		else if(degree < FROM_RIGHT_TO_LEFT_THRESHOLD){
+		// If it was moved to the rigth before this point
+		else if(*last_state == 1){
 			
-			// If it is approaching
-			if(x_diff_compass_abs < previous_x_diff_compass_abs){
-			    //printf("Continue moving the proximity sensor to the right!\n");
-			    
-			    // Send to Arduino the indication to continue move it to the right
-			    I2CCommunication(CONTROL_CMD_RIGHT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
-			       	
-			}
-			
-			// If it is moving away
-			else if(x_diff_compass_abs > previous_x_diff_compass_abs){
-				
-				//printf("Rotate the proximity sensor to the left!\n");
-			    
-			    // Send to Arduino the indication to rotate it to the left
-			    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
-			       	
-			}
-			
-			// If it is remained in the same position as before
-			/*else if(x_diff_compass_abs == previous_x_diff_compass_abs){
-			    
-			    printf("The floater is not moving!\n");
-		           	
-			}*/
-			
+		    // Send to Arduino the indication to move it to the right
+			I2CCommunication(CONTROL_CMD_RIGHT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
 		}
 		
-		// If no movement is detected
-		else if(degree == 0){
-		    //printf("No movement detected!\n");
+		// If it was moved to the left before this point
+		else if(*last_state == 2){
+			
+		    // Send to Arduino the indication to move it to the left
+			I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
 		}
+		
 	}
 	
 	// The proximity sensor is correctly orientated
 	else{
+		*last_state = 0;
 	    //printf("The proximity sensor is correctly orientated\n"); 
 	}
 		
@@ -329,25 +292,23 @@ static void* threadControl(void* arg)
     }
 
 	//int i=0;
-	short x_start_compass = 0, previous_x_compass = 0;
+	short x_start_compass = 0;
 	
 	//sample values for magnetic field detected by the compass and accelerometer
     short z_gyro, x_compass, z_accel;
 	
 	getControlData(dev, &z_gyro, &x_start_compass, &z_accel);
-	
-	previous_x_compass = x_start_compass;
+		
+	int last_state = 0;  // It stands for 'the proximity sensor is correctly orientated'
 	
 	//get control data correction degree will be saved into buffer with sintax -360/360 as char*
 	while(1)
 	{
-		previous_x_compass = x_compass;
-		
 		//get control data correction degree will be saved into buffer with sintax -360/360 as char*
 	    getControlData(dev, &z_gyro, &x_compass, &z_accel);
 				
 		// Proximity sensor correction
-		proximitySensorCorrection(buffer, x_start_compass, previous_x_compass, x_compass, z_gyro);
+		proximitySensorCorrection(buffer, x_start_compass, x_compass, z_gyro, &last_state);
 		
 		/* Power management
 		float z_accell = ( (float) z_accel ) * GRAVITY_ACCELERATION / 1000;
@@ -385,7 +346,7 @@ static void* threadAlarm(void* arg)
 	while(1)
 	{
 		I2CCommunication(ALARM_CMD,buffer,ALARM_BUFFER_SIZE,"ALARM");
-		//printf("[ALARM]MEX: %s \n",buffer);
+		printf("[ALARM]MEX: %s \n",buffer);
 		
 		if(atoi(buffer)==1)
 			cont++;
