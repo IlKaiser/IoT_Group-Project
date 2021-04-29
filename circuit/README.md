@@ -29,7 +29,7 @@ Now we explain the wiring of sensors and actuators:
 
 Below we can see the **wiring of components**:
 
-![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/circuit.png)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/circuit_bb.png)
 
 **NOTE!** As you can see from the wiring, we need to point out a few things: 
 - the MPU sensor is not an MPU-9250 in the picture, but is an MPU-6050 sensor, that works with the same logic
