@@ -3,6 +3,10 @@
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
 
+String ID="1";
+
+SoftwareSerial EEBlue(3, 2); // RX | TX
+
 // Global variables
 String mode = "auto";  // auto || test
 
@@ -38,6 +42,8 @@ void setup() {
   // Setting the address 
   Wire.begin(0x04);
   Serial.begin(9600);
+  EEBlue.begin(9600);  //Default Baud for comm, it may be different for your Module. 
+  Serial.println("The bluetooth gates are open.\n Connect to HC-05 from any other bluetooth device with 1234 as pairing key!.");
   ss.begin(GPSBaud);
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
@@ -137,13 +143,39 @@ void requestEvent() {
           Wire.write(infoGps.c_str());  
         }
       }
+      else if (x==5)
+      {
+        if(infoGps!="/"){
+          String toSend=infoGps+";"+ID;
+          EEBlue.write(toSend.c_str());
+        }
+        else{
+          EEBlue.write(ID.c_str());
+        }
+        Wire.write(x);
+          
+      }
        
   }
 
   // Test mode
   else if(mode == "test"){
-    Serial.println("Now in test mode");
-    Serial.println("Sending random generated data to STM-32...");  
+    infoGps="/";
+    if(x == 1){
+          Wire.write("1"); 
+      }
+      else if (x==5)
+      {
+        if(infoGps!="/"){
+          String toSend=infoGps+";"+ID;
+          EEBlue.write(toSend.c_str());
+        }
+        else{
+          EEBlue.write(ID.c_str());
+        }
+        Wire.write(x);
+          
+      }
   }
    
 }
