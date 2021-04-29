@@ -28,6 +28,7 @@
 
 #define ALARM_BUFFER_SIZE 1
 #define ALARM_CMD 1
+#define BOAT_FOUND_CMD 5
 #define ALARM_THRESHOLD 2
 
 //base time interval for each thread
@@ -356,8 +357,10 @@ static void* threadAlarm(void* arg)
 			
 		
 		if(cont==ALARM_THRESHOLD)
+		{
 			controlBuzzer(buzzer,1);
-		
+			I2CCommunication(BOAT_FOUND_CMD,buffer,ALARM_BUFFER_SIZE,"BOAT FOUNDs");
+		}
 		if(cont==0)
 			controlBuzzer(buzzer,0);
 		
