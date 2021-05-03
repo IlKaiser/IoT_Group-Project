@@ -3,10 +3,12 @@ from picamera import PiCamera
 import tensorflow as tf
 from time import sleep
 
-#Shutfu Keras
+# Stfu Keras
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 classes = ["No_Boat","Boat"]
+
+
 def take_pic_and_evaluate():
     #Import model
     model = tf.keras.models.load_model('model.h5')
