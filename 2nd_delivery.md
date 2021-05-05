@@ -26,13 +26,13 @@ For the first delivery, our architecture was totally based on STM-32 devices. No
 Now we present the specific components.
 
 #### Arduino-UNO
-Attached to the Floaters, it communicates with STM-32 with I2C protocol. It samples the GPS, the accelerometer and the proximity sensor. After sampling and some data-processing, it sends data to the STM-32 board.
+Attached to the Floaters, the [Arduino Uno](https://store.arduino.cc/arduino-uno-rev3) communicates with STM-32 with I2C protocol. It samples the GPS, the accelerometer and the proximity sensor. After sampling and some data-processing, it sends data to the STM-32 board.
 
 #### STM-32
-Attached to the Floaters, it communicates with Arduino-UNO with I2C protocol. It manages actuators, which are the DC motor, the Servo motor and buzzers. It also uses Lora-WAN protocol to communicate with the Sea Station, in order to send data received by Arduino-UNO.
+Attached to the Floaters, the [STM-32](https://www.st.com/en/evaluation-tools/nucleo-f401re.html) communicates with Arduino-UNO with I2C protocol. It manages actuators, which are the Stepper motor and the buzzer. It also uses Lora-WAN protocol to communicate with the Sea Station, in order to send data received by Arduino-UNO.
 
 #### Sea Station (with Raspberry pi 4)
-We decided to use a Raspberry pi for the Sea Station, because it is a portable device that offers great performances similar to a PC with low power consumption. It uses Lora-WAN protocol to communicate with the STM-32 board in order to receive reports and to take pictures, with the goal of verifying wheter there was a true violation or not, by using a Neural Network.
+We decided to use a [Raspberry pi](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) for the Sea Station, because it is a portable device that offers great performances similar to a PC with low power consumption. It uses Lora-WAN protocol to communicate with the STM-32 board in order to receive reports and to take pictures, with the goal of verifying wheter there was a true violation or not, by using a Neural Network.
 
 #### Cloud service
 There are no changes for this part.
