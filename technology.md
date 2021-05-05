@@ -95,7 +95,7 @@ It is used to **increase battery life**.
 
 <img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/camera.jpg" width=400/>
 
-It is used to take pictures of the current situation, in order to check whether there is a violation or not.
+It is used to take **pictures** of the current situation, in order to check whether there is a **violation** or not.
 
 ## Actuators
 
