@@ -2,7 +2,7 @@
 *.d
 
 # Env file
-.env
+dashboard/.env
 
 # Node modules
 dashboard/node_modules/
