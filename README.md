@@ -29,7 +29,10 @@ More informations about the **circuit** and the whole **wiring of components** c
 - **Arduino code**: more info about the Arduino code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/arduino_code/README.md).
 - **Raspberry code**: more info about the Raspberry code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/README.md).
 - **Convolutional Neural Network code**: more info about the Convolutional Neural Network code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/MR-SSD.md).
-- **Web Dashboard**: more info about the Web Dashboard can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/dashboard/README.md).
+
+## Web Dashboard
+
+More informations about the Web Dashboard can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/dashboard/README.md).
 
 ## Videos
 
