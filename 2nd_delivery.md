@@ -39,3 +39,38 @@ There are no changes for this part.
 
 ### Evaluation
 No changes has been done.
+
+## Presentation of technical work
+For the technical work, we present a list of the functionalities we implemented in different devices.
+
+### Safety Floater
+Safety Floater has been divided in two parts, so in two devices, that are the Arduino Uno board and the Nucleo Stm-32 board. The communication between them has been implemented with the I2C protocol, where the Nucleo board is the master and the Arduino Uno is the slave: in particular, the Nucleo board periosically sends request messages to the Arduino board, in order to retrieve informations about sensors and system. The functionalities provided are:
+
+- **boat detection mechanism**: by using the ultrasonic proximity sensor and the buzzer, the system can detect whether a boat is transiting near the safety line or not. In order to avoid false positives, we introduced a smart measuring system based on delay
+- **orientation control mechanism**: by using the gyroscope/compass and the stepper motor, we implemented a control system that is able to correct the orientation of the proximity sensor
+- **power management mechanism**: by using the accelerometer, we implemented a power management system based on varying the sampling periods for sensors with respect to the acceleration measured by the accelerometer
+- **system info mechanism**: by using the gps, we implemented a mechanism able to retrieve the last known position of the floater
+- **sea-ground communication system**: we implemented the communication between the Safety Floater and the Sea Station by using a bluetooth module, in order to emulate Lorawan communication 
+
+### Sea station
+Sea station has been implemented with Raspberry pi, because we have no power management problems, and we need more computational power to handle the camera and the image recognition system. We have three main modules:
+
+- **Ground-sea communication** via serial bluetooth, which receives data of a possible violation
+- **Boat recognition system**, that takes pictures of the current situation and analyzes them with a Convolutional Neural Network in order to ensure that there is an actual violation and avoid false positives
+- **Ground-cloud communication**, that periodically sends data of sensors to the cloud via MQTT if there is a violation
+
+## Missing functionalities
+- Optimizing power management
+- Improving latency
+- Development of a better web interface
+
+## Evaluation
+For the evaluation:
+- we estimate the power consumption of single subsytems
+- we evaluated performances of the CNN
+- we estimate the latency in the whole system
+- we estimate the battery consumption and correction accuracy of the stepper motor.
+
+## Evaluation for the 3rd delivery
+We want to obtain the correct estimation of the previous parameters with the real prototype.
+
