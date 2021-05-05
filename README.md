@@ -32,7 +32,7 @@ More informations about the **circuit** and the whole **wiring of components** c
 
 ## Web Dashboard
 
-More informations about the Web Dashboard can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/dashboard/README.md).
+More informations about the **Web Dashboard** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/dashboard/README.md).
 
 ## Videos
 
