@@ -7,7 +7,7 @@ Given that Safety Floater will communicate with the Sea Station via LoraWAN, for
 The power consumption will be monitored in all possible states of the Safety Floater, and in order to do this we will use a **power meter**. In particular, we will measure the battery consumption and correction accuracy of the stepper motor.
 
 ## Detection accuracy with CNN
-We measured the accuracy and performances of the Convolutional Neural Network we trained for boat recognition, and the results are in the picture below:
+We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition, and the results are in the picture below:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/plots.jpeg)
 
