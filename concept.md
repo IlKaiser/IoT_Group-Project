@@ -36,4 +36,4 @@ As we can see from the above persona, Matteo cares a lot about the safety of peo
 Above we can see a typical use case: Bob wants to enjoy a holiday with his family, so they go to the airport in order to take a plain for Sardinia. When they arrive there, they are ready to enjoy some days at a beautiful beach. One day, however, while his son is swimming in the water nearby, Bob sees a boat approaching too close to safety line, but thanks to the Safety Floater system control his son is not really in danger, because authorities will intervene in time. 
 
 ## Previous version
-The previous version of the document can be find in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
+The previous version of the document can be found in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
