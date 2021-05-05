@@ -115,4 +115,4 @@ Below I show a picture of the HC-05 Bluetooth module:
 ![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png )
 
 ## Previous version
-The previous version of the document can be find in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
+The previous version of the document can be found in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
