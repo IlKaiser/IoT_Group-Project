@@ -38,7 +38,7 @@ We decided to use a [Raspberry pi](https://www.raspberrypi.org/products/raspberr
 There are no changes for this part.
 
 ### Evaluation
-No changes has been done.
+More informations can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/2nd_delivery.md#evaluation-1).
 
 ## Presentation of technical work
 For the technical work, we present a list of the functionalities we implemented in different devices.
