@@ -14,10 +14,5 @@ We measured the accuracy and performances of the Convolutional Neural Network we
 ## End-user point of view
 From an end-user point of view the response time is conditioned by **LoraWAN**, by the **bandwith of the channel linking the Sea Station to the cloud**, and by the type of **protocol** used (**MQTT**). From a quantitative point of view, we will use **timestamps** at the generation of the packet and one at the receiving of the packet.  
 
-we estimated the power consumption of single subsytems
-we evaluated performances of the CNN
-we estimated the latency in the whole system
-we estimated the battery consumption and correction accuracy of the stepper motor.
-
 ## Previous version
 The previous version of the document can be find in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
