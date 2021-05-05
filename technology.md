@@ -82,6 +82,21 @@ It is used for getting the last known **position** of the floater.
 
 It is used to **increase battery life**.
 
+### Raspberry pi Camera Rev 1.3
+
+- Fully Compatible with Both the Model A and Model B Raspberry Pi
+- 5MP Omnivision 5647 Camera Module
+- Still Picture Resolution: 2592 x 1944
+- Video: Supports 1080p @ 30fps, 720p @ 60fps and 640x480p 60/90 Recording
+- 15-pin MIPI Camera Serial Interface - Plugs Directly into the Raspberry Pi Board
+- Size: 20 x 25 x 9mm
+- Weight 3g
+- Fully Compatible with many Raspberry Pi cases
+
+<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/camera.jpg" width=400/>
+
+It is used to take pictures of the current situation, in order to check whether there is a violation or not.
+
 ## Actuators
 
 ### Buzzer
