@@ -2,9 +2,11 @@
 *.d
 
 # Env file
+.env
 dashboard/.env
 
 # Node modules
+node_modules/
 dashboard/node_modules/
 
 # Object files
