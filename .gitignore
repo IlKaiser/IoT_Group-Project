@@ -1,6 +1,12 @@
 # Prerequisites
 *.d
 
+# Env file
+.env
+
+# Node modules
+dashboard/node_modules/
+
 # Object files
 *.o
 *.ko
