@@ -11,7 +11,7 @@ Now for each of the previous points we explain our decisions:
 1. In order to monitor the temperature and humidity of air we will use Weather Services API, notifying in case of very adverse measurements our floaters to enable the power safe mode.
 2. Our use of Lora-WAN will be in the range of 150 metres, so the positioning and dimensioning of the antenna is not a relevant problem.
 3. In order to solve this problem, the first approach is verifying if the detected object remains in the detection field for more than a fixed amount of seconds.
-4. More info later..
+4. More info later.
 
 ## Changes
 
@@ -44,7 +44,7 @@ No changes has been done.
 For the technical work, we present a list of the functionalities we implemented in different devices.
 
 ### Safety Floater
-Safety Floater has been divided in two parts, so in two devices, that are the Arduino Uno board and the Nucleo Stm-32 board. The communication between them has been implemented with the I2C protocol, where the Nucleo board is the master and the Arduino Uno is the slave: in particular, the Nucleo board periosically sends request messages to the Arduino board, in order to retrieve informations about sensors and system. The functionalities provided are:
+Safety Floater has been divided in two parts, so in two devices, that are the Arduino Uno board and the Nucleo Stm-32 board. The communication between them has been implemented with the I2C protocol, where the Nucleo board is the master and the Arduino Uno is the slave: in particular, the Nucleo board periodically sends request messages to the Arduino board, in order to retrieve informations about sensors and system. The functionalities provided are:
 
 - **boat detection mechanism**: by using the ultrasonic proximity sensor and the buzzer, the system can detect whether a boat is transiting near the safety line or not. In order to avoid false positives, we introduced a smart measuring system based on delay
 - **orientation control mechanism**: by using the gyroscope/compass and the stepper motor, we implemented a control system that is able to correct the orientation of the proximity sensor
@@ -66,10 +66,10 @@ Sea station has been implemented with Raspberry pi, because we have no power man
 
 ## Evaluation
 For the evaluation:
-- we estimate the power consumption of single subsytems
-- we evaluated performances of the CNN
-- we estimate the latency in the whole system
-- we estimate the battery consumption and correction accuracy of the stepper motor.
+- we estimated the **power consumption** of single subsytems
+- we evaluated **performances of the CNN**
+- we estimated the **latency** in the whole system
+- we estimated the **battery consumption** and **correction accuracy** of the **stepper motor**.
 
 ## Evaluation for the 3rd delivery
 We want to obtain the correct estimation of the previous parameters with the real prototype.
