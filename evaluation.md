@@ -1,13 +1,23 @@
 # Evaluation
 
 ## Network technologies
-Given that Safety Floater will communicate with the Sea Station via LoraWAN, the evaluation of the performance of the network technologies will be measured with **Iot-lab**, because there we have the right tools compared to a generic user. We want to notice that we are not able to analyze the network consumption of physical devices of our personal Safety Floater.
+Given that Safety Floater will communicate with the Sea Station via LoraWAN, for our prototype we used a **Bluetooth module** in order to achieve an accurate measure of the **latency**. When we will perform final tests, we will take into account the technological constraints of LoraWan, such as **throughput, latency and bandwith**.
 
 ## Embedded devices
-During the development phase we will use **Iot-lab** to have an estimation of the power consumption of the embedded device (Nucleo f401re), because even if on Iot-lab are not available our specific sensors we can obtain a rough result. During the final testing we will use a **voltage measure sensor** in order to monitor the real consumption.
+The power consumption will be monitored in all possible states of the Safety Floater, and in order to do this we will use a **power meter**. In particular, we will measure the battery consumption and correction accuracy of the stepper motor.
+
+## Detection accuracy with CNN
+We measured the accuracy and performances of the Convolutional Neural Network we trained for boat recognition, and the results are in the picture below:
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/plots.jpeg)
 
 ## End-user point of view
-From an end-user point of view the response time is conditioned by **LoraWAN**, by the **bandwith of the channel linking the Sea Station to the cloud**, and by the type of **protocol** used (e.g.: HTTP-REST / MQTT). From a quantitative point of view, we will use **timestamps** at the generation of the packet and one at the receiving of the packet.  
+From an end-user point of view the response time is conditioned by **LoraWAN**, by the **bandwith of the channel linking the Sea Station to the cloud**, and by the type of **protocol** used (**MQTT**). From a quantitative point of view, we will use **timestamps** at the generation of the packet and one at the receiving of the packet.  
+
+we estimated the power consumption of single subsytems
+we evaluated performances of the CNN
+we estimated the latency in the whole system
+we estimated the battery consumption and correction accuracy of the stepper motor.
 
 ## Previous version
 The previous version of the document can be find in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
