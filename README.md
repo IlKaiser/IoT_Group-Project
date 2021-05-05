@@ -25,3 +25,7 @@ In future, the system could be used to monitor the state of the sea and to impro
 - [Technical Approach](https://www.youtube.com/watch?v=QwJG0_9aonI)
 - [Performance Evaluation Plan](https://www.youtube.com/watch?v=1ltpUNfAVcA)
 
+## Releases
+
+- [First delivery](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0)
+- [Second delivery](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/2.0)
