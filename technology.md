@@ -107,4 +107,5 @@ Below we show an image of the spotter of the floater:
 
 ![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png )
 
+## Previous version
 The previous version of the document can be find in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
