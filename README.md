@@ -19,6 +19,17 @@ In future, the system could be used to monitor the state of the sea and to impro
 - [Technology](https://github.com/IlKaiser/IoT_Group-Project/blob/main/technology.md)
 - [Evaluation](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation.md)
 
+## Circuit
+
+More informations about the **circuit** and the whole **wiring of components** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/README.md).
+
+## Code
+
+- **Nucleo code**: more info about the Nucleo code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md).
+- **Arduino code**: more info about the Arduino code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/arduino_code/README.md).
+- **Raspberry code**: more info about the Raspberry code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/README.md).
+- **Convolutional Neural Network code**: more info about the Convolutional Neural Network code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/MR-SSD.md).
+
 ## Videos
 
 - [Presentation of the product](https://www.youtube.com/watch?v=axyGc6fHb7c)
