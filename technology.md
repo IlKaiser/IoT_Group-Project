@@ -100,8 +100,12 @@ Below we show an image of the spotter of the floater:
 
 
 ## Communication
-- **Smart Floater-to-Sea Station Communication** is via LoraWan in our original design, in practice we will use Bluetooth. Packets are sent with the status of the sensor if a possible violation is detected. 
+- **Smart Floater-to-Sea Station Communication** is via LoraWan in our original design, in practice we will use Bluetooth: in particular, we used an HC-05 Bluetooth module. Packets are sent with the status of the sensor if a possible violation is detected. 
 - **Sea Station-to-Cloud Communication** via MQTT communication.
+
+Below I show a picture of the HC-05 Bluetooth module:
+
+<img src="https://images-na.ssl-images-amazon.com/images/I/71tyACSeI6L._SL1500_.jpg"  width=400/>
 
 ## The final picture
 
