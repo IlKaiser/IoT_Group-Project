@@ -27,7 +27,7 @@ Now we explain the wiring of sensors and actuators:
 - For the **BN-880** module we need to to connect the **GND pin** to **ground** on the breadboard, the **VCC pin** to **5V** on the breadboard and the **TX pin** to the **D7 pin** of the Arduino Uno board
 - For the **HC-05** Bluetooth module we need to connect the **GND pin** to **GND** on Arduino, the **VCC pin** to **5V** of the Arduino board, the **RX pin** to the **D2 pin** of the Arduino board,the **TX pin** to the **D3 pin** of the Arduino board 
 
-Below we can see the **wiring of components**:
+Below we can see the **wiring of components** for the Nucleo board and the Arduino Uno board:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/circuit_bb.png)
 
@@ -35,3 +35,6 @@ Below we can see the **wiring of components**:
 - the MPU sensor is not an MPU-9250 in the picture, but is an MPU-6050 sensor, that works with the same logic
 - in the picture we have a 220 Ohm resistor but, as mentioned before, it should be a 100 Ohm resistor
 
+Below we can see the **wiring of components** for the Raspberry board:
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/raspberry_bb.png)
