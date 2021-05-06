@@ -65,18 +65,24 @@
             <!-- INFO DATA-->
 
             <div class="card-body" v-if="infoMode">
+              <center>
               <h5 @click="switch2View()" style="color: blue; cursor: pointer">
                 <-Back
               </h5>
               <div class="row">
-                <div class="col " >
-                  <h5>Image of the violation</h5>
-                  <img :src=this.info_data.url width=400>
-                </div>
                 <div class="col">
-                  <h5>{{info_data.lat}}</h5>
-                  <h5>{{info_data.long}}</h5>
+                  <h5>Image of the violation</h5>
+                  <img :src=this.info_data.url width="600" height="400">
                 </div>
+              </div>
+                <div class="row mt-5">
+                  <div class="col">
+                    <h5>Position of the boat</h5>
+                  <img width="600" height="400" :src=this.mapUrl>
+                  </div>
+                
+                </div>
+              </center>
 
               </div>
               
@@ -94,6 +100,7 @@
               info_data: null,
               viewMode: true,
               infoMode: false,  
+              mapUrl:""
 				      },
             
             beforeCreate: function(){
@@ -107,8 +114,8 @@
                 "station_id": "1",
                 "violation_id":"1",
                 "time":"05/06/2021 09:58:15",
-                "lat":"41.7564",
-                "long":"35.6743",
+                "lat":"41.5439",
+                "long":"12.2854",
                 "url":"https://movies.gamesource.it/wp-content/uploads/sites/2/2017/03/Margot-Robbie2.jpg"
               },
             {
@@ -135,6 +142,10 @@
 
             methods: {
 
+            getMap: function(lat,long){
+           this.mapUrl="https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&center=lonlat:"+lat+","+long+"&zoom=8&apiKey=0ad69017c7e7462b99ee1e5d0fa90db4"
+      
+          },
             getData: function()
             {
               this.$http.get("http://localhost:8080/AllViolations").then(
@@ -147,8 +158,8 @@
                     "station_id": "1",
                     "violation_id":"1",
                     "time":"05/06/2021 09:58:15",
-                    "lat":"41.7564",
-                    "long":"35.6743",
+                    "lat":"41.5439",
+                    "long":"12.2854",
                     "url":"https://movies.gamesource.it/wp-content/uploads/sites/2/2017/03/Margot-Robbie2.jpg"
                   },
                   {
@@ -194,6 +205,7 @@
                 if(this.data[i].violation_id==id)
                 {
                   this.info_data=this.data[i]
+                  this.getMap(this.info_data.lat,this.info_data.long)
                   break
                 }
               }
