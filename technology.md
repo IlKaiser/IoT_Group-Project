@@ -84,6 +84,8 @@ It is used to **increase battery life**.
 
 ### Raspberry pi Camera Rev 1.3
 
+<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/camera.jpg" width=400/>
+
 - Still resolution: 5 Megapixels
 - Video modes: 1080p30, 720p60 
 - Linux integration: V4L2 driver available
@@ -104,8 +106,6 @@ It is used to **increase battery life**.
 - Horizontal field of view: 53.50 +/- 0.13 degrees
 - Vertical field of view: 41.41 +/- 0.11 degrees
 - Focal ratio (F-Stop): 2.9
-
-<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/camera.jpg" width=400/>
 
 It is used to take **pictures** of the current situation, in order to check whether there is a **violation** or not.
 
