@@ -1,11 +1,11 @@
 const views = require("../routes/views");
 const violations = require("../routes/violations");
-var bodyParser = require('body-parser')
+var express = require('express')
 
 
 module.exports = function (app) {
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }))
   
   app.use("/", views);
   app.use("/", violations);
