@@ -84,14 +84,26 @@ It is used to **increase battery life**.
 
 ### Raspberry pi Camera Rev 1.3
 
-- Fully Compatible with Both the Model A and Model B Raspberry Pi
-- 5MP Omnivision 5647 Camera Module
-- Still Picture Resolution: 2592 x 1944
-- Video: Supports 1080p @ 30fps, 720p @ 60fps and 640x480p 60/90 Recording
-- 15-pin MIPI Camera Serial Interface - Plugs Directly into the Raspberry Pi Board
-- Size: 20 x 25 x 9mm
-- Weight 3g
-- Fully Compatible with many Raspberry Pi cases
+- Still resolution: 5 Megapixels
+- Video modes: 1080p30, 720p60 
+- Linux integration: V4L2 driver available
+- C programming API: OpenMAX IL and others available
+- Sensor: OmniVision OV5647
+- Sensor resolution: 2592 × 1944 pixels
+- Sensor image area: 3.76 × 2.74 mm
+- Pixel size: 1.4 µm × 1.4 µm
+- Optical size: 1/4"
+- Full-frame SLR lens equivalent: 35 mm
+- S/N ratio: 36 dB
+- Dynamic range: 67 dB @ 8x gain
+- Sensitivity: 680 mV/lux-sec
+- Dark current: 16 mV/sec @ 60 C
+- Well capacity: 4.3 Ke-
+- Fixed focus: 1 m to infinity
+- Focal length: 3.60 mm +/- 0.01
+- Horizontal field of view: 53.50 +/- 0.13 degrees
+- Vertical field of view: 41.41 +/- 0.11 degrees
+- Focal ratio (F-Stop): 2.9
 
 <img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/camera.jpg" width=400/>
 
