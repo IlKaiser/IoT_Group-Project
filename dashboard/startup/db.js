@@ -16,7 +16,7 @@ AWS.config.update(awsConfig);
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 const paramsViolation = {
-    TableName: "violation",
+    TableName: config.get("violation_table_name"),
 };
 
 exports.docClient = docClient;
