@@ -9,6 +9,9 @@ dashboard/.env
 node_modules/
 dashboard/node_modules/
 
+# That's one secret i'll never tell
+secret.json
+
 # Object files
 *.o
 *.ko
