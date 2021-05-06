@@ -13,10 +13,6 @@ router.get("/redirect_to_violations", async (req, res) => {
   res.sendFile(path.join(__dirname, "../views", "redirect_to_violations.html"));
 });
 
-router.get("/checkLogin", async (req, res) => {
-  res.sendFile(path.join(__dirname, "../views", "checkLogin.html"));
-});
-
 router.get("/violations", async (req, res) => {
   res.sendFile(path.join(__dirname, "../views", "violations.html"));
 });
