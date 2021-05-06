@@ -62,3 +62,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 bin/
+
+# Ignore models and pictures
+*.h5
+*.jpg
+*.jpeg
