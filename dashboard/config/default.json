@@ -1,5 +1,8 @@
 {
     "port": "8080",
+    
     "aws_endpoint": "http://dynamodb.us-east-1.amazonaws.com",
-    "aws_region": "us-east-1"
+    "aws_region": "us-east-1",
+    
+    "violation_table_name": "violation"
 }
