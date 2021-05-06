@@ -1,13 +1,16 @@
 const { MongoClient } = require("mongodb");
 const secret = require('../secret.json');
+const config = require("config");
 var crypto = require('crypto');
 
-var hash = crypto.createHash('sha256');
+const hash_function = config.get("hash_function");
+
+var hash = crypto.createHash(hash_function);
 const password = secret.password
 
 function check(nameReq,passwordReq,callback_true,callback_false){
     
-    const uri = "mongodb+srv://safetyFloater:"+password+"@cluster0.cc40d.mongodb.net/access?retryWrites=true&w=majority";
+    const uri = config.get("db_safety_floater_base_url")+password+config.get("mongo_db_final_url");
     
     
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,7 +27,7 @@ function check(nameReq,passwordReq,callback_true,callback_false){
             const user = await inv.findOne(query);
             
             if (user !== null && 
-                user.password == crypto.createHash('sha256').update(passwordReq+user.salt).digest("hex")){
+                user.password == crypto.createHash(hash_function).update(passwordReq+user.salt).digest("hex")){
                 callback_true();
             }else{
                 callback_false();
