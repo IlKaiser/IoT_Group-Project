@@ -8,8 +8,10 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 classes = ["No_Boat","Boat"]
 
-
-def take_pic_and_evaluate():
+'''
+    True if it is a Boat, False elsewhere
+'''
+def check():
     #Import model
     model = tf.keras.models.load_model('model.h5')
     print("Model correctly loaded...")

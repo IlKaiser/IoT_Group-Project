@@ -10,7 +10,7 @@ def recieveLine():
     
     bluetoothSerial = serial.Serial( "/dev/rfcomm0", baudrate=9600 )
     line = bluetoothSerial.readline()
-    print(line)
+   
     string = line.decode("utf-8")
     
     lat   = string.split(";")[0]
@@ -18,7 +18,5 @@ def recieveLine():
     speed = string.split(";")[2]
     id    = string.split(";")[3]
     
+    print("Recieved "+lat,long,speed,id)
     return lat,long,speed,id
-    
-    
-recieveLine()
