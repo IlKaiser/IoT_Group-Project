@@ -4,5 +4,10 @@
     "aws_endpoint": "http://dynamodb.us-east-1.amazonaws.com",
     "aws_region": "us-east-1",
     
-    "violation_table_name": "violation"
+    "violation_table_name": "violation",
+    
+    "db_safety_floater_base_url": "mongodb+srv://safetyFloater:",
+    "mongo_db_final_url": "@cluster0.cc40d.mongodb.net/access?retryWrites=true&w=majority",
+    
+    "hash_function": "sha256"
 }
