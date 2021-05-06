@@ -3,8 +3,13 @@ const router = express.Router();
 const {quickSort} = require("../helper/quickSort");
 const {docClient, paramsViolation} = require("../startup/db");
 
+let logged = "";
+
 router.get("/AllViolations", async (req, res) => {
-  timestamps = [];
+	
+  if(logged == "true"){
+	  
+	  timestamps = [];
   
   docClient.scan(paramsViolation, (err, data) => {
 	  if (err) {
@@ -74,6 +79,19 @@ router.get("/AllViolations", async (req, res) => {
         return res.status(200).send(toReturn);
     }
   });
+	  
+  }
+  
+  else{
+	res.status(401).redirect("/");  
+  }
+  
+  
 });
+
+router.post("/setLogged", async (req, res) => {
+    logged = req.body.logged;
+    res.status(200).send("Logged set!");
+})
 
 module.exports = router;
