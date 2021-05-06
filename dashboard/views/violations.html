@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
-
-    <script type="text/javascript" language="javascript">
-  
-    </script>
-
+    <script type="text/javascript" language="javascript"></script>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -20,9 +16,10 @@
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
-  />
+    />
     <title >SafetyFloater Violations</title>
   </head>
+  
   <body>
     <div class="container-fluid">
       <div class="container">
@@ -35,7 +32,6 @@
             </div>
 
             <!-- VIEW MODE-->
-
             <div class="card-body" v-if="viewMode">
               <div class="table-responsive" style="height: 550px">
                 <table class="table">
@@ -59,38 +55,35 @@
                   </tbody>
                 </table>
               </div>
-             
             </div>
 
             <!-- INFO DATA-->
-
             <div class="card-body" v-if="infoMode">
-              <center>
-              <h5 @click="switch2View()" style="color: blue; cursor: pointer">
-                <-Back
-              </h5>
-              <div class="row">
-                <div class="col">
-                  <h5>Image of the violation</h5>
-                  <img :src=this.info_data.url width="600" height="400">
-                </div>
-              </div>
-                <div class="row mt-5">
-                  <div class="col">
-                    <h5>Position of the boat</h5>
-                  <img width="600" height="400" :src=this.mapUrl>
+                <center>
+                  <h5 @click="switch2View()" style="color: blue; cursor: pointer">
+                    <-Back
+                  </h5>
+                  <div class="row">
+                    <div class="col">
+                      <h5>Image of the violation</h5>
+                      <img :src=this.info_data.url width="600" height="400">
+                    </div>
                   </div>
-                
-                </div>
-              </center>
-
-              </div>
-              
+                  <div class="row mt-5">
+                    <div class="col">
+                      <h5>Position of the boat</h5>
+                      <img width="600" height="400" :src=this.mapUrl>
+                    </div>  
+                  </div>
+                </center>
             </div>            
-          </div>
+              
+          </div>            
         </div>
       </div>
     </div>
+  </div>
+
 
 <script>
       var app = new Vue({
@@ -143,7 +136,7 @@
             methods: {
 
             getMap: function(lat,long){
-           this.mapUrl="https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&center=lonlat:"+lat+","+long+"&zoom=8&apiKey=0ad69017c7e7462b99ee1e5d0fa90db4"
+           this.mapUrl="https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&center=lonlat:"+lat+","+long+"&zoom=8&marker=lonlat:"+lat+","+long+";color:%23ff0000;size:medium;text:1&apiKey=0ad69017c7e7462b99ee1e5d0fa90db4"
       
           },
             getData: function()
