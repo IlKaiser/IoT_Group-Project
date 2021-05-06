@@ -21,7 +21,7 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
   />
-    <title >Safety Floater Violations</title>
+    <title >SafetyFloater Violations</title>
   </head>
   <body>
     <div class="container-fluid">
@@ -68,9 +68,18 @@
               <h5 @click="switch2View()" style="color: blue; cursor: pointer">
                 <-Back
               </h5>
-              <div class="table-responsive" style="height: 550px">
-              HOLA AMIGOS
+              <div class="row">
+                <div class="col " >
+                  <h5>Image of the violation</h5>
+                  <img :src=this.info_data.url width=400>
+                </div>
+                <div class="col">
+                  <h5>{{info_data.lat}}</h5>
+                  <h5>{{info_data.long}}</h5>
+                </div>
+
               </div>
+              
             </div>            
           </div>
         </div>
@@ -136,6 +145,7 @@
                 this.data=[
                   {
                     "station_id": "1",
+                    "violation_id":"1",
                     "time":"05/06/2021 09:58:15",
                     "lat":"41.7564",
                     "long":"35.6743",
@@ -143,6 +153,7 @@
                   },
                   {
                     "station_id": "2",
+                    "violation_id":"2",
                     "time":"05/06/2021 10:58:15",
                     "lat":"46.7564",
                     "long":"32.6743",
@@ -150,6 +161,7 @@
                   },
                   {
                     "station_id": "3",
+                    "violation_id":"3",
                     "time":"05/06/2021 11:58:15",
                     "lat":"56.7564",
                     "long":"22.6743",
@@ -163,7 +175,8 @@
             switch2View: function (event) {
               this.viewMode = true;
               this.infoMode = false;
-              this.info_data=null;
+              this.info_data={};
+              this.data=[];
         
               this.getData();
             },
@@ -172,6 +185,7 @@
               id=event.target.id
               this.viewMode=false;
               this.infoMode=true;
+
 
               i=0;
 
