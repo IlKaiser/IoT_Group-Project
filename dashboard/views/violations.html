@@ -26,47 +26,165 @@
   <body>
     <div class="container-fluid">
       <div class="container">
-        
-
         <div id="app">
-			
-				
-				AGGIUNGERE LA TABELLA DELLE VIOLAZIONI QUI	
-				
-				
-                    
-        </div>   <!-- APP CLOSED -->
+          <div class="card mt-5">
+            <div class="card-title mt-2">
+              <center>
+                <h4 class="mt-4"><b>Violations Detected</b></h4>  
+              </center>
+            </div>
 
-      </div>     <!-- CONTAINER CLOSED -->
-    </div>       <!-- CONTAINER FLUID CLOSED -->
- 
+            <!-- VIEW MODE-->
+
+            <div class="card-body" v-if="viewMode">
+              <div class="table-responsive" style="height: 550px">
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">STATION_ID</th>
+                      <th scope="col">TIME</th>
+                      <th scope="col">LAT</th>
+                      <th scope="col">LONG</th>
+                      <th scope="col">MORE INFO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="data in data">
+                      <td>{{data.station_id}}</td>
+                      <td>{{data.time}}</td>
+                      <td>{{data.lat}}</td>
+                      <td>{{data.long}}</td>
+                      <td ><button class="btn btn-warning" :id="data.violation_id" @click="switch2Info"></button> </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+             
+            </div>
+
+            <!-- INFO DATA-->
+
+            <div class="card-body" v-if="infoMode">
+              <h5 @click="switch2View()" style="color: blue; cursor: pointer">
+                <-Back
+              </h5>
+              <div class="table-responsive" style="height: 550px">
+              HOLA AMIGOS
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+
 <script>
-
-
-
-        var app = new Vue({
+      var app = new Vue({
             el: '#app',
             data: {
-				
-				// insert here all auxiliary data needed
-				
-            },
+              data: [],
+              info_data: null,
+              viewMode: true,
+              infoMode: false,  
+				      },
             
             beforeCreate: function(){
             
-				/*this.$http.get('http://localhost:8080/url_rotta_login').then(response => {
-					
-				   console.log(response.body);
-
-				}, response => {
-					// error callback
-				})*/
+				    this.$http.get('http://localhost:8080/AllViolations').then(response => 
+            {
+				      console.log(response.body);
+              this.data = response.body;
+				    }, response => {// error callback
+              this.data=[{
+                "station_id": "1",
+                "violation_id":"1",
+                "time":"05/06/2021 09:58:15",
+                "lat":"41.7564",
+                "long":"35.6743",
+                "url":"https://movies.gamesource.it/wp-content/uploads/sites/2/2017/03/Margot-Robbie2.jpg"
+              },
+            {
+                "station_id": "2",
+                "violation_id":"2",
+                "time":"05/06/2021 10:58:15",
+                "lat":"46.7564",
+                "long":"32.6743",
+                "url":"https://www.tomshw.it/images/images/2021/04/generico-attori-155587.jpg" 
+            },
+            {
+                "station_id": "3",
+                "violation_id":"3",
+                "time":"05/06/2021 11:58:15",
+                "lat":"56.7564",
+                "long":"22.6743",
+                "url":"https://m.media-amazon.com/images/M/MV5BNjM4NjQwMzE1Ml5BMl5BanBnXkFtZTgwNjg5MTM0NzE@._V1_UY1200_CR83,0,630,1200_AL_.jpg" 
+            }
+            ]
+				
+            })
                 
             },
 
             methods: {
+
+            getData: function()
+            {
+              this.$http.get("http://localhost:8080/AllViolations").then(
+              (response) => {
+                this.data = response.body;
+              },
+              (response) => {
+                this.data=[
+                  {
+                    "station_id": "1",
+                    "time":"05/06/2021 09:58:15",
+                    "lat":"41.7564",
+                    "long":"35.6743",
+                    "url":"https://movies.gamesource.it/wp-content/uploads/sites/2/2017/03/Margot-Robbie2.jpg"
+                  },
+                  {
+                    "station_id": "2",
+                    "time":"05/06/2021 10:58:15",
+                    "lat":"46.7564",
+                    "long":"32.6743",
+                    "url":"https://www.tomshw.it/images/images/2021/04/generico-attori-155587.jpg" 
+                  },
+                  {
+                    "station_id": "3",
+                    "time":"05/06/2021 11:58:15",
+                    "lat":"56.7564",
+                    "long":"22.6743",
+                    "url":"https://m.media-amazon.com/images/M/MV5BNjM4NjQwMzE1Ml5BMl5BanBnXkFtZTgwNjg5MTM0NzE@._V1_UY1200_CR83,0,630,1200_AL_.jpg" 
+                  }
+                  ]
+                });
+
+            },
+
+            switch2View: function (event) {
+              this.viewMode = true;
+              this.infoMode = false;
+              this.info_data=null;
+        
+              this.getData();
+            },
+
+            switch2Info: function(event){
+              id=event.target.id
+              this.viewMode=false;
+              this.infoMode=true;
+
+              i=0;
+
+              for (i=0;i<this.data.length;i++)
+              {
+                if(this.data[i].violation_id==id)
+                {
+                  this.info_data=this.data[i]
+                  break
+                }
+              }
+            }
 				
-				// insert here all auxiliary methods needed
 				
             }
     })
