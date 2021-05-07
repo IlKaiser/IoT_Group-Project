@@ -407,3 +407,97 @@ If the current orientation of the proximity sensor is too far from the starting 
 #define CONTROL_CMD_LEFT 3
 ```
 
+The power management is handled by the sampling of the **acceleration** measured along the **z-axis** of the **accelerometer**:
+
+- if the acceleration is below a **low threshold**, then sampling delays are setted to the base delays
+- if the acceleration is above a **low threshold** but below an **high threshold**, then sampling delays are slightly increased
+- if the acceleration is above a **high threshold**, then sampling delays are further increased
+
+So we have to define the thresholds in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+
+```c
+#define LOW_PM_THRESHOLD 9.5
+#define HIGH_PM_THRESHOLD 10.0
+```
+
+Also, we have to define all delays in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+
+```c
+//medium time interval for each thread
+#define DELAY_INFO_MEDIUM 50
+#define DELAY_ALARM_MEDIUM 10
+#define DELAY_CONTROL_MEDIUM 10000000
+
+//high time interval for each thread
+#define DELAY_INFO_HIGH 70
+#define DELAY_ALARM_HIGH 20
+#define DELAY_CONTROL_HIGH 60000000
+```
+
+All this is done by the *powerManagement* function:
+
+```c
+void powerManagement(float z_accel){
+    if(z_accel <= LOW_PM_THRESHOLD){
+		printf("ACCEL LOW!\n");
+		    
+		delay_alarm = DELAY_ALARM_BASE;
+		delay_control = DELAY_CONTROL_BASE;
+		delay_info = DELAY_INFO_BASE;	
+    }
+    
+    else if(z_accel > LOW_PM_THRESHOLD && z_accel <= HIGH_PM_THRESHOLD){
+		printf("ACCEL MEDIUM!\n");
+		    
+		delay_alarm = DELAY_ALARM_MEDIUM;
+		delay_control = DELAY_CONTROL_MEDIUM;
+		delay_info = DELAY_INFO_MEDIUM;	
+    }
+		
+    else if(z_accel > HIGH_PM_THRESHOLD){
+		printf("ACCEL HIGH!\n");
+		    
+		delay_alarm = DELAY_ALARM_HIGH;
+		delay_control = DELAY_CONTROL_HIGH;
+		delay_info = DELAY_INFO_HIGH;	
+     }
+}
+```
+
+## Info thread
+This thread periodically requests the Arduino for the **last known position** of the floater. In the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c), we need to define the **base sampling period** for the Info thread as follows:
+
+```c
+#define DELAY_INFO_BASE 30
+
+int delay_info = DELAY_INFO_BASE;
+```
+
+Also, in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c), we need to define the **buffer length** for the I2C communication with Arduino, as well as the **info command**:
+
+```c
+#define INFO_BUFFER_SIZE 20
+#define INFO_CMD 4
+```
+
+So, the periodical requests of the Gps informations done by the Info thread are resumed in the following code:
+```c
+char buffer[INFO_BUFFER_SIZE]={0};
+while(1){	
+	
+	I2CCommunication(INFO_CMD,buffer,INFO_BUFFER_SIZE,"INFO");
+		
+	char* first = getSubstr(buffer, 0, 2);
+		
+	if(strcmp(first, "/") == 0){
+		printf("[INFO] No info received!\n");
+	}
+		
+	else{
+		printf("[INFO] %s\n",buffer);
+	}
+			
+	xtimer_sleep(delay_info);
+	
+}
+```
