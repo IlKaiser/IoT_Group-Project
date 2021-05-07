@@ -90,7 +90,7 @@ Also, we need to include this header in the [main.c](https://github.com/IlKaiser
 #include "xtimer.h"
 ```
 
-We define the **sampling period** for the Alarm thread as follows:
+We define the **base sampling period** for the Alarm thread as follows:
 
 ```c
 #define DELAY_ALARM_BASE 1
@@ -174,5 +174,236 @@ while(1){
 ```
 
 ## Control thread
+The thread first initialize the MPU9250 sensor, then periodically samples it in order to check, together with the Arduino, whether the proximity sensor needs to be better oriented or not, and also to manage the power consumption in a smart way.
+In order to use the MPU9250 sensor we have to specify the **mpu9250 module** in the [Makefile](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/Makefile):
 
+```c
+# MPU-9250 driver
+DRIVER ?= mpu9250
+USEMODULE += $(DRIVER)
+```
+
+Also, we need to include some **utilities** in the [Makefile](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/Makefile):
+
+```c
+# utilities for MPU 
+ifneq (,$(wildcard $(CURDIR)../../RIOT/tests*/.))
+  DEFAULT_MODULE += test_utils_interactive_sync
+  # add interactive test configuration when testing Kconfig
+  ifeq (1,$(TEST_KCONFIG))
+    KCONFIG_ADD_CONFIG += $(RIOTBASE)/tests/test_interactive.config
+  endif
+endif
+
+ifneq (,$(filter tests_driver_%,$(APPLICATION)))
+  BOARD ?= nucleo-f401re
+endif
+```
+
+Also, we need to include the following headers in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+
+```c
+#include "mpu9x50.h"
+#include "mpu9x50_params.h"
+```
+
+Then we have to specify the buffer length for the control thread for the I2C communication with Arduino:
+
+```c
+#define CONTROL_BUFFER_SIZE 10
+```
+
+The MPU9250 is initialized as follows:
+
+```c
+char buffer[CONTROL_BUFFER_SIZE]={0};
+		
+// definition of MPU-device
+mpu9x50_t dev;
+int result;
+
+// MPU device initialization
+result = mpu9x50_init(&dev, &mpu9x50_params[0]);
+    
+// Check errors
+if (result == -1) {
+    puts("[MPU9250] The given i2c is not enabled");
+    return NULL;
+}
+else if (result == -2) {
+    puts("[MPU9250] The compass did not answer correctly on the given address");
+    return NULL;
+}
+   
+// Definition of sample rates
+mpu9x50_set_sample_rate(&dev, 200);
+if (dev.conf.sample_rate != 200) {
+    puts("[MPU9250] The sample rate was not set correctly");
+    return NULL;
+}
+    
+mpu9x50_set_compass_sample_rate(&dev, 100);
+    
+if (dev.conf.compass_sample_rate != 100) {
+    puts("[MPU9250] The compass sample rate was not set correctly");
+    //return NULL;
+}
+```
+
+We define the **base sampling period** for the Control thread as follows:
+
+```c
+#define DELAY_CONTROL_BASE 100
+
+int delay_control = DELAY_CONTROL_BASE;
+```
+
+So, the periodical sampling of the control thread is resumed in the following code:
+
+```c
+short x_start_compass = 0;
+	
+//sample values for magnetic field detected by the compass and accelerometer
+short z_gyro, x_compass, z_accel;
+	
+getControlData(dev, &z_gyro, &x_start_compass, &z_accel);
+		
+int last_state = 0;  // It stands for 'the proximity sensor is correctly orientated'
+
+while(1){
+	//get control data correction degree will be saved into buffer with sintax -360/360 as char*
+	getControlData(dev, &z_gyro, &x_compass, &z_accel);
+				
+	// Proximity sensor correction
+	proximitySensorCorrection(buffer, x_start_compass, x_compass, z_gyro, &last_state);
+		
+	// Power management
+	float z_accell = ( (float) z_accel ) * GRAVITY_ACCELERATION / 1000;
+	powerManagement(z_accell);
+		
+	xtimer_usleep(delay_control);
+}
+```
+
+As we can see, data from MPU9250 are retrieved by using the *getControlData* function. Below we show the code related to this function:
+
+```c
+void getControlData(mpu9x50_t dev, short* z_gyro, short* x_compass, short* z_accel)
+{
+	//Data structure to save info
+	mpu9x50_results_t measurement;
+    
+	mutex_lock(&mutex);
+	
+	/* Get accel data in milli g */
+        mpu9x50_read_accel(&dev, &measurement);
+        *z_accel = measurement.z_axis;
+        //printf("[MPU9250] Accel data [milli g] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
+        //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
+        /* Get gyro data in dps */
+        mpu9x50_read_gyro(&dev, &measurement);
+        *z_gyro = measurement.z_axis;
+        //printf("[MPU9250] Gyro data [dps] - X: %"PRId16"   Y: %"PRId16"   Z: %"PRId16"\n",
+        //        measurement.x_axis, measurement.y_axis, measurement.z_axis);
+        /* Get compass data in mikro Tesla */
+        
+        while(!first_read_compass_done){
+			
+		mpu9x50_read_compass(&dev, &measurement);
+		*x_compass = measurement.x_axis;
+		    
+		if(*x_compass != 0){
+			first_read_compass_done = 1;
+			break;	
+		}	
+	}
+		
+	if(first_read_compass_done){
+		mpu9x50_read_compass(&dev, &measurement);
+		*x_compass = measurement.x_axis;	
+	}
+
+	mutex_unlock(&mutex);
+	
+}
+```
+
+Notice that each sampling from the MPU9250 is treated as a **critical section**, because the sensor communicates with the Nucleo board by I2C, so we have to use the **mutex** in order to avoid **starvations** of other threads.
+
+Below we show the *proximitySensorCorrection* function:
+
+```c
+void proximitySensorCorrection(char* buffer, short x_start_compass, short x_compass, short z_gyro, int* last_state){
+    float degree = calculateDegreeFromDps(z_gyro, FIXED_NUMBER);
+    
+	short x_diff_compass = x_start_compass - x_compass;	
+	int x_diff_compass_abs = abs((int)x_diff_compass);
+	
+	// If the proximity sensor is NOT correctly orientated
+	if(x_diff_compass_abs > CORRECTION_THRESHOLD){
+		
+		// If it was correctly orientated before this point
+		if(*last_state == 0){
+		    
+		    // If it is moving to the left 
+		    if(degree > 0){
+			    
+			    // Setting the last state to 1, which means that the "next" last state will be that
+			    // the proximity sensor was moved to the right
+			    *last_state = 1;
+			    // Send to Arduino the indication to move it to the right
+			    I2CCommunication(CONTROL_CMD_RIGHT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+			        	
+			}
+			
+			// If it is moving to the right
+			else if(degree < 0){
+			    
+			    // Setting the last state to 2, which means that the "next" last state will be that
+			    // the proximity sensor was moved to the left
+			    *last_state = 2;
+			    // Send to Arduino the indication to move it to the left
+			    I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+			        	
+			} 
+		    	
+		}
+		
+		// If it was moved to the rigth before this point
+		else if(*last_state == 1){
+			
+		    // Send to Arduino the indication to move it to the right
+			I2CCommunication(CONTROL_CMD_RIGHT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+		}
+		
+		// If it was moved to the left before this point
+		else if(*last_state == 2){
+			
+		    // Send to Arduino the indication to move it to the left
+			I2CCommunication(CONTROL_CMD_LEFT, buffer, CONTROL_BUFFER_SIZE, "CONTROL");
+		}
+		
+	}
+	
+	// The proximity sensor is correctly orientated
+	else{
+		*last_state = 0;
+	    //printf("The proximity sensor is correctly orientated\n"); 
+	}
+		
+}
+```
+
+The main idea of the proximity sensor orientation correction is measuring the first value of the **magnetic field (in µT)** along the **x-axis** of the **compass**, and continuosly check whether the current value measured is too far from the starting value, for example by exploiting a **correction threshold**, that we define in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c) as follows:
+
+```c
+#define CORRECTION_THRESHOLD 1
+```
+
+If the current orientation of the proximity sensor is too far from the starting one, then we send to Arduino by I2C the indication to rotate the sensor in the opposite direction from the currently detected motion, that is detected by the the measurement of the **dps (degree per seconds)** along the **z-axis** of the **gyroscope**. This procedure is repeated until the proximity sensor is not correctly orientated again. We have also to define, in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c), the two commands for the I2C communication, indicating a correction towards the right or the left:
+
+```c
+#define CONTROL_CMD_RIGHT 2
+#define CONTROL_CMD_LEFT 3
+```
 
