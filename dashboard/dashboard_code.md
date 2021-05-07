@@ -15,7 +15,7 @@
 
 The dashboard code has been organized in several directories.
 
-### Root directory
+### root directory
 
 - **index.js**: it contains the code needed to launch the server
 - **package.json**: it contains all dependencies for the server
