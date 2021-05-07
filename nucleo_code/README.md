@@ -14,6 +14,20 @@ Also, we need to include the following headers in the [main.c](https://github.co
 #include "periph/i2c.h"
 ```
 
+Also we have to define the I2C interface:
+
+```c
+#define I2C_INTERFACE I2C_DEV(0)
+```
+
+
+Below we report the code related to the initialization of the I2C interface:
+
+```c
+//initialize the i2c interface
+i2c_init(I2C_INTERFACE);
+```
+
 Then we create three different threads, one for each sensor we used:
 ```c
 thread_create(stackThreadAlarm,sizeof(stackThreadAlarm),THREAD_PRIORITY_MAIN,0,threadAlarm,NULL,"Thread Alarm detection");
