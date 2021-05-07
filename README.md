@@ -23,6 +23,10 @@ In future, the system could be used to monitor the state of the sea and to impro
 
 More informations about the **circuit** and the whole **wiring of components** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/README.md).
 
+## Setup
+
+More informations about the **setup** of the project can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/setup.md).
+
 ## Code
 
 - **Nucleo code**: more info about the Nucleo code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md).
