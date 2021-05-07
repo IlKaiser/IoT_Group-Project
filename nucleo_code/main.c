@@ -44,7 +44,7 @@
 //high time interval for each thread
 #define DELAY_INFO_HIGH 70
 #define DELAY_ALARM_HIGH 20
-#define DELAY_CONTROL_HIGH 6000000
+#define DELAY_CONTROL_HIGH 60000000
 
 //constants for correcting the proximity orientation with the compass
 #define CORRECTION_THRESHOLD 1
