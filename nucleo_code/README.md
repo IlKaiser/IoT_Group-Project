@@ -132,6 +132,13 @@ Notice how the access to the I2C bus is treated as a **critical section**, becau
 #include "mutex.h"
 ```
 
+We define the mutex as follows:
+
+```c
+//define mutex to protect i2c access
+mutex_t mutex;
+```
+
 So, the periodical request of the alarm thread is resumed in the following code:
 
 ```c
