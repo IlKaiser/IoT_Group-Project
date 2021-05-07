@@ -150,6 +150,9 @@ mutex_t mutex;
 So, the periodical request of the alarm thread is resumed in the following code:
 
 ```c
+int cont=0;
+char buffer[ALARM_BUFFER_SIZE]={0};
+	
 while(1){
 	I2CCommunication(ALARM_CMD,buffer,ALARM_BUFFER_SIZE,"ALARM");
 	printf("[ALARM]MEX: %s \n",buffer);
