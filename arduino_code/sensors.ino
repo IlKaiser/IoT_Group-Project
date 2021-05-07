@@ -3,24 +3,7 @@
 #include <TinyGPS++.h>
 #include <SoftwareSerial.h>
 
-String ID="1";
-
-SoftwareSerial EEBlue(3, 2); // RX | TX
-
-// Global variables
-String mode = "auto";  // auto || test
-
-byte x = 0;
-long durata, cm;
-
-static const int RXPin = 7, TXPin = 3; //Connect only pin 4 to GPS TX
-static const uint32_t GPSBaud = 9600; //Modified to be used with BN-880 or uBlox NEO-7M / M8N
-String infoGps;
-// The TinyGPS++ object
-TinyGPSPlus gps;
-
-// The serial connection to the GPS device
-SoftwareSerial ss(RXPin, TXPin);
+// MACRO
 
 // HC SR04 ultrasound sensor pins definition
 #define trigPin                       12
@@ -30,13 +13,35 @@ SoftwareSerial ss(RXPin, TXPin);
 // change this to the number of steps on your motor
 #define STEPS                         48
 
+// Distance threshold
+#define MAX_DISTANCE_FROM_FLOATER     100                     // It should be about 170-180 cm
+
+
+// GLOBAL VARIABLES
+String mode = "auto";  // auto || test
+
+String ID="1";
+
+byte x = 0;
+long durata, cm;
+
+static const int RXPin = 7, TXPin = 3; //Connect only pin 7 to GPS TX
+static const uint32_t GPSBaud = 9600; //Modified to be used with BN-880 or uBlox NEO-7M / M8N
+String infoGps;
+
+// The serial connection to the GPS device
+SoftwareSerial ss(RXPin, TXPin);
+
+// The serial connection with the Bluetooth module
+SoftwareSerial EEBlue(3, 2); // RX | TX
+
+// The TinyGPS++ object
+TinyGPSPlus gps;
+
 // create an instance of the stepper class, specifying
 // the number of steps of the motor and the pins it's
 // attached to
 Stepper stepper(STEPS, 8, 10, 9, 11);
-
-// DISTANCE THRESHOLD
-#define MAX_DISTANCE_FROM_FLOATER     100                     // It should be about 170-180 cm
 
 void setup() {
   // Setting the address 
@@ -61,8 +66,6 @@ void loop() {
 
 void receiveEvent(int data){
   x = Wire.read();
-  //Serial.print("Received: ");
-  //Serial.println(x);
 }
 
 void requestEvent() {
@@ -143,6 +146,8 @@ void requestEvent() {
           Wire.write(infoGps.c_str());  
         }
       }
+
+      // Bluetooth
       else if (x==5)
       {
         if(infoGps!="/"){
@@ -180,6 +185,7 @@ void requestEvent() {
    
 }
 
+// Function that measures the distance from a nearby object using HCSR04 sensor
 void measureDistanceBy_HCSR04(){
    
    digitalWrite(trigPin, LOW);
@@ -204,6 +210,7 @@ static void smartDelay(unsigned long ms)
   } while (millis() - start < ms);
 }
 
+// Utility function to convert a float into String
 String fromFloatToString(float val, int precision){
   String buf;
   buf += String(val, precision);
@@ -211,6 +218,7 @@ String fromFloatToString(float val, int precision){
   return buf;
 }
 
+// Function that reads info from bn-880 gps module
 String getGpsInfo(){
   if(gps.location.isValid() && gps.speed.isValid()){
 
