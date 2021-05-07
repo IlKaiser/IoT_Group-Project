@@ -118,7 +118,7 @@ As we can see we need to define the **Arduino address**:
 #define ARDUINO_ADDRESS (0X04)
 ```
 
-Given that the function takes as input the command related to the specific request for the Arduiono, the buffer for receiving data from the I2C bus, the length of the buffer and the specific service, we need to specify the specific **command** and **buffer length** for both cases of use of the I2C communication by the Alarm thread:
+Given that the function takes as input the command related to the specific request for the Arduino, the buffer for receiving data from the I2C bus, the length of the buffer and the specific service, we need to specify the **command** and **buffer length** for both cases of use of the I2C communication by the Alarm thread:
 
 ```c
 #define ALARM_BUFFER_SIZE 1
