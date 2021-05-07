@@ -1,5 +1,5 @@
 # name of your application
-APPLICATION = I2c-riot
+APPLICATION = safety-floater
 
 # utilities for MPU 
 ifneq (,$(wildcard $(CURDIR)../../RIOT/tests*/.))
