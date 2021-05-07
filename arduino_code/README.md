@@ -62,3 +62,187 @@ SoftwareSerial EEBlue(3, 2);
 TinyGPSPlus gps;
 Stepper stepper(STEPS, 8, 10, 9, 11);
 ```
+
+## Setup function
+We need to set the Arduino address in order to correctly establish the I2C communication with the Nucleo board:
+
+```cpp
+Wire.begin(0x04);
+```
+
+Then we need to set the data rata of both serial connections to 9600 bps:
+
+```cpp
+EEBlue.begin(9600);
+ss.begin(9600);
+```
+
+Then we need to specify that whenever on the I2C bus there is some data to read, we need to handle this event by executing the *receiveEvent* function:
+
+```cpp
+Wire.onReceive(receiveEvent);
+```
+
+Also, we need to specify that whenever the Nucleo board makes a specific request to the Arduino, we need to handle this event by executing the *requestEvent* function:
+
+```cpp
+Wire.onRequest(requestEvent);
+```
+
+Then we need to initialize the pins for the HCSR04 sensor:
+
+```cpp
+pinMode(trigPin, OUTPUT);
+pinMode(echoPin, INPUT);
+```
+
+## Loop function
+The loop function is used only to periodically update (by using the *smartDelay* function) the position of the floater, by using the *getGpsInfo* function. Below I report these two functions:
+
+```cpp
+String getGpsInfo(){
+  if(gps.location.isValid() && gps.speed.isValid()){
+
+    float lat = gps.location.lat(), lon = gps.location.lng(), speed_kmh = gps.speed.kmph();
+   
+    String lat_s = fromFloatToString(lat, 4);
+    String lon_s = fromFloatToString(lon, 4);
+    float speed_ms = speed_kmh / 3.6;
+
+    String info = "";
+    info += String(lat_s);
+    info += ";";
+    info += String(lon_s);
+    info += ";";
+    info += String(speed_ms);
+    
+    return info;
+  }
+
+  else{
+      return "/";
+  }
+}
+
+static void smartDelay(unsigned long ms)
+{
+  unsigned long start = millis();
+  do 
+  {
+    while (ss.available())
+      gps.encode(ss.read());
+  } while (millis() - start < ms);
+}
+```
+
+## receiveEvent function
+This function just store the type of request received by the Nucleo board that has to be done:
+
+```cpp
+void receiveEvent(int data){
+  x = Wire.read();
+}
+```
+
+## requestEvent function
+This function manages the vaious type of requests received by the Nucleo board, with the possibility to use an automatic and a test mode. By looking the auto mode, we present the various type of requests' management.
+
+### Boat detection (x==1)
+By using the HCSR04 sensor, we send to the Nucleo board an indication of a possible detection if we are under the MAX_DISTANCE_FROM_FLOATER threshold, otherwise an indication that everything is ok. Below we report the code:
+
+```cpp
+if(x == 1){
+        
+        measureDistanceBy_HCSR04();
+  
+        Serial.print("Cm = ");
+        Serial.println(cm);
+        Serial.println();
+
+        if(cm <= MAX_DISTANCE_FROM_FLOATER){
+          Serial.println("Possible detection!");
+          Wire.write("1");  
+        }
+
+        else{
+          Serial.println("No boats detected!");
+          Wire.write("0");    
+        }
+        
+        
+}
+```
+
+Also, we report the *measureDistanceBy_HCSR04* function:
+
+```cpp
+void measureDistanceBy_HCSR04(){
+   
+   digitalWrite(trigPin, LOW);
+   delayMicroseconds(2);
+   digitalWrite(trigPin, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(trigPin, LOW);
+   durata = pulseIn(echoPin, HIGH);
+   cm = durata / 58;    // for inches the formula is duration / 148;
+   
+}
+```
+
+### Proximity sensor correction (x==2 || x==3)
+By using the Stepper motor, we apply a correction of the proximiy sensor towards the right if x is 2, otherwise towards the left if x is 3. Below we report the code for the correction towards the right, because the other one is similar:
+
+```cpp
+else if(x == 2){
+        Serial.println("Received 2");
+
+        int direction_ = -1, speed_ = 0;
+        int val = 1023;
+
+        speed_ = map(val, 0, 1023, 2, 500);
+        // set the speed of the motor
+        stepper.setSpeed(speed_);
+  
+ 
+        // move the stepper motor
+
+        stepper.step(direction_);
+  
+
+
+        Wire.write("123");
+        
+}
+```
+
+### GPS (x==4)
+By using the GPS module, we send to the Nucleo board, if available, the last known position of the floater. Below we show the code:
+
+```cpp
+else if (x == 4){
+        if(infoGps == "/"){
+          Wire.write("/");  
+        }
+    
+        else{
+          Wire.write(infoGps.c_str());  
+        }
+}
+```
+
+### Bluetooth (x==5)
+By using the Bluetooth module, we send, if available, the last known position of the floater. Below we show the code:
+
+```cpp
+else if (x==5){
+        if(infoGps!="/"){
+          String toSend=infoGps+";"+ID;
+          EEBlue.write(toSend.c_str());
+        }
+        else{
+          EEBlue.write(ID.c_str());
+        }
+        Wire.write(x);
+          
+}
+```
