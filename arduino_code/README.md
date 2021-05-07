@@ -64,13 +64,13 @@ Stepper stepper(STEPS, 8, 10, 9, 11);
 ```
 
 ## Setup function
-We need to set the Arduino address in order to correctly establish the I2C communication with the Nucleo board:
+We need to set the **Arduino address** in order to correctly establish the I2C communication with the Nucleo board:
 
 ```cpp
 Wire.begin(0x04);
 ```
 
-Then we need to set the data rata of both serial connections to 9600 bps:
+Then we need to set the **data rate** of both serial connections to **9600 bps**:
 
 ```cpp
 EEBlue.begin(9600);
@@ -89,7 +89,7 @@ Also, we need to specify that whenever the Nucleo board makes a specific request
 Wire.onRequest(requestEvent);
 ```
 
-Then we need to initialize the pins for the HCSR04 sensor:
+Then we need to initialize the **pins** for the **HCSR04** sensor:
 
 ```cpp
 pinMode(trigPin, OUTPUT);
@@ -97,7 +97,7 @@ pinMode(echoPin, INPUT);
 ```
 
 ## Loop function
-The loop function is used only to periodically update (by using the *smartDelay* function) the position of the floater, by using the *getGpsInfo* function. Below I report these two functions:
+The loop function is used only to periodically update (by using the *smartDelay* function) the **position** of the floater, by using the *getGpsInfo* function. Below I report these two functions:
 
 ```cpp
 String getGpsInfo(){
@@ -145,10 +145,10 @@ void receiveEvent(int data){
 ```
 
 ## requestEvent function
-This function manages the vaious type of requests received by the Nucleo board, with the possibility to use an automatic and a test mode. By looking the auto mode, we present the various type of requests' management.
+This function manages the vaious type of requests received by the Nucleo board, with the possibility to use an **automatic** and a **test** mode. By looking the auto mode, we present the various type of requests' management.
 
 ### Boat detection (x==1)
-By using the HCSR04 sensor, we send to the Nucleo board an indication of a possible detection if we are under the MAX_DISTANCE_FROM_FLOATER threshold, otherwise an indication that everything is ok. Below we report the code:
+By using the HCSR04 sensor, we send to the Nucleo board an indication of a **possible detection** if we are below the **MAX_DISTANCE_FROM_FLOATER** threshold, otherwise an indication that everything is ok. Below we report the code:
 
 ```cpp
 if(x == 1){
@@ -190,7 +190,7 @@ void measureDistanceBy_HCSR04(){
 ```
 
 ### Proximity sensor correction (x==2 || x==3)
-By using the Stepper motor, we apply a correction of the proximiy sensor towards the right if x is 2, otherwise towards the left if x is 3. Below we report the code for the correction towards the right, because the other one is similar:
+By using the Stepper motor, we apply a **correction** of the proximiy sensor orientation towards the **right** if x is 2, otherwise towards the **left** if x is 3. Below we report the code for the correction towards the right, because the other one is similar:
 
 ```cpp
 else if(x == 2){
@@ -216,7 +216,7 @@ else if(x == 2){
 ```
 
 ### GPS (x==4)
-By using the GPS module, we send to the Nucleo board, if available, the last known position of the floater. Below we show the code:
+By using the GPS module, we send to the Nucleo board, if available, the **last known position** of the floater. Below we show the code:
 
 ```cpp
 else if (x == 4){
@@ -231,7 +231,7 @@ else if (x == 4){
 ```
 
 ### Bluetooth (x==5)
-By using the Bluetooth module, we send, if available, the last known position of the floater. Below we show the code:
+By using the Bluetooth module, we send to Raspberry pi, if available, the **last known position** of the floater. Below we show the code:
 
 ```cpp
 else if (x==5){
