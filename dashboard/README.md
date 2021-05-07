@@ -33,3 +33,6 @@ By clicking on the button **More info** of one violation, he will be redirected 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violation_info_1.png)
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violation_info_2.png)
+
+## Code
+More info about the code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/dashboard/dashboard_code.md).
