@@ -90,6 +90,14 @@ Also, we need to include this header in the [main.c](https://github.com/IlKaiser
 #include "xtimer.h"
 ```
 
+We define the **sampling period** for the Alarm thread as follows:
+
+```c
+#define DELAY_ALARM_BASE 1
+
+int delay_alarm = DELAY_ALARM_BASE;
+```
+
 The **alarm threshold** is defined as follows:
 
 ```c
@@ -126,7 +134,7 @@ Given that the function takes as input the command related to the specific reque
 #define BOAT_FOUND_CMD 5
 ```
 
-Notice how the access to the I2C bus is treated as a **critical section**, because we have to avoid that multiple threads access it at the same time. In order to do this, we used a mutex, so we have to include the following header in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+Notice how the access to the I2C bus is treated as a **critical section**, because we have to avoid that multiple threads access it at the same time. In order to do this, we used a **mutex**, so we have to include the following header in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 #include "mutex.h"
