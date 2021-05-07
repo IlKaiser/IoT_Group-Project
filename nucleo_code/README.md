@@ -53,7 +53,7 @@ All pins used are initialized by using the **GPIO peripheral driver**, that maps
 
 ## Alarm thread
 
-This thread initializes the buzzer, and then starts periodically requesting the Arduino info about the current situation nearby the floater. If the Nucleo receives a number of indications of a possible violation greater or equal than a certain ALARM_THRESHOLD, then the buzzer starts to sound.
+This thread initializes the buzzer, and then starts periodically requesting the Arduino info about the current situation nearby the floater by the I2C communication. If the Nucleo receives a number of indications of a possible violation greater or equal than a certain **ALARM_THRESHOLD**, then the buzzer starts to sound and a notification that a boat was found is sent to the Arduino by the I2C communication.
 The buzzer is initialized in this way:
 
 ```c
@@ -90,6 +90,12 @@ Also, we need to include this header in the [main.c](https://github.com/IlKaiser
 #include "xtimer.h"
 ```
 
+The **alarm threshold** is defined as follows:
+
+```c
+#define ALARM_THRESHOLD 2
+```
+
 Finally, the I2C communication is managed by the *I2CCommunication* function:
 
 ```c
@@ -104,6 +110,20 @@ void I2CCommunication(int cmd,void*buffer,int len,char* service){
     i2c_release(I2C_INTERFACE);
     mutex_unlock(&mutex);	
 }
+```
+
+As we can see we need to define the **Arduino address**:
+
+```c
+#define ARDUINO_ADDRESS (0X04)
+```
+
+Given that the function takes as input the command related to the specific request for the Arduiono, the buffer for receiving data from the I2C bus, the length of the buffer and the specific service, we need to specify the specific **command** and **buffer length** for both cases of use of the I2C communication by the Alarm thread:
+
+```c
+#define ALARM_BUFFER_SIZE 1
+#define ALARM_CMD 1
+#define BOAT_FOUND_CMD 5
 ```
 
 Notice how the access to the I2C bus is treated as a **critical section**, because we have to avoid that multiple threads access it at the same time. In order to do this, we used a mutex, so we have to include the following header in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
