@@ -4,7 +4,7 @@
 
 - **Wire.h**: used to send messagges over the I2C bus towards the Nucleo board
 - **Stepper.h**: used to manage the Stepper motor
-- **TinyGPS.h**: used to parse data received from the gps module (you have to download it from [here](https://github.com/mikalhart/TinyGPSPlus/archive/refs/tags/v1.0.2b.zip), rename the folder in the zip as "TinyGPSPlus" and put it in the libraries folder of the Arduino folder)
+- **TinyGPS.h**: used to parse data received from the gps module
 - **SoftwareSerial.h**: used for the serial connection with the GPS device and the Bluetooth module
 
 In order to use them, we need to include them on the top of the [sensors.ino](https://github.com/IlKaiser/IoT_Group-Project/blob/main/arduino_code/sensors.ino):
