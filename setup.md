@@ -42,7 +42,7 @@ Then you need to **subscribe** to the **data/seastation/+** MQTT topic, where '+
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/subscribe_aws.png)
 
-Then by going in the Rules section you have to create a **rule** for violations, specifying a topics data/seastation/<seastation_id>, and as operation you need to choose "Insert a message into a DynamoDB table". Here you can find a [tutorial](https://docs.aws.amazon.com/iot/latest/developerguide/iot-ddb-rule.html).
+Then by going in the Rules section you have to create a **rule** for violations, specifying as topic data/seastation/<seastation_id>, and as operation you need to choose "Insert a message into a DynamoDB table". Here you can find a [tutorial](https://docs.aws.amazon.com/iot/latest/developerguide/iot-ddb-rule.html).
 
 **Violation rule**:
 
