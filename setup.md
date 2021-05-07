@@ -38,6 +38,8 @@ AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY
 AWS_SESSION_TOKEN=YOUR_AWS_SESSION_TOKEN
 ```
 
+**NOTE!** The access key id, the secret access key and the session token provided by AWS expire after a while, so you have to manually re-set them in the .env file when this happens.
+
 Then you need to **subscribe** to the **data/seastation/+** MQTT topic, where '+' stands for 'at least one character' from the syntax of regular expressions: in our case it will represent the **seastation id**. 
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/subscribe_aws.png)
@@ -49,3 +51,16 @@ Then by going in the Rules section you have to create a **rule** for violations,
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violation_rule.png)
 
 So it is clear that we will create a **DynamoDb table**: particularly, each entry of the table is made up of the **Unix timestamp** associated to the creation of that entry, the **seastation id** of the Sea Station that send the violation to AWS by MQTT, the **device_data**, which consists of the **seastation id**, the **violation id** of the violation detected, the **latitude** and **longitude** of the floater that send the indication of the violation to the Sea Station and the **url of the picture** taken by the Raspberry pi Camera. 
+
+## Launching the application
+
+- Download the repository from [here](https://github.com/IlKaiser/IoT_Group-Project/archive/refs/heads/main.zip), or clone it with **git clone https://github.com/IlKaiser/IoT_Group-Project.git**
+- Open a terminal in the dashboard folder
+- Launch **npm install**
+- Launch the nodeJS server with **node index.js** or **nodemon** (if you installed it)
+- Open the sensor.ino sketch in the arduino_code folder
+- **Upload** the sketch
+- Open another terminal in the nucleo_code folder of the project
+- Launch the application by flashing the code into the STM-32 board with **make BOARD=nucleo-f401re flash term**
+
+The server will be available at **http://localhost:8080/**.
