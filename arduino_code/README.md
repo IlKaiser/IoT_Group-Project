@@ -39,4 +39,26 @@ So we need do define these constants in the [sensors.ino](https://github.com/IlK
 - **mode**: auto or test, default is auto
 - **ID**: the floater id
 - **x**: a byte used to discriminate between the different type of requests recieved by the Nucleo board
-- **durata, cm**: used to store
+- **durata, cm**: used to store, respectively, the time it takes for the impulse to go and return and the distance (in cm) measured.
+- **RXPin, TXPin**: RXPin and TXPin for the GPS
+- **infoGps**: used to store info retrieved from the bn-880n gps module
+- **ss**: SoftwareSerial instance for the serial connection to the GPS device
+- **EEBlue**: SoftwareSerial instance for the serial connection to the Bluetooth module
+- **gps**: the TinyGPS++ object
+- **stepper**: instance of the stepper class
+
+So we need do define these global variables in the [sensors.ino](https://github.com/IlKaiser/IoT_Group-Project/blob/main/arduino_code/sensors.ino):
+
+```cpp
+String mode = "auto";
+String ID="1";
+byte x = 0;
+long durata, cm;
+static const int RXPin = 7, TXPin = 3;
+static const uint32_t GPSBaud = 9600;
+String infoGps;
+SoftwareSerial ss(RXPin, TXPin);
+SoftwareSerial EEBlue(3, 2);
+TinyGPSPlus gps;
+Stepper stepper(STEPS, 8, 10, 9, 11);
+```
