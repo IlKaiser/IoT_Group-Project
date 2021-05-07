@@ -30,4 +30,22 @@ You need also to install this [MQTT-cli](https://www.hivemq.com/blog/mqtt-cli/),
 
 
 ## AWS, Iot-Core and DynamoDB
-Then, you need so sign in in [AWS](https://aws.amazon.com/education/awseducate/), in order to get access to **Iot-Core** and **DynamoDB** services. Once you're on Iot-Core, you need to create a **thing** in order to get your certificate, root certificate and private key. Here you can find a [tutorial](https://docs.aws.amazon.com/iot/latest/developerguide/iot-moisture-create-thing.html). Then you need to add into the **.env** file **the access key id, the secret access key and the session token** provided by AWS, to be able to receive messages from the devices and to query the DynamoDB database. Then you need to **subscribe** to the **data/seastation/+** MQTT topic, where '+' stands for 'at least one character' from the syntax of regular expressions: in our case it will represent the **seastation id**. 
+Then, you need so sign in in [AWS](https://aws.amazon.com/education/awseducate/), in order to get access to **Iot-Core** and **DynamoDB** services. Once you're on Iot-Core, you need to create a **thing** in order to get your **certificate**, **root certificate** and **private key**. Here you can find a [tutorial](https://docs.aws.amazon.com/iot/latest/developerguide/iot-moisture-create-thing.html). Then you need to add into the **.env** file **the access key id, the secret access key and the session token** provided by AWS, to be able to receive messages from the devices and to query the DynamoDB database. So at this point the .env should look like this:
+
+```
+AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY
+AWS_SESSION_TOKEN=YOUR_AWS_SESSION_TOKEN
+```
+
+Then you need to **subscribe** to the **data/seastation/+** MQTT topic, where '+' stands for 'at least one character' from the syntax of regular expressions: in our case it will represent the **seastation id**. 
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/subscribe_aws.png)
+
+Then by going in the Rules section you have to create a **rule** for violations, specifying a topics data/seastation/<seastation_id>, and as operation you need to choose "Insert a message into a DynamoDB table". Here you can find a [tutorial](https://docs.aws.amazon.com/iot/latest/developerguide/iot-ddb-rule.html).
+
+**Violation rule**:
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violation_rule.png)
+
+So it is clear that we will create a **DynamoDb table**: particularly, each entry of the table is made up of the **Unix timestamp** associated to the creation of that entry, the **seastation id** of the Sea Station that send the violation to AWS by MQTT, the **device_data**, which consists of the **seastation id**, the **violation id** of the violation detected, the **latitude** and **longitude** of the floater that send the indication of the violation to the Sea Station and the **url of the picture** taken by the Raspberry pi Camera. 
