@@ -2,9 +2,6 @@
 
 ## Devices
 
-### The RIOT operating system
-We need to install the **RIOT operating system**, [here](https://github.com/RIOT-OS/Tutorials#tutorials-for-riot) you can find a tutorial for the installation.
-
 ### STM32 Nucleo-64 F401RE board
 You need to have available an **STM-32 Nucleo-64 F401RE board**, [here](https://www.st.com/en/evaluation-tools/nucleo-f401re.html) you can find info about it.
 
@@ -17,10 +14,17 @@ You need to have available an **Raspberry pi 4 board**, [here](https://www.raspb
 ## Arduino Uno setup
 
 ### Arduino IDE
-You need to download the **Arduino IDE** from [here](https://www.arduino.cc/en/software). 
+You need to download the **Arduino IDE** from [here](https://www.arduino.cc/en/software).
 
 ### TinyGPSPlus library
 You have to download the **TinyGPSPlus library** from [here](https://github.com/mikalhart/TinyGPSPlus/archive/refs/tags/v1.0.2b.zip), rename the folder in the zip as "TinyGPSPlus" and put it in the **libraries folder** of the Arduino folder.
+
+## STM32 Nucleo-64 F401RE setup
+
+### The RIOT operating system
+We need to install the **RIOT operating system**, [here](https://github.com/RIOT-OS/Tutorials#tutorials-for-riot) you can find a tutorial for the installation.
+
+## Raspberry pi 4 setup [WIP]
 
 ## Server setup
 
