@@ -16,7 +16,7 @@ def bt_recieveLine():
     lat   = float(string.split(";")[0])
     long  = float(string.split(";")[1])
     speed = float(string.split(";")[2])
-    id    = int(string.split(";")[3])
+    floater_id    = int(string.split(";")[3])
     
-    print("Recieved "+str(lat),str(long),str(speed),str(id))
-    return lat,long,speed,id
+    print("Recieved "+str(lat),str(long),str(speed),str(floater_id))
+    return lat,long,speed,floater_id
