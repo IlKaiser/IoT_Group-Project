@@ -48,7 +48,7 @@ Then by going in the Rules section you have to create a **rule** for violations,
 
 **Violation rule**:
 
-![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violation_rule.png)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violation_rule.jpeg)
 
 So it is clear that we will create a **DynamoDb table**: particularly, each entry of the table is made up of the **Unix timestamp** associated to the creation of that entry, the **seastation id** of the Sea Station that send the violation to AWS by MQTT, the **device_data**, which consists of the **seastation id**, the **violation id** of the violation detected, the **latitude** and **longitude** of the floater that send the indication of the violation to the Sea Station and the **url of the picture** taken by the Raspberry pi Camera. 
 
