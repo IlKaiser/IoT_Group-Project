@@ -15,7 +15,6 @@ raspberry_code/certificates/*
 # That's one secret i'll never tell
 secret.json
 
-
 # Object files
 *.o
 *.ko
@@ -78,3 +77,7 @@ token.json
 
 # Ignore tests
 test.py
+
+# Exceptions
+!raspberry_code/model/.gitignore
+!raspberry_code/certificates/.gitignore
