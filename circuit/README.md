@@ -39,3 +39,6 @@ Below we can see the **wiring of components** for the Nucleo board and the Ardui
 Below we can see the **wiring of components** for the Raspberry board:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/circuit/raspberry_bb.png)
+
+No special wiring is required, the ribbon cable included with the camera needs to be installed in correct way in the camera slot.
+Since the Raspberry will be in **Headless Mode** (will be entirely controlled remotely) only a generic 15W USB Type-C power supply is required.
