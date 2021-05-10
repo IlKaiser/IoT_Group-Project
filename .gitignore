@@ -9,8 +9,12 @@ dashboard/.env
 node_modules/
 dashboard/node_modules/
 
+# And who am i?
+certificates/*
+
 # That's one secret i'll never tell
 secret.json
+
 
 # Object files
 *.o
@@ -67,3 +71,10 @@ bin/
 *.h5
 *.jpg
 *.jpeg
+ 
+# Ignore google api
+credentials.json
+token.json
+
+# Ignore tests
+test.py
