@@ -10,7 +10,7 @@ node_modules/
 dashboard/node_modules/
 
 # And who am i?
-certificates/*
+raspberry_code/certificates/*
 
 # That's one secret i'll never tell
 secret.json
