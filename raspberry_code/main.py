@@ -55,20 +55,23 @@ def checker():
             
 
     
-try:
-    threading.Thread(target=bt_reciever_forever).start()
+while(True):
+    try:
+        th = threading.Thread(target=bt_reciever_forever)
+        th.start()
+        th.join()
         
-except Exception as e:
-    
-    continue_counter += 1
-    if(continue_counter is 3):
-        print("Too Many Errors...")
-        print("Exiting")
-        quit()
-    else:
-        print("Error Detected! Continue... "+ str(continue_counter))
-        print("\033[1;37;43m" +str(e)+"\033[0m")
-        if(e.args[0]is 2):
-            print("Check if 'sudo rfcomm connect 0 <MAC of Bt>' is running")
-        time.sleep(5)
-        continue
+    except Exception as e:
+        
+        continue_counter += 1
+        if(continue_counter is 3):
+            print("Too Many Errors...")
+            print("Exiting")
+            quit()
+        else:
+            print("Error Detected! Continue... "+ str(continue_counter))
+            print("\033[1;37;43m" +str(e)+"\033[0m")
+            if(e.args[0]is 2):
+                print("Check if 'sudo rfcomm connect 0 <MAC of Bt>' is running")
+            time.sleep(5)
+            continue
