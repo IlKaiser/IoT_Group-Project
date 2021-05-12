@@ -13,7 +13,7 @@ Run:
 pip3 install -r requirements.txt
 ```
 to automatically install all needed modules.
-If you have issue installing tensorflow install following this [guide](https://qengineering.eu/install-tensorflow-2.4.0-on-raspberry-64-os.html), delete tensorflow from requirements and run the command again.
+If you have issue installing tensorflow follow this [guide](https://qengineering.eu/install-tensorflow-2.4.0-on-raspberry-64-os.html), delete tensorflow from requirements and run the command again.
 
 ## Before you execute the program
 ### Bluetooth setup
@@ -27,4 +27,4 @@ to connect the Arduino Bluetooth-Adapter tio Raspberry and Setup hc-05 serial pr
 ```
 python3 main.py
 ```
-more info on the code [here](./Code.md)
+more info on the code [here](./Code.md).
