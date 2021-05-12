@@ -5,7 +5,7 @@
 - Sea Station
 - Web Dashboard
 
-### Smart Floater
+### Safety Floater
 It is the main component of our project: its main purpose is to detect **illegal transit of boats** over the safety line. When a violation is detected, the sensors data are sent to the **Sea Station (Ground server)**.
 A **ultrasonic proximity sensor** is used for detections, a **gyroscope/compass** and a **stepper motor** grant that the floater has the proximity sensor correctly oriented, an **accelerometer** is used to provide a power management mechanism, **gps sensor** detects the current position of the floater, **solar panels** permit a longer battery life and **buzzer** is used for audio notification of swimmers.
 A **LoraWan module** would be used in real life scenario to transmit data (its model in practice is a common **bluetooth module**).
