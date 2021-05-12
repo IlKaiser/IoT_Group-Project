@@ -8,7 +8,7 @@ The **Web Dashboard** is on of the main component of our project. It is composed
 
 It is directed to **coast guards** with the purpose of show them all the **violations** detected by the Sea Stations. Below we show a picture of all interactions at the Web Dashboard level:
 
-![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/dashboard_architecture.jpeg)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/dashboard-architecture.jpeg)
 
 As we can see from the picture, the server interacts with two databases:
 
