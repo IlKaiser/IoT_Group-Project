@@ -21,7 +21,7 @@ No changes has been done.
 ### Architecture and technology
 For the first delivery, our architecture was totally based on STM-32 devices. Now, since we wanted to use specific sensors (GPS, camera, other sensors) and we wanted to minimize the latency of the report notification, we changed slightly the architecture and the technology. Below we show a picture:
 
-<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/SCHEMA.png"  width=1500/>
+<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/SCHEMA.jpeg"  width=1500/>
 
 Now we present the specific components.
 
