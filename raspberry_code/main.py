@@ -10,10 +10,6 @@ import time
 
 photo_counter = 0
 
-print("##########################")
-print("# Safety Monitor Started #")
-print("##########################")
-
 continue_counter = 0
 lat,long,speed,floater_id = 0,0,0,0
 
@@ -56,15 +52,20 @@ def checker():
 
     
 while(True):
+    
+    print("##########################")
+    print("# Safety Monitor Started #")
+    print("##########################")
+
     try:
-        th = threading.Thread(target=bt_reciever_forever)
+        th = threading.Thread(target=bt_reciever_forever())
         th.start()
         th.join()
         
     except Exception as e:
         
         continue_counter += 1
-        if(continue_counter == 3):
+        if(continue_counter >= 3):
             print("Too Many Errors...")
             print("Exiting")
             quit()
