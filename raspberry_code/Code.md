@@ -1,4 +1,4 @@
-#  Raspberry code Explained
+#  Raspberry code explained
 
 The code is dividied in modules, each for a specific task.
 
