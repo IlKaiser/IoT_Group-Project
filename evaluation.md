@@ -2,7 +2,7 @@
 
 ## Network technologies
 Given that Safety Floater will communicate with the Sea Station via LoraWAN, for our prototype we used a **Bluetooth module** in order to achieve an accurate measure of the **latency**. When we will perform final tests, we will take into account the technological constraints of LoraWan, such as **throughput, latency and bandwith**.
-<br><br>For this delivery, we estimated the **latency** in the whole system by looking at: 
+<br><br>For this delivery, we also estimated the **latency** in the whole system by looking at: 
 1. the total time needed to detect a **violation** on the **Nucleo board** for the activation of the **buzzer**
 2. the total time needed to have the **boat picture** available on the Dashboard starting by the moment when the buzzer activates
 
