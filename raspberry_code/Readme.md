@@ -1,4 +1,4 @@
-# Raspberry Setup[WIP]
+# Raspberry Setup
 
 
 ## Before you start 
