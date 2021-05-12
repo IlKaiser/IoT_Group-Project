@@ -63,6 +63,7 @@ Sea station has been implemented with Raspberry pi, because we have no power man
 - Optimizing power management
 - Improving latency
 - Development of a better web interface
+- Security
 
 ## Evaluation
 For the evaluation:
