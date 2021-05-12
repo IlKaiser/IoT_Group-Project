@@ -1,4 +1,4 @@
-# Setup [WIP]
+# Setup
 
 ## Devices
 
@@ -76,6 +76,6 @@ So it is clear that we will create a **DynamoDb table**: particularly, each entr
 - **Upload** the sketch
 - Open another terminal in the nucleo_code folder of the project
 - Launch the application by flashing the code into the STM-32 board with **make BOARD=nucleo-f401re flash term**
-- For Raspberry Pi 4 you can check all details [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
+- For **Raspberry Pi 4** you can check all details [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
 
 The server will be available at **http://localhost:8080/**.
