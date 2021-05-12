@@ -64,14 +64,14 @@ while(True):
     except Exception as e:
         
         continue_counter += 1
-        if(continue_counter is 3):
+        if(continue_counter == 3):
             print("Too Many Errors...")
             print("Exiting")
             quit()
         else:
             print("Error Detected! Continue... "+ str(continue_counter))
             print("\033[1;37;43m" +str(e)+"\033[0m")
-            if(e.args[0]is 2):
+            if(e.args[0] == 2):
                 print("Check if 'sudo rfcomm connect 0 <MAC of Bt>' is running")
             time.sleep(5)
             continue
