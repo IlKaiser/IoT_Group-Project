@@ -25,7 +25,7 @@ You have to download the **TinyGPSPlus library** from [here](https://github.com/
 We need to install the **RIOT operating system**, [here](https://github.com/RIOT-OS/Tutorials#tutorials-for-riot) you can find a tutorial for the installation.
 
 ## Raspberry pi 4 setup
-For the Raspberry pi 4 setup you can check [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
+For the **Raspberry pi 4** setup you can check [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
 
 ## Server setup
 
