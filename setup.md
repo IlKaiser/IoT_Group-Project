@@ -24,7 +24,8 @@ You have to download the **TinyGPSPlus library** from [here](https://github.com/
 ### The RIOT operating system
 We need to install the **RIOT operating system**, [here](https://github.com/RIOT-OS/Tutorials#tutorials-for-riot) you can find a tutorial for the installation.
 
-## Raspberry pi 4 setup [WIP]
+## Raspberry pi 4 setup
+For the Raspberry pi 4 setup you can check [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
 
 ## Server setup
 
@@ -35,9 +36,6 @@ You also need to require the **.env** file, that has to placed in the dashboard 
 
 ### Nodemon
 After this, you can install **nodemon** (not mandatory), a very useful package to run our NodeJS server, with this command: **npm install -g nodemon** if you are on Windows, or **sudo npm install -g nodemon** if you are on Linux/Ubuntu.
-
-## Installing MQTT-cli
-You need also to install this [MQTT-cli](https://www.hivemq.com/blog/mqtt-cli/), in order to do publish/subscribe requests from the command line.
 
 ## Data storage
 
