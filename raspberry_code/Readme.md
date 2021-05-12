@@ -21,7 +21,7 @@ Execute:
 ```
 sudo rfcomm connect 0 <MAC of Bt adapter>
 ```
-to connect the Arduino Bluetooth-Adapter tio Raspberry and Setup hc-05 serial protocol
+to connect the Arduino Bluetooth-Adapter tio Raspberry and Setup hc-05 serial protocol.
 
 ## Start program
 ```
