@@ -79,6 +79,10 @@ token.json
 # Ignore tests
 test.py
 
+# Ignore Pycache
+__pycache__/
+
 # Exceptions
 !raspberry_code/model/.gitignore
 !raspberry_code/certificates/.gitignore
+
