@@ -4,6 +4,7 @@
 # Env file
 .env
 dashboard/.env
+dashboard/env.txt
 
 # Node modules
 node_modules/

@@ -31,7 +31,7 @@ More informations about the **setup** of the project can be found [here](https:/
 
 - **Nucleo code**: more info about the Nucleo code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md).
 - **Arduino code**: more info about the Arduino code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/arduino_code/README.md).
-- **Raspberry code**: more info about the Raspberry code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
+- **Raspberry code**: more info about the Raspberry code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Code.md).
 - **Convolutional Neural Network code**: more info about the Convolutional Neural Network code can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/MR-SSD.md).
 
 ## Web Dashboard
