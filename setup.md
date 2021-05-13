@@ -1,4 +1,4 @@
-# Setup [WIP]
+# Setup
 
 ## Devices
 
@@ -25,7 +25,7 @@ You have to download the **TinyGPSPlus library** from [here](https://github.com/
 We need to install the **RIOT operating system**, [here](https://github.com/RIOT-OS/Tutorials#tutorials-for-riot) you can find a tutorial for the installation.
 
 ## Raspberry pi 4 setup
-For the Raspberry pi 4 setup you can check [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
+For the **Raspberry pi 4** setup you can check [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
 
 ## Server setup
 
@@ -76,5 +76,6 @@ So it is clear that we will create a **DynamoDb table**: particularly, each entr
 - **Upload** the sketch
 - Open another terminal in the nucleo_code folder of the project
 - Launch the application by flashing the code into the STM-32 board with **make BOARD=nucleo-f401re flash term**
+- For **Raspberry Pi 4** you can check all details [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/raspberry_code/Readme.md).
 
 The server will be available at **http://localhost:8080/**.

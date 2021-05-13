@@ -5,12 +5,11 @@ import json
 
 # Define ENDPOINT, CLIENT_ID, PATH_TO_CERT, PATH_TO_KEY, PATH_TO_ROOT, MESSAGE, TOPIC, and RANGE
 ENDPOINT = "a1gznbp4fjkpqr-ats.iot.us-east-1.amazonaws.com"
-CLIENT_ID = "testDevice"
+CLIENT_ID = "seaStation1"
 PATH_TO_CERT = "certificates/cert.pem"
 PATH_TO_KEY = "certificates/private.key"
 PATH_TO_ROOT = "certificates/rootCA.pem"
-MESSAGE = "Hello World"
-TOPIC = "test/testing"
+TOPIC = "data/seastation/1"
 RANGE = 20
 
 def mqtt_publish(lat,long,speed,floater_id,file_id):

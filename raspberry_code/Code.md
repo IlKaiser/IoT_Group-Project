@@ -1,4 +1,4 @@
-#  Raspberry code Explained
+#  Raspberry code explained
 
 The code is dividied in modules, each for a specific task.
 
@@ -6,7 +6,7 @@ The code is dividied in modules, each for a specific task.
 
 Recieves an ecoded string with latiude, longitude, speed and floater id from Arduino with Bluetooth and hc05 protocol; decodes the string and returns the parsed value.
 The main part is illustrated here:
-```
+```py
     bluetoothSerial = serial.Serial( "/dev/rfcomm0", baudrate=9600 )
     line = bluetoothSerial.readline()
    
@@ -24,7 +24,7 @@ The main part is illustrated here:
 ## Boat Detection module
 
 The most important part of the program. It takes a picture with the Raspberry Camera and analyzes it with the CNN. If a Boat is detected returns True, else False.
-```
+```py
     # Start camera
     camera = PiCamera()
     camera.resolution = (2592, 1944)
@@ -53,7 +53,7 @@ The most important part of the program. It takes a picture with the Raspberry Ca
 ## Drive Uploader module
 
 Uploads taken picture on Drive and retrives link in order to add photo drive link to DB via Mqtt.
-```
+```py
         file_metadata = {'name': photo_name,'parents':["1euot5RlQOXgl7bV8yZWktXFMeZJ8HsuG"]}
         media = MediaFileUpload(photo_name, mimetype='image/jpeg',resumable=True)
         file = service.files().create(body=file_metadata,
@@ -74,7 +74,7 @@ Uploads taken picture on Drive and retrives link in order to add photo drive lin
 ## MQTT Publisher module
 
 Publishes data taken from Bluetooth (latiude, longitude, speed and floater id) and drive file id to AWS Mqtt.
-```
+```py
     message = {"lat" : lat,"long": long,"speed" : speed,"floater_id": floater_id, "file_id": file_id }
     mqtt_connection.publish(topic=TOPIC, payload=json.dumps(message), qos=mqtt.QoS.AT_LEAST_ONCE)
     print("Published: '" + json.dumps(message) + "' to the topic: " + TOPIC)

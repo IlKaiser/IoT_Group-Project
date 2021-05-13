@@ -97,7 +97,7 @@ void requestEvent() {
       
       // Rotate the proximity sensor to the right
       else if(x == 2){
-        Serial.println("Received 2");
+       
 
         int direction_ = -1, speed_ = 0;
         int val = 1023;
@@ -119,8 +119,7 @@ void requestEvent() {
 
      // Rotate the proximity sensor to the left
       else if(x == 3){
-        Serial.println("Received 3");
-
+        
         int direction_ = 1, speed_ = 0;
         int val = 1023;
 
@@ -150,12 +149,17 @@ void requestEvent() {
       // Bluetooth
       else if (x==5)
       {
+
+        
+        
         if(infoGps!="/"){
-          String toSend=infoGps+";"+ID;
-          EEBlue.write(toSend.c_str());
+          String toSend=infoGps+";"+ID+"\n";
+          EEBlue.print(toSend);
+          Serial.println("BLUETOOTH TIME 1! \n");
         }
         else{
-          EEBlue.write(ID.c_str());
+          EEBlue.print(ID+'\n');
+          Serial.println("BLUETOOTH TIME 2! \n");
         }
         Wire.write(x);
           
@@ -224,8 +228,8 @@ String getGpsInfo(){
 
     float lat = gps.location.lat(), lon = gps.location.lng(), speed_kmh = gps.speed.kmph();
    
-    String lat_s = fromFloatToString(lat, 4);
-    String lon_s = fromFloatToString(lon, 4);
+    String lat_s = fromFloatToString(lat, 6);
+    String lon_s = fromFloatToString(lon, 6);
     float speed_ms = speed_kmh / 3.6;
 
     String info = "";
@@ -234,6 +238,8 @@ String getGpsInfo(){
     info += String(lon_s);
     info += ";";
     info += String(speed_ms);
+
+    //Serial.println(info);
     
     return info;
   }
