@@ -356,7 +356,7 @@ static void* threadAlarm(void* arg)
 			
 			
 		
-		if(cont==ALARM_THRESHOLD)
+		if(cont>=ALARM_THRESHOLD)
 		{
 			controlBuzzer(buzzer,1);
 			I2CCommunication(BOAT_FOUND_CMD,buffer,ALARM_BUFFER_SIZE,"BOAT FOUNDs");
