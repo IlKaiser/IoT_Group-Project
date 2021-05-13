@@ -19,7 +19,7 @@
 #define ARDUINO_ADDRESS (0X04)
 
 //define command's number and buffer size
-#define INFO_BUFFER_SIZE 20
+#define INFO_BUFFER_SIZE 24
 #define INFO_CMD 4
 
 #define CONTROL_BUFFER_SIZE 10
@@ -33,7 +33,7 @@
 
 //base time interval for each thread
 #define DELAY_INFO_BASE 30
-#define DELAY_ALARM_BASE 1
+#define DELAY_ALARM_BASE 5
 #define DELAY_CONTROL_BASE 100
 
 //medium time interval for each thread
@@ -191,6 +191,9 @@ void powerManagement(float z_accel){
 }
 
 void proximitySensorCorrection(char* buffer, short x_start_compass, short x_compass, short z_gyro, int* last_state){
+    
+    //printf("x_compass = %hd\n",x_compass);
+    
     float degree = calculateDegreeFromDps(z_gyro, FIXED_NUMBER);
     
 	short x_diff_compass = x_start_compass - x_compass;	
@@ -389,6 +392,8 @@ static void* threadInfo(void* arg)
 	{	
 	
 		I2CCommunication(INFO_CMD,buffer,INFO_BUFFER_SIZE,"INFO");
+		
+		printf("[INFO] %s\n",buffer);
 		
 		char* first = getSubstr(buffer, 0, 2);
 		
