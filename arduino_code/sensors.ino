@@ -228,8 +228,8 @@ String getGpsInfo(){
 
     float lat = gps.location.lat(), lon = gps.location.lng(), speed_kmh = gps.speed.kmph();
    
-    String lat_s = fromFloatToString(lat, 4);
-    String lon_s = fromFloatToString(lon, 4);
+    String lat_s = fromFloatToString(lat, 6);
+    String lon_s = fromFloatToString(lon, 6);
     float speed_ms = speed_kmh / 3.6;
 
     String info = "";
@@ -239,7 +239,7 @@ String getGpsInfo(){
     info += ";";
     info += String(speed_ms);
 
-    Serial.println(info);
+    //Serial.println(info);
     
     return info;
   }
