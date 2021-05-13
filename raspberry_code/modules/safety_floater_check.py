@@ -3,6 +3,8 @@ from picamera import PiCamera
 import tensorflow as tf
 from time import sleep
 
+camera = PiCamera()
+camera.resolution = (2592, 1944)
 # Stfu Keras
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -13,12 +15,11 @@ classes = ["No_Boat","Boat"]
 '''
 def sf_check(photo_name="pic.jpg"):
     #Import model
-    model = tf.keras.models.load_model('../model/model.h5')
+    model = tf.keras.models.load_model('model/model.h5')
     print("Model correctly loaded...")
 
     #Start camera
-    camera = PiCamera()
-    camera.resolution = (2592, 1944)
+    
     #Take pic
     print("Taking pic...")
     # Camera warm-up time
@@ -27,7 +28,7 @@ def sf_check(photo_name="pic.jpg"):
     print("Pic taken,start processing...")
 
     #Tf analysis
-    img = tf.keras.preprocessing.image.load_img('pic.jpg',target_size=(128,128))
+    img = tf.keras.preprocessing.image.load_img(photo_name,target_size=(128,128))
     img_array = tf.keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array,0)
     predictions_single = model.predict(img_array)

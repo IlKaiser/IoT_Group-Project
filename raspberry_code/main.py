@@ -23,7 +23,8 @@ while(True):
         
         ### Incremental Name
         photo_counter += 1
-        photo_name     = "pic_{photo_counter}.jpg"
+        photo_counter = photo_counter % 10
+        photo_name     = "pic"+str(photo_counter)+".jpg"
          
         is_boat = sf_check(photo_name=photo_name)
         
@@ -38,8 +39,10 @@ while(True):
             ## Everything should be fine
             assert(file_id != -1)
             ## Publish to AWS mqtt
+            ### Create url
+            url = "https://drive.google.com/uc?id="+str(file_id)
             print("Notifying to DB...")
-            mqtt_publish(lat,long,speed,floater_id,file_id)
+            mqtt_publish(lat,long,speed,floater_id,url,photo_counter)
             
         else:
             print("No actual Boat detected")
