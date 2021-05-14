@@ -29,6 +29,9 @@
 #define DELAY_ALARM_HIGH 20
 #define DELAY_CONTROL_HIGH 60000000
 
+//delay for thread timer
+#define DELAY_TIMER      500
+
 //constants for correcting the proximity orientation with the compass
 #define CORRECTION_THRESHOLD 1
 
@@ -43,7 +46,7 @@
 #define GPS_INFO_NOT_FOUND             "/"
 
 //constant (in sec) to determine wheter we have to change from one mode to another or not
-#define CONTROL_TIME_THRESHOLD         60
+#define CONTROL_TIME_THRESHOLD         600
 
 //fixed number for float conversion
 #define FIXED_NUMBER 4.3
@@ -53,6 +56,7 @@ static msg_t _main_msg_queue[MAIN_QUEUE_SIZE];
 static char stackThreadAlarm[THREAD_STACKSIZE_DEFAULT];
 static char stackThreadInfo[THREAD_STACKSIZE_DEFAULT];
 static char stackThreadControl[THREAD_STACKSIZE_DEFAULT];
+static char stackThreadTimer[THREAD_STACKSIZE_DEFAULT];
 
 int first_read_compass_done = 0;
 
@@ -146,12 +150,6 @@ static void* threadControl(void* arg)
 {
 	(void)arg;
 	
-	// Start measuring time
-	time_t begin, end;
-	time(&begin);
-    
-	char* modeIdentifier = POWER_MANAGEMENT_LOW;
-	
 	srand(time(NULL));
 
 	//sample values for magnetic field detected by the compass and accelerometer
@@ -171,22 +169,6 @@ static void* threadControl(void* arg)
 				
 		// Proximity sensor correction
 		proximitySensorCorrection(x_start_compass, x_compass);
-		
-		if(strcmp(pm_mode, POWER_MANAGEMENT_GENERAL) == 0){
-		    // Stop measuring time and calculate the elapsed time
-			time(&end);
-			time_t elapsed = end - begin;
-		
-			//printf("Elapsed time: %ld seconds.\n", elapsed);
-		
-			if(elapsed > CONTROL_TIME_THRESHOLD){
-				printf("Elapsed time: %ld seconds.\n", elapsed);
-				runtimePowerManagement(&modeIdentifier);
-		    
-				// Restart measuring time
-				time(&begin);
-			}   	
-		}
 		
 		xtimer_usleep(delay_control);
 	}
@@ -290,6 +272,43 @@ void fixedPowerManagement(char* mode){
 	}
 }
 
+static void* threadTimer(void* arg){
+	(void)arg;
+	
+	// Start measuring time
+	time_t begin, end;
+	time(&begin);
+    
+	char* modeIdentifier = POWER_MANAGEMENT_LOW;
+	
+	printf("[TIMER] Now in mode %s\n",modeIdentifier);
+	
+	while(1){
+	  	// Stop measuring time and calculate the elapsed time
+		time(&end);
+		time_t elapsed = end - begin;
+		
+		//printf("Elapsed time: %ld seconds.\n", elapsed);
+		
+		if(elapsed >= CONTROL_TIME_THRESHOLD){
+				
+			long int el = elapsed;
+				
+			printf("Elapsed time: %ld seconds.\n", el);
+			runtimePowerManagement(&modeIdentifier);
+			
+			printf("[TIMER] Now in mode %s\n",modeIdentifier);
+		    
+			// Restart measuring time
+			time(&begin);
+		}
+	    
+	    xtimer_usleep(DELAY_TIMER);
+	}
+	
+	return NULL;
+}
+
 int cmd_handler(int argc, char **argv){
     (void)argc;
     (void)argv;
@@ -315,6 +334,9 @@ int cmd_handler(int argc, char **argv){
 	
 	else{
 	    printf("Power management: general mode inserted!\n");
+	    
+	    thread_create(stackThreadTimer,sizeof(stackThreadTimer),THREAD_PRIORITY_MAIN-1,0,threadTimer,NULL,"Thread Timer");
+		printf("Thread timer created! \n");
 	}
 	
 	thread_create(stackThreadAlarm,sizeof(stackThreadAlarm),THREAD_PRIORITY_MAIN-1,0,threadAlarm,NULL,"Thread Alarm detection");
