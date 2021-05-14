@@ -4,7 +4,7 @@
 As we have seen by the explanation of the [Nucleo code](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md), between our main purposes we can find a **power management system**: based on the value of **acceleration** along the **z-axis** that is constantly sampled from the **MPU9250** accelerometer, we have defined three **modalities** of our system:
 - **high power consumption mode (high mode)**: the sea conditios are **good**, so our system needs to monitor the environment with an **high** frequence
 - **normal power consumption mode (medium mode)**: the sea conditios are **stable**, so our system needs to monitor the environment with a **normal** frequence
-- **low power consumption 3 (low mode)**: the sea conditios are **not good**, so our system needs to monitor the environment with a **low** frequence
+- **low power consumption mode (low mode)**: the sea conditios are **not good**, so our system needs to monitor the environment with a **low** frequence
 
 In order to have a better understanding of the power consumption of our system, we decided to use [Iot-lab](https://www.iot-lab.info/): in particular, you can check this [tutorial](https://iot-lab.github.io/docs/tools/consumption-monitoring/) in order to see more details.
 First, we need to create a **monitoring profile**: 
@@ -59,7 +59,7 @@ Below we show the results for the **general mode**, where the switching occures 
 
 In the first 10 minutes we can observe the trend of **high mode**, in the next 10 minutes the trend for **medium mode** and in the final 10 minutes the trend for **low mode**.
 
-Below we also show a picture of the application running in the console in mode 3 at the moment of the switching from high mode to medium mode:
+Below we also show a picture of the application running in the console in general mode at the moment of the switching from high mode to medium mode:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/switch_from_1_to_2.png)
 
