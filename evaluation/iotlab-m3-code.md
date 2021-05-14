@@ -472,7 +472,7 @@ static void* threadInfo(void* arg)
 }
 ```
 
-The **info thread** is responsible for simulating the retrieval of **GPS** data. In particular, we simulate with a **random boolean decision**, whether the **position** is available or not, by using the *getGpsInfoFromArduino* function, that we report below:
+The **info thread** is responsible for simulating the retrieval of **GPS** data. In particular, we simulate with a **random boolean decision** whether the **position** is available or not, by using the *getGpsInfoFromArduino* function, that we report below:
 
 ```c
 char* getGpsInfoFromArduino(int decision){
