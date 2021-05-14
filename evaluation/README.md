@@ -41,7 +41,7 @@ Below we show the results for the **medium mode**, also with a zoomed view:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-2-zoom.png)
 
-As we can see, in some points we have **peaks**, corresponding to the **sampling** of values, but if we compare these plots with those of high mode above, for sure we have less peaks than there, beacuse the sampling periods for all sensors are slightly **increased**: this leads to a **reduction** of the power consumption. All other observations done for high mode holds also for medium mode.
+As we can see, in some points we have **peaks**, corresponding to the **sampling** of values, but if we compare these plots with those of high mode above, for sure we have less peaks than there, because the sampling periods for all sensors are slightly **increased**: this leads to a **reduction** of the power consumption. All other observations done for high mode holds also for medium mode.
 
 ## Low mode
 Below we show the results for the **low mode**, also with a zoomed view:
