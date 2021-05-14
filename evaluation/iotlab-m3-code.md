@@ -349,7 +349,7 @@ We need to define the **ALARM_THRESHOLD** and the **delay_alarm** in the [main.c
 int delay_alarm = DELAY_ALARM_BASE;
 ```
 
-Notice that the delay_info is setted to th delay corresponding to the **high mode**, and the same holds for the other sampling delays that we will see later.
+Notice that the delay_info is setted to the delay corresponding to the **high mode**, and the same holds for the other sampling delays that we will see later.
 
 ### Control thread
 
