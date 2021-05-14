@@ -38,6 +38,10 @@ More informations about the **setup** of the project can be found [here](https:/
 
 More informations about the **Web Dashboard** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/dashboard/README.md).
 
+## Evaluation
+
+More informations about the **evaluation** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/README.md).
+
 ## Videos
 
 - [Presentation of the product](https://www.youtube.com/watch?v=axyGc6fHb7c)
