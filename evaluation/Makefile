@@ -21,40 +21,6 @@ USEMODULE += shell
 USEMODULE += shell_commands
 USEMODULE += ps
 
-# Include packages that pull up and auto-init the link layer.
-# NOTE: 6LoWPAN will be included if IEEE802.15.4 devices are present
-USEMODULE += gnrc_netdev_default
-USEMODULE += auto_init_gnrc_netif
-# Activate ICMPv6 error messages
-USEMODULE += gnrc_icmpv6_error
-# Specify the mandatory networking modules for IPv6 and UDP
-USEMODULE += gnrc_ipv6_router_default
-USEMODULE += gnrc_udp
-# Add a routing protocol
-USEMODULE += gnrc_rpl
-USEMODULE += auto_init_gnrc_rpl
-# This application dumps received packets to STDIO using the pktdump module
-USEMODULE += gnrc_pktdump
-# Additional networking modules that can be dropped if not needed
-USEMODULE += gnrc_icmpv6_echo
-
-USEMODULE += netstats_l2
-USEMODULE += netstats_ipv6
-USEMODULE += netstats_rpl
-
-# Instead of simulating an Ethernet connection, we can also simulate
-# an IEEE 802.15.4 radio using ZEP
-USE_ZEP ?= 0
-
-# set the ZEP port for native
-ZEP_PORT_BASE ?= 17754
-ifeq (1,$(USE_ZEP))
-  TERMFLAGS += -z [::1]:$(ZEP_PORT_BASE)
-  USEMODULE += socket_zep
-endif
-
 include $(RIOTBASE)/Makefile.include
-
-FEATURES_OPTIONAL += periph_rtc
 
 #to compile use -Wno-unused-variable
