@@ -50,7 +50,7 @@ Below we show the results for the **low mode**, also with a zoomed view:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-3-zoom.png)
 
-As we can see, in some points we have **peaks**, corresponding to the **sampling** of values, but if we compare these plots with those of mode 1 and 2 above, for sure we have less peaks than there, beacuse the sampling periods for all sensors are, again, slightly **increased**: this leads to a further **reduction** of the power consumption. All other observations done for high mode and medium mode holds also for mode low mode.
+As we can see, in some points we have **peaks**, corresponding to the **sampling** of values, but if we compare these plots with those of high mode and medium mode above, for sure we have less peaks than there, beacuse the sampling periods for all sensors are, again, slightly **increased**: this leads to a further **reduction** of the power consumption. All other observations done for high mode and medium mode holds also for mode low mode.
 
 ## Genaral mode
 Below we show the results for the **general mode**, where the switching occures after about **10 minutes**:
