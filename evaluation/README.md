@@ -52,6 +52,13 @@ Below we show the results for the **mode 3**, also with a zoomed view:
 
 As we can see, in some points we have **peaks**, corresponding to the **sampling** of values, but if we compare these plots with those of mode 1 and 2 above, for sure we have less peaks than there, beacuse the sampling periods for all sensors are, again, slightly **increased**: this leads to a further **reduction** of the power consumption. All other observations done for mode 1 and 2 holds also for mode 3.
 
+## Genaral mode
+Below we show the results for the **general mode**, where the switching occures after about **10 minutes**:
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/pm-general.png)
+
+In the first 10 minutes we can observe the trend of **mode 1**, in the next 10 minutes the trend for **mode 2** and in the final 10 minutes the trend for **mode 3**.
+
 Below we also show a picture of the application running in the console in mode 3 at the moment of the switching from mode 1 to mode 2:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/switch_from_1_to_2.png)
