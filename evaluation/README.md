@@ -19,7 +19,7 @@ Then, in order to test our modalities separately, we need to create three differ
 
 As we can see, for the experiment we used the **Saclay** frontend, where we reserved **one M3-node** (**M3-10**) as a node for our **application**.
 
-Finally, we tested all three modalities together by simulating the switch from one to another, so we created one last experiment, for a total **4** experiments. All experiments lasted **30 minutes**.
+Finally, we tested all three modalities together by simulating the switch from one to another, so we created one last experiment, for a total of **4** experiments. All experiments lasted **30 minutes**.
 
 ## High mode
 Below we show the results for the **high mode**, also with a zoomed view:
