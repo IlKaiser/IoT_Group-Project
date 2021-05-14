@@ -292,7 +292,7 @@ The *fixedPowerManagement* function takes as input the mode inserted by the user
 
 ## Sampling threads
 
-Finally, the handler initializes the sampling threads, the same as those seen in the [real application](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md), that will simulate the sampling of data from sensors. In order to create these threads, we need to define their stacks in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c):
+Finally, the handler initializes the **sampling threads**, the same as those seen in the [real application](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md), that will simulate the sampling of data from **sensors**. In order to create these threads, we need to define their **stacks** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c):
 
 ```c
 static char stackThreadAlarm[THREAD_STACKSIZE_DEFAULT];
@@ -339,7 +339,7 @@ static void* threadAlarm(void* arg)
 }
 ```
 
-The **alarm thread** is responsible for the simulation of **boat detections**. The detection is completely random, based on a **boolean random variable** continuosly generated every **delay_alarm** seconds, and if '1' is extracted **ALARM_THRESHOLD** or more time in a row, we assume that there was a violation, otherwise the counter is restarted.
+The **alarm thread** is responsible for the simulation of **boat detections**. The detection is completely random, based on a **boolean random variable** continuosly generated every **delay_alarm** seconds, and if '1' is extracted **ALARM_THRESHOLD** or more time in a row, we assume that there was a **violation**, otherwise the counter is restarted.
 
 We need to define the **ALARM_THRESHOLD** and the **delay_alarm** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c):
 
@@ -472,7 +472,7 @@ static void* threadInfo(void* arg)
 }
 ```
 
-The **info thread** is responsible for simulating the retrieval of **GPS** data. In particular, we simulate with a random **boolean decision**, whether the position is available or not, by using the getGpsInfoFromArduino, that we report below:
+The **info thread** is responsible for simulating the retrieval of **GPS** data. In particular, we simulate with a **random boolean decision**, whether the **position** is available or not, by using the *getGpsInfoFromArduino* function, that we report below:
 
 ```c
 char* getGpsInfoFromArduino(int decision){
@@ -485,7 +485,7 @@ char* getGpsInfoFromArduino(int decision){
 
 The function simply return some **fixed** GPS info if the decision is '1', nothing otherwise.
 
-In the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c), we need to define the **delay_info** sampling delay:
+In the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c), we need to define the **delay_info** sampling period:
 
 ```c
 int delay_info = DELAY_INFO_BASE;
