@@ -288,7 +288,7 @@ void fixedPowerManagement(char* mode){
 }
 ```
 
-The *fixedPowerManagement* function takes as input the mode inserted by the user, and sets as **sampling delays** the delay corresponding to that mode.
+The *fixedPowerManagement* function takes as input the mode inserted by the user, and sets as **sampling delays** the delays corresponding to that mode.
 
 ## Sampling threads
 
