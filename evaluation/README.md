@@ -32,7 +32,7 @@ As we can see, in a lot of points we have **peaks**, corresponding to the **samp
 
 Below we also show a picture of the application running in the console in high mode:
 
-![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/console-pm-not-general.png)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/console-not-general-pm.png)
 
 ## Medium mode
 Below we show the results for the **medium mode**, also with a zoomed view:
@@ -61,7 +61,7 @@ In the first 10 minutes we can observe the trend of **high mode**, in the next 1
 
 Below we also show a picture of the application running in the console in general mode at the moment of the switching from high mode to medium mode:
 
-![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/switch_from_1_to_2.png)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/from-high-to-medium-mode.png)
 
 ## Code
 More info on the **Iotlab-m3 code** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/iotlab-m3-code.md).
