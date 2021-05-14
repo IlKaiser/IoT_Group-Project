@@ -163,7 +163,7 @@ static void* threadTimer(void* arg){
 }
 ```
 
-This thread continuosly evaluates the **elapsed time**, in particular every DELAY_TIMER seconds and, if the elapsed time exceeds the CONTROL_TIME_THRESHOLD, then the **mode** is automatically changed with a predefined logic that we can find in the *runtimePowerManagement* function, and the timer is restarted.
+This thread continuosly evaluates the **elapsed time**, in particular every **DELAY_TIMER** seconds and, if the elapsed time exceeds the **CONTROL_TIME_THRESHOLD**, then the **mode** is automatically changed with a predefined logic that we can find in the *runtimePowerManagement* function, and the timer is restarted.
 
 In order to use the timer, we need to include this **header** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c):
 
