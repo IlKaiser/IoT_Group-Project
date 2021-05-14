@@ -171,7 +171,7 @@ In order to use the timer, we need to include this **header** in the [main.c](ht
 #include <time.h>
 ```
 
-We need to define the CONTROL_TIME_THRESHOLD in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c) as follows:
+We need to define the **CONTROL_TIME_THRESHOLD** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c) as follows:
 
 ```c
 #define CONTROL_TIME_THRESHOLD         600
