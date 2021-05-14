@@ -61,6 +61,7 @@ Sea station has been implemented with Raspberry pi, because we have no power man
 
 ## Missing functionalities
 - Optimizing power management
+- Use a better gyroscope, if possible
 - Improving latency
 - Development of a better web interface
 - Security
