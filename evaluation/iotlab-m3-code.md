@@ -338,7 +338,7 @@ We need to define the **ALARM_THRESHOLD** and the **delay_alarm** in the [main.c
 ```c
 #define ALARM_THRESHOLD 2
 
-int delay_info = DELAY_INFO_BASE;
+int delay_alarm = DELAY_ALARM_BASE;
 ```
 
 Notice that the delay_info is setted to th delay corresponding to the **high mode**, and the same holds for the other sampling delays that we will see later.
@@ -477,7 +477,13 @@ char* getGpsInfoFromArduino(int decision){
 
 The function simply return some **fixed** GPS info if the decision is '1', nothing otherwise.
 
-In the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c), we need to define the **GPS_INFO_REAL** and the **GPS_INFO_NOT_FOUND** constants:
+In the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c), we need to define the **delay_info** sampling delay:
+
+```c
+int delay_info = DELAY_INFO_BASE;
+```
+
+Also, in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c), we need to define the **GPS_INFO_REAL** and the **GPS_INFO_NOT_FOUND** constants:
 
 ```c
 #define GPS_INFO_REAL                  "41.3456;19.3185;0.25"
