@@ -1,7 +1,7 @@
 # Evaluation
 
 ## Introduction
-As we have seen by the explanation of the [Nucleo code](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md), between our main purposes we can find a **power management system**: based on the value of **acceleration** along the **z-axix** that is constantly sampled from the **MPU9250** accelerometer, we have defined three **modalities** of our system:
+As we have seen by the explanation of the [Nucleo code](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/README.md), between our main purposes we can find a **power management system**: based on the value of **acceleration** along the **z-axis** that is constantly sampled from the **MPU9250** accelerometer, we have defined three **modalities** of our system:
 - **mode 1**: the sea conditios are **good**, so our system needs to monitor the environment with an **high** frequence
 - **mode 2**: the sea conditios are **stable**, so our system needs to monitor the environment with a **normal** frequence
 - **mode 3**: the sea conditios are **not good**, so our system needs to monitor the environment with a **low** frequence
