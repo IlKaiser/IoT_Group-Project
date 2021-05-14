@@ -385,7 +385,7 @@ static void* threadControl(void* arg)
 }
 ```
 
-The **control thread** is responsible for the simulation of **proximity sensor correction**. Sampling from the the **MPU-9250** are simulated through the *getControlData* function:
+The **control thread** is responsible for the simulation of **proximity sensor correction**. Samplings from the the **MPU-9250** are simulated through the *getControlData* function:
 
 ```c
 void getControlData(short* x_compass, short* x_start_compass){
