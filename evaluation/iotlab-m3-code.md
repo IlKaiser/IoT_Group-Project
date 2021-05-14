@@ -98,7 +98,7 @@ The cmd_handler takes as input the **number of arguments** of the program and th
 
 We need to define the **power modes macros** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c):
 
-```
+```c
 #define POWER_MANAGEMENT_HIGH           "high"
 #define POWER_MANAGEMENT_MEDIUM         "medium"
 #define POWER_MANAGEMENT_LOW            "low"
