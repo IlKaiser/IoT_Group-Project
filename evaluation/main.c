@@ -301,6 +301,14 @@ int cmd_handler(int argc, char **argv){
     
     printf("pm_mode = %s\n",pm_mode);
     
+    if(strcmp(mode, POWER_MANAGEMENT_LOW) != 0 && strcmp(mode, POWER_MANAGEMENT_MEDIUM) != 0 &&
+       strcmp(mode, POWER_MANAGEMENT_HIGH) != 0 && strcmp(mode, POWER_MANAGEMENT_GENERAL) != 0){
+       
+       printf("Please insert %s or %s or %s or %s\n", POWER_MANAGEMENT_LOW, POWER_MANAGEMENT_MEDIUM, POWER_MANAGEMENT_HIGH, POWER_MANAGEMENT_GENERAL);
+       
+       exit(EXIT_FAILURE);  
+    }
+    
     if(strcmp(mode, POWER_MANAGEMENT_GENERAL) != 0){
 	    fixedPowerManagement(mode);   	
 	}
