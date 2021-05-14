@@ -10,7 +10,15 @@ char line_buf[SHELL_DEFAULT_BUFSIZE];
 shell_run(shell_commands, line_buf, SHELL_DEFAULT_BUFSIZE);
 ```
 
-In order to do this, we need to include these **headers** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c):
+In order to do this, we need to include these **modules** in the [Makefile](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/Makefile):
+
+```c
+USEMODULE += shell
+USEMODULE += shell_commands
+USEMODULE += ps
+```
+
+Also, we need to include these **headers** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/main.c):
 
 ```c
 #include "shell.h"
