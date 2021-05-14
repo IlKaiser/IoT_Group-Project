@@ -40,7 +40,7 @@ More informations about the **Web Dashboard** can be found [here](https://github
 
 ## Evaluation
 
-More informations about the **evaluation** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/README.md).
+More informations about the **evaluation** conducted on [Iot-lab](https://www.iot-lab.info/) can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/README.md).
 
 ## Videos
 
