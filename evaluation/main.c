@@ -36,10 +36,10 @@
 #define CORRECTION_THRESHOLD 1
 
 //power management mode constants
-#define POWER_MANAGEMENT_LOW           "1"
-#define POWER_MANAGEMENT_MEDIUM        "2"
-#define POWER_MANAGEMENT_HIGH          "3"
-#define POWER_MANAGEMENT_GENERAL       "general"
+#define POWER_MANAGEMENT_HIGH           "high"
+#define POWER_MANAGEMENT_MEDIUM         "medium"
+#define POWER_MANAGEMENT_LOW            "low"
+#define POWER_MANAGEMENT_GENERAL        "general"
 
 //gps info constants
 #define GPS_INFO_REAL                  "41.3456;19.3185;0.25"
@@ -77,7 +77,7 @@ char* fromFloatToString(float f, unsigned precision){
 void runtimePowerManagement(char** modeIdentifier){
     printf("Switching from mode %s to mode ",*modeIdentifier);
     
-    if(strcmp(*modeIdentifier, POWER_MANAGEMENT_LOW) == 0){
+    if(strcmp(*modeIdentifier, POWER_MANAGEMENT_HIGH) == 0){
 		printf("%s\n",POWER_MANAGEMENT_MEDIUM);
 		
 		*modeIdentifier = POWER_MANAGEMENT_MEDIUM;
@@ -88,19 +88,19 @@ void runtimePowerManagement(char** modeIdentifier){
 	}
 	
 	else if(strcmp(*modeIdentifier, POWER_MANAGEMENT_MEDIUM) == 0){
-		printf("%s\n",POWER_MANAGEMENT_HIGH);
+		printf("%s\n",POWER_MANAGEMENT_LOW);
 		
-		*modeIdentifier = POWER_MANAGEMENT_HIGH;
+		*modeIdentifier = POWER_MANAGEMENT_LOW;
 		
 		delay_alarm = DELAY_ALARM_HIGH;
 		delay_control = DELAY_CONTROL_HIGH;
 		delay_info = DELAY_INFO_HIGH;	
 	}
 	
-	else if(strcmp(*modeIdentifier, POWER_MANAGEMENT_HIGH) == 0){
-	    printf("%s\n",POWER_MANAGEMENT_LOW);
+	else if(strcmp(*modeIdentifier, POWER_MANAGEMENT_LOW) == 0){
+	    printf("%s\n",POWER_MANAGEMENT_HIGH);
 	    
-	    *modeIdentifier = POWER_MANAGEMENT_LOW;
+	    *modeIdentifier = POWER_MANAGEMENT_HIGH;
 		
 		delay_alarm = DELAY_ALARM_BASE;
 		delay_control = DELAY_CONTROL_BASE;
@@ -247,7 +247,7 @@ static void* threadInfo(void* arg)
 }
 
 void fixedPowerManagement(char* mode){
-    if(strcmp(mode, POWER_MANAGEMENT_LOW) == 0){
+    if(strcmp(mode, POWER_MANAGEMENT_HIGH) == 0){
 		printf("ACCEL LOW!\n");
 		    
 		delay_alarm = DELAY_ALARM_BASE;
@@ -263,7 +263,7 @@ void fixedPowerManagement(char* mode){
 		delay_info = DELAY_INFO_MEDIUM;	
 	}
 		
-	else if(strcmp(mode, POWER_MANAGEMENT_HIGH) == 0){
+	else if(strcmp(mode, POWER_MANAGEMENT_LOW) == 0){
 		printf("ACCEL HIGH!\n");
 		    
 		delay_alarm = DELAY_ALARM_HIGH;
@@ -279,7 +279,7 @@ static void* threadTimer(void* arg){
 	time_t begin, end;
 	time(&begin);
     
-	char* modeIdentifier = POWER_MANAGEMENT_LOW;
+	char* modeIdentifier = POWER_MANAGEMENT_HIGH;
 	
 	printf("[TIMER] Now in mode %s\n",modeIdentifier);
 	
@@ -320,10 +320,10 @@ int cmd_handler(int argc, char **argv){
     
     printf("pm_mode = %s\n",pm_mode);
     
-    if(strcmp(mode, POWER_MANAGEMENT_LOW) != 0 && strcmp(mode, POWER_MANAGEMENT_MEDIUM) != 0 &&
-       strcmp(mode, POWER_MANAGEMENT_HIGH) != 0 && strcmp(mode, POWER_MANAGEMENT_GENERAL) != 0){
+    if(strcmp(mode, POWER_MANAGEMENT_HIGH) != 0 && strcmp(mode, POWER_MANAGEMENT_MEDIUM) != 0 &&
+       strcmp(mode, POWER_MANAGEMENT_LOW) != 0 && strcmp(mode, POWER_MANAGEMENT_GENERAL) != 0){
        
-       printf("Please insert %s or %s or %s or %s\n", POWER_MANAGEMENT_LOW, POWER_MANAGEMENT_MEDIUM, POWER_MANAGEMENT_HIGH, POWER_MANAGEMENT_GENERAL);
+       printf("Please insert %s or %s or %s or %s\n", POWER_MANAGEMENT_HIGH, POWER_MANAGEMENT_MEDIUM, POWER_MANAGEMENT_LOW, POWER_MANAGEMENT_GENERAL);
        
        exit(EXIT_FAILURE);  
     }
