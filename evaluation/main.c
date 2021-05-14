@@ -17,7 +17,7 @@
 //base time interval for each thread
 #define DELAY_INFO_BASE 30
 #define DELAY_ALARM_BASE 1
-#define DELAY_CONTROL_BASE 500
+#define DELAY_CONTROL_BASE 100
 
 //medium time interval for each thread
 #define DELAY_INFO_MEDIUM 50
