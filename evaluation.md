@@ -57,6 +57,10 @@ Below we report the results obtained for each mode, also with a zoomed view, and
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-3-zoom.png)
 
+## General mode (with switching)
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/pm-general.png)
+
 More details on the evaluation of the power consumption can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/README.md).
 
 In the future, the power consumption will be monitored in all possible states of the Safety Floater, and in order to do this we will use a **power meter**.
