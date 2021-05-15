@@ -28,7 +28,7 @@ After the login, he will be redirected to the **violations page**, where he can 
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violations.png)
 
-By clicking on the button **More info** of one violation, he will be redirected to a page where he can see the **picture of the boat** taken by the Raspberry pi Camera and a **map** with the marker pointing on the last known position of the Floater that correctly detected the violation. By clicking on **<-Back** he will be redirected to the violations page. Below we can see a couple of images:
+By clicking on the **More info** button of one violation, he will be redirected to a page where he can see the **picture of the boat** taken by the Raspberry pi Camera and a **map** with the marker pointing on the last known position of the Floater that correctly detected the violation. By clicking on **<-Back** he will be redirected to the violations page. Below we can see a couple of images:
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/violation_info_1.png)
 
