@@ -94,7 +94,7 @@ All pins used are initialized by using the **GPIO peripheral driver**, that maps
 This thread initializes the buzzer, and then starts periodically requesting the Arduino info about the current situation nearby the floater by the I2C communication. If the Nucleo receives a number of indications of a possible violation greater or equal than a certain **ALARM_THRESHOLD**, then the buzzer starts to sound and a notification that a boat was found is sent to the Arduino by the I2C communication.
 The buzzer is initialized in this way:
 
-### Buzzer
+### Alarm thread: buzzer
 
 ```c
 //definition and initialitation of buzzer using pin D9
