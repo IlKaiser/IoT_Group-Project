@@ -1,7 +1,7 @@
 # Web Dashboard
 
 ## Introduction
-The **Web Dashboard** is on of the main component of our project. It is composed by two parts:
+The **Web Dashboard** is one of the main component of our project. It is composed by two parts:
 
 - the **server**, realized with **Node.js**
 - the **frontend**, realized with **HTML, Bootstrap, Javascript, Vue.js**
