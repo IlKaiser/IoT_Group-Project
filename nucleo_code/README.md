@@ -9,7 +9,7 @@ The application starts by initializing the I2C interface. In order to do this, w
 FEATURES_REQUIRED += periph_i2c
 ```
 
-Also, we need to include the following headers in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+Also, we need to include the following **headers** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 #include "periph_conf.h"
@@ -51,7 +51,7 @@ As we can see we need to define the **Arduino address** in the [main.c](https://
 #define ARDUINO_ADDRESS (0X04)
 ```
 
-Notice how the access to the I2C bus is treated as a **critical section**, because we have to avoid that multiple threads access it at the same time. In order to do this, we used a **mutex**, so we have to include the following header in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+Notice how the access to the I2C bus is treated as a **critical section**, because we have to avoid that multiple threads access it at the same time. In order to do this, we used a **mutex**, so we have to include the following **header** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 #include "mutex.h"
@@ -78,7 +78,7 @@ thread_create(stackThreadInfo,sizeof(stackThreadInfo),THREAD_PRIORITY_MAIN,0,thr
 	printf("Thread info created! \n");
 ```
 
-In order to do this we need to include this header in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+In order to do this we need to include this **header** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 #include "thread.h"
@@ -91,7 +91,7 @@ All pins used are initialized by using the **GPIO peripheral driver**, that maps
 
 ## Alarm thread
 
-This thread initializes the buzzer, and then starts periodically requesting the Arduino info about the current situation nearby the floater by the I2C communication. If the Nucleo receives a number of indications of a possible violation greater or equal than a certain **ALARM_THRESHOLD**, then the buzzer starts to sound and a notification that a boat was found is sent to the Arduino by the I2C communication.
+This thread initializes the **buzzer**, and then starts periodically requesting the Arduino info about the current situation nearby the floater by the **I2C communication**. If the Nucleo receives a number of indications of a possible violation greater or equal than a certain **ALARM_THRESHOLD**, then the buzzer starts to sound and a **notification** that a boat was found is sent to the Arduino by the I2C communication.
 The buzzer is initialized in this way:
 
 ### Alarm thread: buzzer
@@ -126,7 +126,7 @@ The periodical requests are done by using the **xtimer** module, so we need to s
 USEMODULE += xtimer
 ```
 
-Also, we need to include this header in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+Also, we need to include this **header** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 #include "xtimer.h"
@@ -148,7 +148,7 @@ The **alarm threshold** is defined as follows:
 ```
 
 ### Alarm thread: I2C communication
-Given that the *I2CCommunication* function takes as input the command related to the specific request for the Arduino, the buffer for receiving data from the I2C bus, the length of the buffer and the specific service, we need to specify the **command** and **buffer length** for both cases of use of the I2C communication by the Alarm thread:
+Given that the *I2CCommunication* function takes as input the **command** related to the specific request for the Arduino, the **buffer** for receiving data from the I2C bus, the **length** of the buffer and the specific **service**, we need to specify the **command** and **buffer length** for both cases of use of the I2C communication by the Alarm thread:
 
 ```c
 #define ALARM_BUFFER_SIZE 1
@@ -157,7 +157,7 @@ Given that the *I2CCommunication* function takes as input the command related to
 ```
 
 ### Alarm thread: periodical requests
-So, the periodical request of the alarm thread is resumed in the following code:
+So, the **periodical request** of the alarm thread is resumed in the following code:
 
 ```c
 int cont=0;
@@ -189,7 +189,7 @@ while(1){
 ## Control thread
 
 ### Control thread: MPU-9250 initialization
-The thread first initialize the **MPU9250 sensor**, then periodically samples it in order to check, together with the Arduino, whether the proximity sensor needs to be better oriented or not, and also to manage the power consumption in a smart way.
+The thread first initialize the **MPU9250 sensor**, then periodically samples it in order to check, together with the Arduino, whether the **proximity sensor** needs to be better oriented or not, and also to manage the **power consumption** in a smart way.
 In order to use the MPU9250 sensor we have to specify the **mpu9250 module** in the [Makefile](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/Makefile):
 
 ```c
@@ -215,14 +215,14 @@ ifneq (,$(filter tests_driver_%,$(APPLICATION)))
 endif
 ```
 
-Also, we need to include the following headers in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+Also, we need to include the following **headers** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 #include "mpu9x50.h"
 #include "mpu9x50_params.h"
 ```
 
-Then we have to specify the buffer length for the control thread for the I2C communication with Arduino:
+Then we have to specify the **buffer length** for the control thread for the I2C communication with Arduino:
 
 ```c
 #define CONTROL_BUFFER_SIZE 10
@@ -274,7 +274,7 @@ We define the **base sampling period** for the Control thread as follows:
 int delay_control = DELAY_CONTROL_BASE;
 ```
 
-So, the periodical sampling of the control thread is resumed in the following code:
+So, the **periodical sampling** of the control thread is resumed in the following code:
 
 ```c
 short x_start_compass = 0;
@@ -424,20 +424,22 @@ If the current orientation of the proximity sensor is too far from the starting 
 #define CONTROL_CMD_LEFT 3
 ```
 
-The power management is handled by the sampling of the **acceleration** measured along the **z-axis** of the **accelerometer**:
+### Control thread: power management
+
+The **power management** is handled by the sampling of the **acceleration** measured along the **z-axis** of the **accelerometer**:
 
 - if the acceleration is below a **low threshold**, then sampling delays are setted to the base delays
 - if the acceleration is above a **low threshold** but below an **high threshold**, then sampling delays are slightly increased
 - if the acceleration is above a **high threshold**, then sampling delays are further increased
 
-So we have to define the thresholds in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+So we have to define the **thresholds** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 #define LOW_PM_THRESHOLD 9.5
 #define HIGH_PM_THRESHOLD 10.0
 ```
 
-Also, we have to define all delays in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
+Also, we have to define all **delays** in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c):
 
 ```c
 //medium time interval for each thread
@@ -482,6 +484,7 @@ void powerManagement(float z_accel){
 ```
 
 ## Info thread
+
 This thread periodically requests the Arduino for the **last known position** of the floater. In the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nucleo_code/main.c), we need to define the **base sampling period** for the Info thread as follows:
 
 ```c
@@ -497,7 +500,8 @@ Also, in the [main.c](https://github.com/IlKaiser/IoT_Group-Project/blob/main/nu
 #define INFO_CMD 4
 ```
 
-So, the periodical requests of the Gps informations done by the Info thread are resumed in the following code:
+### Info thread: periodical requests
+So, the **periodical requests** of the **Gps** informations done by the Info thread are resumed in the following code:
 ```c
 char buffer[INFO_BUFFER_SIZE]={0};
 while(1){	
@@ -518,3 +522,5 @@ while(1){
 	
 }
 ```
+
+Obviosuly, gps info can not be immediately available.
