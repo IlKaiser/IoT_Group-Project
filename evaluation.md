@@ -31,7 +31,35 @@ For the second measurement, we have the following **estimates**:
 **Final estimated time: (1.004 seconds + 3.251) seconds = 4.255 seconds.**
 
 ## Embedded devices
-The power consumption will be monitored in all possible states of the Safety Floater, and in order to do this we will use a **power meter**. In particular, we will measure the battery consumption and correction accuracy of the stepper motor.
+We measured the **power consumption** and **correction accuracy** of the stepper motor. The power consumption has been monitored on [Iot-lab](https://www.iot-lab.info/), on the basis of the **power management system** that we have defined [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/2nd_delivery.md#presentation-of-technical-work). Our system will be able to adapt itself with respect to the **acceleration** measured from the **MPU-9250** gyroscope along the **z-axis**, by switching in three possible modalities:
+
+- **high mode**: high power consumption mode
+- **medium mode**: medium power consumption mode
+- **low mode**: low power consumption mode
+
+Below we report the results obtained for each mode, also with a zoomed view, and also a final picture that shows the switching between modes, in particular from the high mode to the medium mode first, and from the medium mode to the low mode later:
+
+### High mode
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-1.png)
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-1-zoom.png)
+
+### Medium mode
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-2.png)
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-2-zoom.png)
+
+### Low mode
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-3.png)
+
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-3-zoom.png)
+
+More details on the evaluation of the power consumption can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/README.md).
+
+In the future, the power consumption will be monitored in all possible states of the Safety Floater, and in order to do this we will use a **power meter**.
 
 ## Detection accuracy with CNN
 We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition, and the results are in the picture below:
