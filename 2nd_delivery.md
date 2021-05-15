@@ -11,7 +11,7 @@ Now for each of the previous points we explain our decisions:
 1. In order to monitor the temperature and humidity of air we will use Weather Services API, notifying in case of very adverse measurements our floaters to enable the power safe mode.
 2. Our use of Lora-WAN will be in the range of 150 metres, so the positioning and dimensioning of the antenna is not a relevant problem.
 3. In order to solve this problem, the first approach is verifying if the detected object remains in the detection field for more than a fixed amount of seconds.
-4. More info later.
+4. More info in the [evaluation.md](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation.md) document and in the [evaluation folder](https://github.com/IlKaiser/IoT_Group-Project/tree/main/evaluation).
 
 ## Changes
 
