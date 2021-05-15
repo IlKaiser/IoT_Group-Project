@@ -7,6 +7,7 @@ For the project we will use:
 - an MPU-9250 9 Axis Gyroscope Accelerometer Magnetic Field sensor
 - a BN-880 gps module
 - a Raspberry pi Camera Rev 1.3
+- 1 buzzer
 - 1 100 Ohm resistor
 - 1 Stepper Unipolar motor
 - 1 ULN2008
