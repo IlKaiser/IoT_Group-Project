@@ -57,7 +57,7 @@ Below we report the results obtained for each mode, also with a zoomed view, and
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/power-consumption-pm-3-zoom.png)
 
-## General mode (with switching)
+### General mode (with switching)
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/images/pm-general.png)
 
