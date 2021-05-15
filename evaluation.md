@@ -68,7 +68,7 @@ In the future, the power consumption will be monitored in all possible states of
 ## Detection accuracy with CNN
 We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition, and the results are in the picture below:
 
-![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/plots.jpeg)
+<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/plots.jpeg"  width=500/>
 
 ## End-user point of view
 From an end-user point of view the response time is conditioned by **LoraWAN**, by the **bandwith of the channel linking the Sea Station to the cloud**, and by the type of **protocol** used (**MQTT**). From a quantitative point of view, we will use **timestamps** at the generation of the packet and one at the receiving of the packet.  
