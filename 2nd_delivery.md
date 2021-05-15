@@ -71,7 +71,7 @@ For the evaluation:
 - we estimated the **power consumption** of single subsytems
 - we evaluated **performances of the CNN**
 - we estimated the **latency** in the whole system
-- we estimated the **battery consumption** and **correction accuracy** of the **stepper motor**.
+- we estimated the **correction accuracy** of the **stepper motor**.
 
 ## Evaluation for the 3rd delivery
 We want to obtain the correct estimation of the previous parameters with the real prototype.
