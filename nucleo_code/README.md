@@ -523,4 +523,4 @@ while(1){
 }
 ```
 
-Obviosuly, gps info can not be immediately available.
+Obviosuly, gps info could not be immediately available.
