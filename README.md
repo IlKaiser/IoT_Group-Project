@@ -44,7 +44,7 @@ More informations about the **evaluation** conducted on [Iot-lab](https://www.io
 
 ## Videos
 
-- [Presentation of the project from a technical point of view](https://www.youtube.com/watch?v=V4iM_ioqQlc)
+- [Presentation of the project from a technical point of view](https://www.youtube.com/watch?v=FmF9_Zp3lKU)
 - [Evaluation of the project](https://www.youtube.com/watch?v=lBwwQdcH_tM)
 - [Future plans](https://www.youtube.com/watch?v=lZY-sbCqoY0)
 
