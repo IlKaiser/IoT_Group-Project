@@ -44,9 +44,9 @@ More informations about the **evaluation** conducted on [Iot-lab](https://www.io
 
 ## Videos
 
-- [Presentation of the product](https://www.youtube.com/watch?v=axyGc6fHb7c)
-- [Technical Approach](https://www.youtube.com/watch?v=QwJG0_9aonI)
-- [Performance Evaluation Plan](https://www.youtube.com/watch?v=1ltpUNfAVcA)
+- [Presentation of the project from a techincal point of view](https://www.youtube.com/)
+- [Evaluation of the project](https://www.youtube.com/watch?v=lBwwQdcH_tM)
+- [Future plans](https://www.youtube.com/)
 
 ## Releases
 
