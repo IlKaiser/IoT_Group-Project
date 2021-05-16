@@ -38,7 +38,7 @@ More informations about the **setup** of the project can be found [here](https:/
 
 More informations about the **Web Dashboard** can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/dashboard/README.md).
 
-## Evaluation
+## Evaluation on Iot-lab
 
 More informations about the **evaluation** conducted on [Iot-lab](https://www.iot-lab.info/) can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/README.md).
 
