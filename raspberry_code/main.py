@@ -18,9 +18,8 @@ continue_counter = 0
 while(True):
     print("Waiting for message to come...")
     try:
-        #lat,long,speed,floater_id = bt_recieveLine()
+        lat,long,speed,floater_id = bt_recieveLine()
         
-        lat,long,speed,floater_id = 41.963581,12.798270,0.01,71
         print("Checking if there is an actual violation...")
         
         ### Incremental Name
