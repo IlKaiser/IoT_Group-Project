@@ -1,7 +1,8 @@
-from modules.bluetooth_module      import bt_recieveLine
-from modules.drive_uploader_module import drive_upload
-from modules.mqtt_module           import mqtt_publish
-from modules.safety_floater_check  import sf_check
+from modules.bluetooth_module         import bt_recieveLine
+from modules.drive_uploader_module    import drive_upload
+from modules.mqtt_module              import mqtt_publish
+from modules.safety_floater_check     import sf_check
+from modules.last_violation_id_module import get_violation_id
 
 
 
@@ -17,8 +18,9 @@ continue_counter = 0
 while(True):
     print("Waiting for message to come...")
     try:
-        lat,long,speed,floater_id = bt_recieveLine()
+        #lat,long,speed,floater_id = bt_recieveLine()
         
+        lat,long,speed,floater_id = 41.963581,12.798270,0.01,71
         print("Checking if there is an actual violation...")
         
         ### Incremental Name
@@ -41,8 +43,11 @@ while(True):
             ## Publish to AWS mqtt
             ### Create url
             url = "https://drive.google.com/uc?id="+str(file_id)
+            ### Updating id to be used
+            curr_id = get_violation_id()
+            
             print("Notifying to DB...")
-            mqtt_publish(lat,long,speed,floater_id,url,photo_counter)
+            mqtt_publish(lat,long,speed,floater_id,url,curr_id)
             
         else:
             print("No actual Boat detected")

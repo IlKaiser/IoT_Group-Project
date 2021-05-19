@@ -5,6 +5,9 @@ from time import sleep
 
 camera = PiCamera()
 camera.resolution = (2592, 1944)
+camera.hflip = True
+camera.vflip = True
+
 # Stfu Keras
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -22,6 +25,7 @@ def sf_check(photo_name="pic.jpg"):
     
     #Take pic
     print("Taking pic...")
+    
     # Camera warm-up time
     sleep(2)
     camera.capture(photo_name)
@@ -36,6 +40,7 @@ def sf_check(photo_name="pic.jpg"):
     response = int(predictions_single[0][0])
     print(classes[response])
     print("Done!")
+    
     if response == 0:
         return False
     return True
