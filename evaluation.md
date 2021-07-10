@@ -40,7 +40,7 @@ For the second measurement, w've considered also a LoraWAN communication instead
    - Sending of the picture url from the Raspberry to the AWS cloud by MQTT -> about **0.050 s**
    - HTTP/REST request from the NodeJS server to the cloud to retrieve the picture url in order to show the picture on the Dashboard -> about **0.050 s**
 
-**Final estimated time: (1.004 seconds + 4.152 seconds) = 5.156 seconds. **
+**Final estimated time: (1.004 seconds + 4.152 seconds) = 5.156 seconds.**
 
 
 
@@ -89,4 +89,4 @@ We measured the accuracy and performances of the **Convolutional Neural Network*
 From an end-user point of view the response time is conditioned by **LoraWAN**, by the **bandwith of the channel linking the Sea Station to the cloud**, and by the type of **protocol** used (**MQTT**). From a quantitative point of view, we will use **timestamps** at the generation of the packet and one at the receiving of the packet.  
 
 ## Previous version
-The previous version of the document can be found in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
+The previous version of the document can be found in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/2.0) of the project.
