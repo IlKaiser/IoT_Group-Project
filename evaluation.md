@@ -86,7 +86,7 @@ For the third deliver we've realized a prototype an we decided to measure the po
 
 This is the setup:
 
-![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/prototype.jpeg)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/prototype.jpeg)
 
 Below we can see results for each power consumption mode:
 
@@ -96,7 +96,7 @@ Starting Voltage: 3,80 V
 Final Voltage: 3,75 V
 Power Consumption: 50 mV => 10 mV per minute => 15 hours using a 9V battery without considering solar panel
 
-![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/high_consumption_tester.jpeg)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/high_consumption_tester.jpeg)
 
 **MEDIUM MODE**
 
@@ -104,7 +104,7 @@ Starting Voltage: 3,75 V
 Final Voltage: 3,73 V
 Power Consumption: 20 mV => 4 mV per minute => 38 hours using a 9V battery without considering solar panel
 
-![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/medium_consumption_tester.jpeg)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/medium_consumption_tester.jpeg)
 
 **LOW MODE**
 
@@ -112,7 +112,7 @@ Starting VOltage: 3,73 V
 Final Voltage: 3,72 V
 Power Consumption: 10 mV => 2 mV per minute => 79 hours using a 9V battery without considering solar panel
 
-![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/low_consumption_tester.jpeg)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/low_consumption_tester.jpeg)
 
 
 
