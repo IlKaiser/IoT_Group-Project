@@ -1,7 +1,7 @@
 # Technology
 
 ## Core: Three main parts
-- Smart Floater
+- Safety Floater
 - Sea Station
 - Web Dashboard
 
@@ -76,12 +76,6 @@ It is used for **violation detection**.
 
 It is used for getting the last known **position** of the floater.
 
-### Solar Panel
-
-<img src="https://images-na.ssl-images-amazon.com/images/I/51t9Z3nh4uL._SL1001_.jpg"  width=400/>
-
-It is used to **increase battery life**.
-
 ### Raspberry pi Camera Rev 1.3
 
 <img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/camera.jpg" width=400/>
@@ -142,4 +136,4 @@ Below I show a picture of the HC-05 Bluetooth module:
 ![Img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/picture.png )
 
 ## Previous version
-The previous version of the document can be found in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0) of the project.
+The previous version of the document can be found in the [previous release](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/2.0) of the project.
