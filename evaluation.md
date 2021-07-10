@@ -30,15 +30,17 @@ For the second measurement, we have the following **estimates**:
 
    **Total estimated time: 3.251 seconds.**
    
-**Final estimated time: (1.004 seconds + 3.251) seconds = 4.255 seconds.**
+**Final estimated time: (1.004 seconds + 3.251 seconds)  = 4.255 seconds.**
 
 For the second measurement, w've considered also a LoraWAN communication instead of a Bluetooth communication so the second part of the estimation changed. The amount of bytes that we've sent from the Safety Floater to the Sea Station is (Identifier of the floater, latitude and longitude), then we send 12 bytes using LoraWAN. 
    
    - Stm request to the Arduino for the second violation check by I2C -> about **0.001 s**
    - Raspberry retrieves gps data from the Arduino by the LoraWAN module ( [Source](http://alessandroblason.it/2017/07/12/ttn-la-politica-accesso-equo/)) -> about **1.051 s**
-   - Convolutional Neural Network evaluation -> about **3 s**
+   - Convolutional Neural Network evaluation -> about **3.000 s**
    - Sending of the picture url from the Raspberry to the AWS cloud by MQTT -> about **0.050 s**
    - HTTP/REST request from the NodeJS server to the cloud to retrieve the picture url in order to show the picture on the Dashboard -> about **0.050 s**
+
+**Final estimated time: (1.004 seconds + 4.152 seconds) = 5.156 seconds. **
 
 
 
