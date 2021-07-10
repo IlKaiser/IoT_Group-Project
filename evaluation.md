@@ -32,6 +32,17 @@ For the second measurement, we have the following **estimates**:
    
 **Final estimated time: (1.004 seconds + 3.251) seconds = 4.255 seconds.**
 
+For the second measurement, w've considered also a LoraWAN communication instead of a Bluetooth communication so the second part of the estimation changed. The amount of bytes that we've sent from the Safety Floater to the Sea Station is (Identifier of the floater, latitude and longitude), then we send 12 bytes using LoraWAN. 
+   
+   - Stm request to the Arduino for the second violation check by I2C -> about **0.001 s**
+   - Raspberry retrieves gps data from the Arduino by the LoraWAN module ( [Source](http://alessandroblason.it/2017/07/12/ttn-la-politica-accesso-equo/)) -> about **1.051 s**
+   - Convolutional Neural Network evaluation -> about **3 s**
+   - Sending of the picture url from the Raspberry to the AWS cloud by MQTT -> about **0.050 s**
+   - HTTP/REST request from the NodeJS server to the cloud to retrieve the picture url in order to show the picture on the Dashboard -> about **0.050 s**
+
+
+
+
 ## Embedded devices
 We measured the **power consumption** and **correction accuracy** of the stepper motor. The power consumption has been monitored on [Iot-lab](https://www.iot-lab.info/), on the basis of the **power management system** that we have defined [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/2nd_delivery.md#presentation-of-technical-work). Our system will be able to adapt itself with respect to the **acceleration** measured from the **MPU-9250** gyroscope along the **z-axis**, by switching in three possible modalities:
 
