@@ -85,4 +85,4 @@ __pycache__/
 # Exceptions
 !raspberry_code/model/.gitignore
 !raspberry_code/certificates/.gitignore
-
+!raspberry_code/tests/
