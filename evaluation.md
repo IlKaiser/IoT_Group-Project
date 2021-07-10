@@ -52,6 +52,7 @@ We measured the **power consumption** and **correction accuracy** of the stepper
 - **medium mode**: medium power consumption mode means that the sea is in a intermediate status it's possible to associate this power mode to the yellow flag
 - **low mode**: low power consumption mode means that the sea is rough and it's possible to associate this power mode to the red flag
 
+During this experiment we kept the system running for 3 hours, and we simulated the passive situtation on which there wasn't a boat that crosses the safety line. 
 
 Below we report the results obtained for each mode, also with a zoomed view, and also a final picture that shows the switching between modes, in particular from the high mode to the medium mode first, and from the medium mode to the low mode later:
 
@@ -80,6 +81,40 @@ Below we report the results obtained for each mode, also with a zoomed view, and
 More details on the evaluation of the power consumption can be found [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/evaluation/README.md).
 
 ### SIMULATED ENVIRONMENT WITH THE PROTOTYPE 
+
+For the third deliver we've realized a prototype an we decided to measure the power consumption using a multimeter. We kept running the floater for 5 minutes for each power consumption mode and for the power supply we used a powerbank and we've simulated a boat that crossed the safety line every 30 seconds. The three attempt have been done consecutively.
+
+This is the setup:
+
+![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/prototype.jpeg)
+
+Below we can see results for each power consumption mode:
+
+**HIGH MODE**
+
+Starting Voltage: 3,80 V
+Final Voltage: 3,75 V
+Power Consumption: 50 mV => 10 mV per minute => 15 hours using a 9V battery without considering solar panel
+
+![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/high_consumption_tester.jpeg)
+
+**MEDIUM MODE**
+
+Starting Voltage: 3,75 V
+Final Voltage: 3,73 V
+Power Consumption: 20 mV => 4 mV per minute => 38 hours using a 9V battery without considering solar panel
+
+![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/medium_consumption_tester.jpeg)
+
+**LOW MODE**
+
+Starting VOltage: 3,73 V
+Final Voltage: 3,72 V
+Power Consumption: 10 mV => 2 mV per minute => 79 hours using a 9V battery without considering solar panel
+
+![img] (https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/low_consumption_tester.jpeg)
+
+
 
 
 ## Detection accuracy with CNN
