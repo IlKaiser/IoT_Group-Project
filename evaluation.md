@@ -108,7 +108,7 @@ Power Consumption: 20 mV => 4 mV per minute => 38 hours using a 9V battery witho
 
 **LOW MODE**
 
-Starting VOltage: 3,73 V
+Starting Voltage: 3,73 V
 Final Voltage: 3,72 V
 Power Consumption: 10 mV => 2 mV per minute => 79 hours using a 9V battery without considering solar panel
 
@@ -117,7 +117,7 @@ Power Consumption: 10 mV => 2 mV per minute => 79 hours using a 9V battery witho
 
 
 ## Detection accuracy with CNN
-We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition, and the results are in the picture below:
+We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition the dataset used is ARGOS, and the results are in the picture below:
 
 <img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/plots.jpeg"  width=500/>
 
