@@ -6,6 +6,8 @@ Given that Safety Floater will communicate with the Sea Station via LoraWAN, for
 1. the total time needed to detect a **violation** on the **Nucleo board** for the activation of the **buzzer**
 2. the total time needed to have the **boat picture** available on the Dashboard starting by the moment when the buzzer activates
 
+To estimate these values we've used timestamps.
+
 For the first measurement, we need to consider two delays:
    - the **I2C** delay for the communication between the Nucleo board and the Arduino board: about **0.001 seconds**
    - the delay to detect **false positives**: **1 second**
