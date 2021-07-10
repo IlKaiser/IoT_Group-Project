@@ -1,8 +1,8 @@
 # Evaluation
 
 ## Network technologies
-Given that Safety Floater will communicate with the Sea Station via LoraWAN, for our prototype we used a **Bluetooth module** in order to achieve an accurate measure of the **latency**. When we will perform final tests, we will take into account the technological constraints of LoraWan, such as **throughput, latency and bandwith**.
-<br><br>For this delivery, we also estimated the **latency** in the whole system by looking at: 
+Given that Safety Floater will communicate with the Sea Station via LoraWAN, for our prototype we used a **Bluetooth module** in order to achieve an accurate measure of the **latency**. We have took into account the technological constraints of **LoraWan**, such as **throughput, latency and bandwith**.
+<br><br>We also estimated the **latency** in the whole system by looking at: 
 1. the total time needed to detect a **violation** on the **Nucleo board** for the activation of the **buzzer**
 2. the total time needed to have the **boat picture** available on the Dashboard starting by the moment when the buzzer activates
 
@@ -32,7 +32,7 @@ For the second measurement, we have the following **estimates**:
    
 **Final estimated time: (1.004 seconds + 3.251 seconds)  = 4.255 seconds.**
 
-For the second measurement, w've considered also a LoraWAN communication instead of a Bluetooth communication so the second part of the estimation changed. The amount of bytes that we've sent from the Safety Floater to the Sea Station is (Identifier of the floater, latitude and longitude), then we send 12 bytes using LoraWAN. 
+For the second measurement, we've considered also a **LoraWAN communication** instead of a Bluetooth communication, so the second part of the estimation changed. The amount of bytes that we've sent from the Safety Floater to the Sea Station is **(Identifier of the floater, latitude and longitude)**, then we send **12 bytes** using LoraWAN. 
    
    - Stm request to the Arduino for the second violation check by I2C -> about **0.001 s**
    - Raspberry retrieves gps data from the Arduino by the LoraWAN module ( [Source](http://alessandroblason.it/2017/07/12/ttn-la-politica-accesso-equo/)) -> about **1.051 s**
@@ -46,13 +46,13 @@ For the second measurement, w've considered also a LoraWAN communication instead
 ## Embedded devices
 
 ### IOT-LAB ESTIMATION
-We measured the **power consumption** and **correction accuracy** of the stepper motor. The power consumption has been monitored on [Iot-lab](https://www.iot-lab.info/), on the basis of the **power management system** that we have defined [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/2nd_delivery.md#presentation-of-technical-work). Our system will be able to adapt itself with respect to the **acceleration** measured from the **MPU-9250** gyroscope along the **z-axis**, by switching in three possible modalities:
+We measured the **power consumption** and **correction accuracy** of the stepper motor. The power consumption has been monitored on [Iot-lab](https://www.iot-lab.info/), on the basis of the **power management system** that we have defined [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/2nd_delivery.md#presentation-of-technical-work). Our system will be able to adapt itself with respect to the **acceleration** measured from the **MPU-9250** accelerometer along the **z-axis**, by switching in three possible modalities:
 
-- **high mode**: high power consumption mode means that the sea is calm and it's possible to associate this power mode to the white flag
-- **medium mode**: medium power consumption mode means that the sea is in a intermediate status it's possible to associate this power mode to the yellow flag
-- **low mode**: low power consumption mode means that the sea is rough and it's possible to associate this power mode to the red flag
+- **high mode**: high power consumption mode means that **the sea is calm** and it's possible to associate this power mode to the **white flag**
+- **medium mode**: medium power consumption mode means that **the sea is in a intermediate status** and it's possible to associate this power mode to the **yellow flag**
+- **low mode**: low power consumption mode means that **the sea is rough** and it's possible to associate this power mode to the **red flag**
 
-During this experiment we kept the system running for 3 hours, and we simulated the passive situtation on which there wasn't a boat that crosses the safety line. 
+During this experiment we kept the system running for **3 hours**, and we simulated the passive situation on which there wasn't a boat that crosses the safety line. 
 
 Below we report the results obtained for each mode, also with a zoomed view, and also a final picture that shows the switching between modes, in particular from the high mode to the medium mode first, and from the medium mode to the low mode later:
 
@@ -82,7 +82,7 @@ More details on the evaluation of the power consumption can be found [here](http
 
 ### SIMULATED ENVIRONMENT WITH THE PROTOTYPE 
 
-For the third deliver we've realized a prototype an we decided to measure the power consumption using a multimeter. We kept running the floater for 5 minutes for each power consumption mode and for the power supply we used a powerbank and we've simulated a boat that crossed the safety line every 30 seconds. The three attempt have been done consecutively.
+For the third deliver we've realized a **prototype** an we decided to measure the power consumption using a **multimeter**. We kept running the floater for **5 minutes** for each **power consumption mode** and for the power supply we used a powerbank and we've simulated a boat that crossed the safety line every **30 seconds**. The three attempts have been done consecutively.
 
 This is the setup:
 
@@ -117,7 +117,7 @@ Power Consumption: 10 mV => 2 mV per minute => 79 hours using a 9V battery witho
 
 
 ## Detection accuracy with CNN
-We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition the dataset used is ARGOS, and the results are in the picture below:
+We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition. The dataset used is **ARGOS**, and the results are in the picture below:
 
 <img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/plots.jpeg"  width=500/>
 
