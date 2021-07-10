@@ -18,7 +18,7 @@ def get_violation_id(dynamodb=None):
     }
 
 
-    max_id = 0
+    max_id = -1
     done = False
     start_key = None
 
@@ -37,4 +37,19 @@ def get_violation_id(dynamodb=None):
         start_key = response.get('LastEvaluatedKey', None)
         done = start_key is None
     
+    print(max_id)
     return max_id+1
+
+def run_legacy():
+    import subprocess
+    subprocess = subprocess.Popen("/usr/local/opt/python-3.9.5/bin/python3.9 -c 'from modules import last_violation_id_module;last_violation_id_module. get_violation_id()'",
+                                  shell=True, stdout=subprocess.PIPE)
+    subprocess_return = subprocess.stdout.read()
+    
+    subprocess.wait()
+    
+    result = int(subprocess_return.decode("utf-8").strip())
+    print(result)
+    
+    return result+1
+    
