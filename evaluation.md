@@ -52,7 +52,7 @@ We measured the **power consumption** and **correction accuracy** of the stepper
 - **medium mode**: medium power consumption mode means that **the sea is in a intermediate status** and it's possible to associate this power mode to the **yellow flag**
 - **low mode**: low power consumption mode means that **the sea is rough** and it's possible to associate this power mode to the **red flag**
 
-During this experiment we kept the system running for **3 hours**, and we simulated the passive situation on which there wasn't a boat that crosses the safety line. 
+During these experiments we kept the system running for **30 minutes** each, and we simulated the passive situation on which there wasn't a boat that crosses the safety line. 
 
 Below we report the results obtained for each mode, also with a zoomed view, and also a final picture that shows the switching between modes, in particular from the high mode to the medium mode first, and from the medium mode to the low mode later:
 
