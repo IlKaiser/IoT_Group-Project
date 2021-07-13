@@ -52,4 +52,4 @@ More informations about the **evaluation** conducted on [Iot-lab](https://www.io
 
 - [First delivery](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0): for the first delivery you can also check this set of [slides](https://github.com/IlKaiser/IoT_Group-Project/blob/main/Safety%20floater.pptx)
 - [Second delivery](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/2.0): for the second delivery you can find more info [here](https://github.com/IlKaiser/IoT_Group-Project/blob/main/2nd_delivery.md), and you can also check this set of [slides](https://github.com/IlKaiser/IoT_Group-Project/blob/main/Safety%20floater_2nd_delivery.pptx)
-- [Third delivery](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/3.0): for the third delivery you can also check this set of [slides](https://github.com/IlKaiser/IoT_Group-Project/blob/main/Safety%20floater_final_delivery.pptx)
+- [Third delivery](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/3.0): for the third delivery you can also check this set of [slides](https://github.com/IlKaiser/IoT_Group-Project/blob/main/Safety%20floater_final_delivery_.pptx)
