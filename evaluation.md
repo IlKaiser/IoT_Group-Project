@@ -119,7 +119,7 @@ Final Voltage: 3,72 V<br>
 ## Detection accuracy with CNN
 We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition. The dataset used is **ARGOS**, and the results are in the picture below:
 
-<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/ML/plots.jpeg"  width=500/>
+<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/image_recognition/plots.jpeg"  width=500/>
 
 ## End-user point of view
 From an end-user point of view the response time is conditioned by **LoraWAN**, by the **bandwith of the channel linking the Sea Station to the cloud**, and by the type of **protocol** used (**MQTT**). From a quantitative point of view, we will use **timestamps** at the generation of the packet and one at the receiving of the packet.  
