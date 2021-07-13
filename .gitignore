@@ -86,3 +86,4 @@ __pycache__/
 !raspberry_code/model/.gitignore
 !raspberry_code/certificates/.gitignore
 !raspberry_code/tests/*.jpg
+!image_recognition/*.jpeg
