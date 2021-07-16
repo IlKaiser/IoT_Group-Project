@@ -45,7 +45,7 @@ More informations about the **evaluation** conducted on [Iot-lab](https://www.io
 ## Videos
 
 - [Presentation of the project](https://www.youtube.com/watch?v=rqtzGxGxrBQ)
-- [Demo](https://www.youtube.com/)
+- [Demo](https://youtu.be/sozL5CH4RoQ)
 
 ## Releases
 
