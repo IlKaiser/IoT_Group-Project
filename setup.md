@@ -39,10 +39,6 @@ After this, you can install **nodemon** (not mandatory), a very useful package t
 
 ## Data storage
 
-### MongoDB
-Using free tier on site it is possible to have a small db instance with 512Mb of available space and up to 100 users connected at the same time, which is perfect for our scenario. On MongoDB are saved user_names,password (generated from the SHA256 of the actual password concatenated with a random salt), and salt for every user.
-To setup free tier see [here](https://docs.atlas.mongodb.com/getting-started/).
-We decided, for safety and concistency reasons, that is not possible for users to register from the frontend, so every new user is added manually. We used the [command line method](https://docs.mongodb.com/guides/server/insert/) with Linux.
 ### AWS, Iot-Core and DynamoDB
 Then, you need so sign in in [AWS](https://aws.amazon.com/education/awseducate/), in order to get access to **Iot-Core** and **DynamoDB** services. Once you're on Iot-Core, you need to create a **thing** in order to get your **certificate**, **root certificate** and **private key**. Here you can find a [tutorial](https://docs.aws.amazon.com/iot/latest/developerguide/iot-moisture-create-thing.html). Then you need to add into the **.env** file **the access key id, the secret access key and the session token** provided by AWS, to be able to receive messages from the devices and to query the DynamoDB database. So at this point the .env should look like this:
 
