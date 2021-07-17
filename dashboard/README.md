@@ -8,7 +8,7 @@ The **Web Dashboard** is one of the main component of our project. It is compose
 
 It is directed to **coast guards** with the purpose of show them all the **violations** detected by the Sea Stations. Below we show a picture of all interactions at the Web Dashboard level:
 
-![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/dashboard-architecture.jpeg)
+![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/dashboard_architecture.png)
 
 As we can see from the picture, the server interacts with two databases a **DynamoBD** database, that acts as the **cloud on AWS** where we store data of each **violation** detected.
 
