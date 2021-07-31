@@ -47,6 +47,10 @@ More informations about the **evaluation** conducted on [Iot-lab](https://www.io
 - [Presentation of the project](https://www.youtube.com/watch?v=rqtzGxGxrBQ)
 - [Demo](https://youtu.be/sozL5CH4RoQ)
 
+## Blog post
+
+[Blog post](https://medium.com/@danielebufalieritkd/safety-floater-1a63ddf3e4a9)
+
 ## Releases
 
 - [First delivery](https://github.com/IlKaiser/IoT_Group-Project/releases/tag/1.0): for the first delivery you can also check this set of [slides](https://github.com/IlKaiser/IoT_Group-Project/blob/main/Safety%20floater.pptx)
