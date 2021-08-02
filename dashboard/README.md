@@ -10,7 +10,7 @@ It is directed to **coast guards** with the purpose of show them all the **viola
 
 ![img](https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/dashboard_architecture.png)
 
-As we can see from the picture, the server interacts with two databases a **DynamoBD** database, that acts as the **cloud on AWS** where we store data of each **violation** detected.
+As we can see from the picture, the server interacts with a **DynamoBD** database, that acts as the **cloud on AWS** where we store data of each **violation** detected.
 
 The login credentials are provided by the system admin to each user.
 
