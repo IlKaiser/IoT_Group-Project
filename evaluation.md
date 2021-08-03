@@ -82,7 +82,7 @@ More details on the evaluation of the power consumption can be found [here](http
 
 ### SIMULATED ENVIRONMENT WITH THE PROTOTYPE 
 
-For the third deliver we've realized a **prototype** an we decided to measure the power consumption using a **multimeter**. We kept running the floater for **5 minutes** for each **power consumption mode** and for the power supply we used a powerbank and we've simulated a boat that crossed the safety line every **30 seconds**. The three attempts have been done consecutively.
+For the third deliver we've realized a **prototype** an we decided to measure the power consumption using a **multimeter**. We kept running the floater for **60 minutes** for each **power consumption mode** and for the power supply we used a powerbank and we've simulated a boat that crossed the safety line every **5 minutes**.
 
 This is the setup:
 
@@ -92,29 +92,21 @@ Below we can see results for each power consumption mode:
 
 **HIGH MODE**
 
-Starting Voltage: 3,80 V<br>
-Final Voltage: 3,75 V<br>
-**Power Consumption: 50 mV => 10 mV per minute => 15 hours using a 9V battery without considering solar panel**
-
-<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/high_consumption_tester.jpeg" height="400" />
+Voltage: 5 V <br>
+Current Consumption: 153 mAh <br>
+**Power Consumption: 7 hours 50 minutes using a 9V 1200 mAh battery without considering solar panel**
 
 **MEDIUM MODE**
 
-Starting Voltage: 3,75 V<br>
-Final Voltage: 3,73 V<br>
-**Power Consumption: 20 mV => 4 mV per minute => 38 hours using a 9V battery without considering solar panel**
-
-<img  src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/tester_medium_mode.jpeg" height="400"/>
+Voltage: 5 V <br>
+Current Consumption: 138,65 mAh <br>
+**Power Consumption: 8 hours 45 minutes using a 9V 1200 mAh battery without considering solar panel**
 
 **LOW MODE**
 
-Starting Voltage: 3,73 V<br>
-Final Voltage: 3,72 V<br>
-**Power Consumption: 10 mV => 2 mV per minute => 79 hours using a 9V battery without considering solar panel**
-
-<img src="https://github.com/IlKaiser/IoT_Group-Project/blob/main/imgs/tester_low_mode.jpeg" height="400"/>
-
-
+Voltage: 5 V <br>
+Current Consumption: 137,5 mAh <br>
+**Power Consumption: 8 hours 55 minutes using a 9V 1200 mAh battery without considering solar panel**
 
 ## Detection accuracy with CNN
 We measured the accuracy and performances of the **Convolutional Neural Network** we trained for boat recognition. The dataset used is **ARGOS**, and the results are in the picture below:
