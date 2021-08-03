@@ -82,7 +82,7 @@ More details on the evaluation of the power consumption can be found [here](http
 
 ### SIMULATED ENVIRONMENT WITH THE PROTOTYPE 
 
-For the third deliver we've realized a **prototype** an we decided to measure the power consumption using a **multimeter**. We kept running the floater for **60 minutes** for each **power consumption mode** and for the power supply we used a powerbank and we've simulated a boat that crossed the safety line every **5 minutes**.
+For the third deliver we've realized a **prototype** an we decided to measure the power consumption. We kept running the floater for **60 minutes** for each **power consumption mode** and for the power supply we used a powerbank and we've simulated a boat that crossed the safety line every **5 minutes**.
 
 This is the setup:
 
